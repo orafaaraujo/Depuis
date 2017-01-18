@@ -5,6 +5,9 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 
 import com.orafaaraujo.depuis.R;
+import com.orafaaraujo.depuis.model.Fact;
+
+import java.util.Date;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -14,6 +17,14 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
+
+        Fact fact = Fact.builder()
+                .setTimestamp(new Date().getTime())
+                .setTitle("This day")
+                .setComment("The day i start the app!")
+                .setCount(true)
+                .build();
+
     }
 
 }
