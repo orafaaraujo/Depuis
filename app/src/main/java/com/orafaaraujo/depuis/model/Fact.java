@@ -1,7 +1,5 @@
 package com.orafaaraujo.depuis.model;
 
-import android.os.Parcelable;
-
 import com.google.auto.value.AutoValue;
 
 /**
@@ -9,7 +7,7 @@ import com.google.auto.value.AutoValue;
  */
 
 @AutoValue
-public abstract class Fact implements Parcelable {
+public abstract class Fact {
 
     public abstract long timestamp();
 

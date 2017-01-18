@@ -1,4 +1,4 @@
-package com.orafaaraujo.depuis.presentation.activities;
+package com.orafaaraujo.depuis.view.activity;
 
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
@@ -9,6 +9,7 @@ import android.support.v7.widget.Toolbar;
 
 import com.orafaaraujo.depuis.R;
 import com.orafaaraujo.depuis.model.Fact;
+import com.orafaaraujo.depuis.view.adapter.FactAdapter;
 
 import java.util.ArrayList;
 import java.util.Date;
@@ -28,21 +29,6 @@ public class MainActivity extends AppCompatActivity {
     @BindView(R.id.main_recycler_fact)
     RecyclerView mRecyclerView;
 
-    private List<Fact> mFacts;
-
-    @Override
-    protected void onResume() {
-        super.onResume();
-        mFacts = new ArrayList<>();
-        Fact fact = Fact.builder()
-                .setTimestamp(new Date().getTime())
-                .setTitle("This day")
-                .setComment("The day i start the app!")
-                .setCount(true)
-                .build();
-        mFacts.add(fact);
-    }
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -52,6 +38,8 @@ public class MainActivity extends AppCompatActivity {
 
         setupToolbar();
         setupRecyclerView();
+
+        populateRecyclerView();
     }
 
     private void setupToolbar() {
@@ -71,6 +59,18 @@ public class MainActivity extends AppCompatActivity {
                 }
             }
         });
+    }
+
+    private void populateRecyclerView() {
+        List<Fact> facts = new ArrayList<>();
+        Fact fact = Fact.builder()
+                .setTimestamp(new Date().getTime())
+                .setTitle("This day")
+                .setComment("The day i start the app!")
+                .setCount(true)
+                .build();
+        facts.add(fact);
+        mRecyclerView.setAdapter(new FactAdapter());
     }
 
 }
