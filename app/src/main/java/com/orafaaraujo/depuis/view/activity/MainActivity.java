@@ -29,6 +29,8 @@ public class MainActivity extends AppCompatActivity {
     @BindView(R.id.main_recycler_fact)
     RecyclerView mRecyclerView;
 
+    private FactAdapter mAdapter;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -38,7 +40,6 @@ public class MainActivity extends AppCompatActivity {
 
         setupToolbar();
         setupRecyclerView();
-
         populateRecyclerView();
     }
 
@@ -47,6 +48,9 @@ public class MainActivity extends AppCompatActivity {
     }
 
     private void setupRecyclerView() {
+
+        mAdapter = new FactAdapter();
+
         mRecyclerView.setLayoutManager(new LinearLayoutManager(this));
         mRecyclerView.setHasFixedSize(true);
         mRecyclerView.addOnScrollListener(new RecyclerView.OnScrollListener() {
@@ -59,6 +63,7 @@ public class MainActivity extends AppCompatActivity {
                 }
             }
         });
+        mRecyclerView.setAdapter(mAdapter);
     }
 
     private void populateRecyclerView() {
@@ -70,7 +75,7 @@ public class MainActivity extends AppCompatActivity {
                 .setCount(true)
                 .build();
         facts.add(fact);
-        mRecyclerView.setAdapter(new FactAdapter());
+        mAdapter.setFacts(facts);
     }
 
 }

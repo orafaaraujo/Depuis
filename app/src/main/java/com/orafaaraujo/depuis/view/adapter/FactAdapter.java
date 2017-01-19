@@ -8,6 +8,7 @@ import android.view.ViewGroup;
 import com.orafaaraujo.depuis.R;
 import com.orafaaraujo.depuis.databinding.ItemFactBinding;
 import com.orafaaraujo.depuis.model.Fact;
+import com.orafaaraujo.depuis.view.adapter.viewholder.BindingHolder;
 import com.orafaaraujo.depuis.viewModel.FactViewModel;
 
 import java.util.ArrayList;
@@ -17,7 +18,7 @@ import java.util.List;
  * Created by rafael on 18/01/17.
  */
 
-public class FactAdapter extends RecyclerView.Adapter<FactAdapter.BindingHolder> {
+public class FactAdapter extends RecyclerView.Adapter<BindingHolder> {
 
     final List<Fact> mFacts;
 
@@ -37,7 +38,7 @@ public class FactAdapter extends RecyclerView.Adapter<FactAdapter.BindingHolder>
 
     @Override
     public void onBindViewHolder(BindingHolder holder, int position) {
-        ItemFactBinding binding = holder.binding;
+        ItemFactBinding binding = holder.getBinding();
         binding.setViewModel(new FactViewModel(mFacts.get(position)));
     }
 
@@ -46,14 +47,7 @@ public class FactAdapter extends RecyclerView.Adapter<FactAdapter.BindingHolder>
         return mFacts.size();
     }
 
-    public static class BindingHolder extends RecyclerView.ViewHolder {
-
-        private ItemFactBinding binding;
-
-        public BindingHolder(ItemFactBinding binding) {
-            super(binding.itemFactLayout);
-            this.binding = binding;
-        }
+    public void setFacts(List<Fact> facts) {
+        mFacts.addAll(facts);
     }
-
 }
