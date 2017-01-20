@@ -7,13 +7,9 @@ import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
 
+import com.orafaaraujo.depuis.FactManager;
 import com.orafaaraujo.depuis.R;
-import com.orafaaraujo.depuis.model.Fact;
 import com.orafaaraujo.depuis.view.adapter.FactAdapter;
-
-import java.util.ArrayList;
-import java.util.Date;
-import java.util.List;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -67,15 +63,7 @@ public class MainActivity extends AppCompatActivity {
     }
 
     private void populateRecyclerView() {
-        List<Fact> facts = new ArrayList<>();
-        Fact fact = Fact.builder()
-                .setTimestamp(new Date().getTime())
-                .setTitle("This day")
-                .setComment("The day i start the app!")
-                .setCount(true)
-                .build();
-        facts.add(fact);
-        mAdapter.setFacts(facts);
+        mAdapter.setFacts(FactManager.fetchFacts());
     }
 
 }
