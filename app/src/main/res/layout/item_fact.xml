@@ -54,7 +54,7 @@
                 android:layout_below="@id/item_fact_title"
                 android:gravity="center"
                 android:text="@{viewModel.factCurrentTime}"
-                android:textColor="@color/colorPrimary"
+                android:textColor="@color/main_primary"
                 android:textSize="46sp"
                 android:textStyle="bold"
                 tools:text="5d 8h"/>
@@ -85,7 +85,7 @@
                 android:paddingLeft="4dp"
                 android:paddingRight="4dp"
                 android:text="@string/main_button_share"
-                android:textColor="@color/colorPrimaryDark"
+                android:textColor="@color/main_primary_dark"
                 android:textSize="12sp"/>
 
         </RelativeLayout>

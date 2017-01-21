@@ -1,5 +1,6 @@
 package com.orafaaraujo.depuis.view.activity;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.v7.app.AppCompatActivity;
@@ -7,6 +8,7 @@ import android.support.v7.widget.DividerItemDecoration;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
+import android.view.View;
 
 import com.orafaaraujo.depuis.R;
 import com.orafaaraujo.depuis.repository.FactManager;
@@ -68,4 +70,7 @@ public class MainActivity extends AppCompatActivity {
         mAdapter.setFacts(FactManager.fetchFacts());
     }
 
+    public void onNewItem(View view) {
+        startActivity(new Intent(this, NewFactActivity.class));
+    }
 }

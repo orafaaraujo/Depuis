@@ -1,6 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <color name="colorPrimary">#0055A4</color>
-    <color name="colorPrimaryDark">#003665</color>
-    <color name="colorAccent">#EF4135</color>
+    <color name="main_primary">#0055A4</color>
+    <color name="main_primary_dark">#003665</color>
+    <color name="main_accent">#EF4135</color>
+
+    <color name="new_fact_primary">#EF4135</color>
+    <color name="new_fact_primary_dark">#A40F03</color>
+    <color name="new_fact_accent">@android:color/white</color>
 </resources>
