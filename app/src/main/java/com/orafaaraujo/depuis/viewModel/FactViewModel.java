@@ -2,10 +2,12 @@ package com.orafaaraujo.depuis.viewModel;
 
 import android.content.Context;
 import android.databinding.BaseObservable;
+import android.view.View;
 
 import com.orafaaraujo.depuis.model.Fact;
 import com.orafaaraujo.depuis.view.helper.DateTimeHelper;
 import com.orafaaraujo.depuis.view.helper.ElapsedDateTimeHelper;
+import com.orafaaraujo.depuis.view.helper.ShareContentHelper;
 
 /**
  * Created by rafael on 18/01/17.
@@ -41,5 +43,8 @@ public class FactViewModel extends BaseObservable {
         return mFact.count();
     }
 
+    public View.OnClickListener onClickShare() {
+        return v -> ShareContentHelper.share(mContext, mFact);
+    }
 
 }

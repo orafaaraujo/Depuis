@@ -81,9 +81,10 @@
                 android:drawableLeft="@drawable/ic_share_24dp"
                 android:drawableStart="@drawable/ic_share_24dp"
                 android:gravity="center"
+                android:onClick="@{viewModel.onClickShare}"
                 android:paddingLeft="4dp"
                 android:paddingRight="4dp"
-                android:text="@string/fact_share"
+                android:text="@string/main_button_share"
                 android:textColor="@color/colorPrimaryDark"
                 android:textSize="12sp"/>
 
