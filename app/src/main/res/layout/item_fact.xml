@@ -18,50 +18,58 @@
         <RelativeLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_margin="8dp">
+            android:layout_margin="16dp">
 
             <TextView
-                android:id="@+id/item_fact_title"
+                android:id="@+id/item_fact_begin"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_alignParentLeft="true"
                 android:layout_alignParentStart="true"
                 android:layout_alignParentTop="true"
-                android:ellipsize="end"
-                android:maxLines="1"
-                android:text="@{viewModel.factTitle}"
-                android:textSize="18sp"
-                android:textStyle="bold"
-                tools:text="This day! "/>
+                android:drawableLeft="@drawable/ic_access_time_black_24dp"
+                android:drawablePadding="4dp"
+                android:drawableStart="@drawable/ic_access_time_black_24dp"
+                android:gravity="center"
+                android:text="@{viewModel.factBegin}"
+                android:textSize="12sp"
+                tools:text="12/12/2017 - 20:20"/>
 
             <TextView
-                android:id="@+id/item_fact_comment"
+                android:id="@+id/item_fact_title"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_below="@id/item_fact_title"
-                android:text="@{viewModel.factComment}"
-                tools:text="This day was very crazy!!!!"/>
+                android:layout_below="@id/item_fact_begin"
+                android:layout_marginTop="12dp"
+                android:ellipsize="end"
+                android:gravity="center|bottom"
+                android:maxLines="1"
+                android:text="@{viewModel.factTitle}"
+                android:textStyle="bold"
+                tools:text="This day! "/>
 
             <TextView
                 android:id="@+id/item_fact_current_time"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_below="@id/item_fact_comment"
-                android:layout_marginBottom="16dp"
-                android:layout_marginTop="16dp"
+                android:layout_below="@id/item_fact_title"
+                android:gravity="center"
                 android:text="@{viewModel.factCurrentTime}"
-                android:textSize="22sp"
+                android:textColor="@color/colorPrimary"
+                android:textSize="38sp"
+                android:textStyle="bold"
                 tools:text="5d 8h"/>
 
             <TextView
-                android:id="@+id/item_fact_begin"
+                android:id="@+id/item_fact_comment"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_below="@id/item_fact_current_time"
-                android:gravity="right"
-                android:text="@{viewModel.factBegin}"
-                android:textSize="12sp"
-                tools:text="12/12/2017 - 20:20"/>
+                android:layout_marginBottom="12dp"
+                android:gravity="center|top"
+                android:text="@{viewModel.factComment}"
+                tools:text="This day was very crazy!!!!"/>
+
         </RelativeLayout>
     </LinearLayout>
 </layout>

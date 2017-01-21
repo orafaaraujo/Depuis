@@ -1,10 +1,11 @@
 package com.orafaaraujo.depuis.viewModel;
 
+import android.content.Context;
 import android.databinding.BaseObservable;
 
 import com.orafaaraujo.depuis.model.Fact;
-
-import java.util.Date;
+import com.orafaaraujo.depuis.view.helper.DateTimeHelper;
+import com.orafaaraujo.depuis.view.helper.ElapsedDateTimeHelper;
 
 /**
  * Created by rafael on 18/01/17.
@@ -12,31 +13,32 @@ import java.util.Date;
 
 public class FactViewModel extends BaseObservable {
 
-    private Fact fact;
+    private Context mContext;
+    private Fact mFact;
 
-    public FactViewModel(Fact fact) {
-        this.fact = fact;
+    public FactViewModel(Context context, Fact fact) {
+        mContext = context;
+        mFact = fact;
     }
 
     public String getFactTitle() {
-        return fact.title();
+        return mFact.title();
     }
 
     public String getFactComment() {
-        return fact.comment();
+        return mFact.comment();
     }
 
     public String getFactBegin() {
-        return new Date(fact.timestamp()).toString();
+        return DateTimeHelper.getTime(mFact.timestamp());
     }
 
     public String getFactCurrentTime() {
-        return new Date(fact.timestamp()).toString();
+        return ElapsedDateTimeHelper.getTime(mContext.getResources(), mFact.timestamp());
     }
 
-
     public boolean getFactCount() {
-        return fact.count();
+        return mFact.count();
     }
 
 

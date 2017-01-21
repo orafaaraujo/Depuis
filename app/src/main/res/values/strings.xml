@@ -1,4 +1,9 @@
 <resources>
     <string name="app_name">Depuis</string>
     <string name="action_settings">Settings</string>
+
+    <string name="elapsed_days">%d dias</string>
+    <string name="elapsed_hours">%dh</string>
+    <string name="elapsed_minutes">%dm</string>
+    <string name="elapsed_seconds">%ds</string>
 </resources>

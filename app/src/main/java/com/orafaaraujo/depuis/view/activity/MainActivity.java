@@ -8,8 +8,8 @@ import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
 
-import com.orafaaraujo.depuis.FactManager;
 import com.orafaaraujo.depuis.R;
+import com.orafaaraujo.depuis.repository.FactManager;
 import com.orafaaraujo.depuis.view.adapter.FactAdapter;
 
 import butterknife.BindView;
@@ -46,7 +46,7 @@ public class MainActivity extends AppCompatActivity {
 
     private void setupRecyclerView() {
 
-        mAdapter = new FactAdapter();
+        mAdapter = new FactAdapter(getApplicationContext());
 
         mRecyclerView.setLayoutManager(new LinearLayoutManager(this));
         mRecyclerView.addItemDecoration(new DividerItemDecoration(this, DividerItemDecoration.VERTICAL));

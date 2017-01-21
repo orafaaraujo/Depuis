@@ -1,4 +1,4 @@
-package com.orafaaraujo.depuis;
+package com.orafaaraujo.depuis.repository;
 
 import com.orafaaraujo.depuis.model.Fact;
 
