@@ -27,9 +27,9 @@
                 android:layout_alignParentLeft="true"
                 android:layout_alignParentStart="true"
                 android:layout_alignParentTop="true"
-                android:drawableLeft="@drawable/ic_access_time_black_24dp"
+                android:drawableLeft="@drawable/ic_access_time_24dp"
                 android:drawablePadding="4dp"
-                android:drawableStart="@drawable/ic_access_time_black_24dp"
+                android:drawableStart="@drawable/ic_access_time_24dp"
                 android:gravity="center"
                 android:text="@{viewModel.factBegin}"
                 android:textSize="12sp"
@@ -43,7 +43,6 @@
                 android:layout_marginTop="12dp"
                 android:ellipsize="end"
                 android:gravity="center|bottom"
-                android:maxLines="1"
                 android:text="@{viewModel.factTitle}"
                 android:textStyle="bold"
                 tools:text="This day! "/>
@@ -56,7 +55,7 @@
                 android:gravity="center"
                 android:text="@{viewModel.factCurrentTime}"
                 android:textColor="@color/colorPrimary"
-                android:textSize="38sp"
+                android:textSize="46sp"
                 android:textStyle="bold"
                 tools:text="5d 8h"/>
 
@@ -69,6 +68,24 @@
                 android:gravity="center|top"
                 android:text="@{viewModel.factComment}"
                 tools:text="This day was very crazy!!!!"/>
+
+            <Button
+                android:id="@+id/item_fac_share"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentBottom="true"
+                android:layout_alignParentEnd="true"
+                android:layout_alignParentRight="true"
+                android:layout_below="@id/item_fact_comment"
+                android:background="?android:selectableItemBackground"
+                android:drawableLeft="@drawable/ic_share_24dp"
+                android:drawableStart="@drawable/ic_share_24dp"
+                android:gravity="center"
+                android:paddingLeft="4dp"
+                android:paddingRight="4dp"
+                android:text="@string/fact_share"
+                android:textColor="@color/colorPrimaryDark"
+                android:textSize="12sp"/>
 
         </RelativeLayout>
     </LinearLayout>

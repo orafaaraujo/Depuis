@@ -12,11 +12,14 @@ import java.util.List;
 
 public class FactManager {
 
-    private static final int n = 10;
+    private static final int N = 10;
+
+    private static final String LOREM_TITLE = "Lorem ipsum dolor sit amet";
+    private static final String LOREM_COMMENT = "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nulla vehicula egestas libero, sit amet elementum turpis. Pellentesque mattis nibh at urna euismod malesuada. Integer feugiat blandit ligula, vel finibus diam pellentesque vitae. Suspendisse bibendum eget justo in imperdiet. Interdum et malesuada fames ac ante ipsum primis in faucibus. Nullam sodales risus eros, at volutpat orci tincidunt scelerisque. Aliquam dapibus commodo augue eget fringilla. Cras eget sodales libero. Class aptent taciti sociosqu ad litora torquent per conubia nostra, per inceptos himenaeos. In vel sodales lacus";
 
     public static List<Fact> fetchFacts() {
-        List<Fact> facts = new ArrayList<>(n);
-        for (int i = 0; i < n; i++) {
+        List<Fact> facts = new ArrayList<>(N);
+        for (int i = 0; i < N; i++) {
             facts.add(makeFact());
         }
         return facts;
@@ -25,8 +28,8 @@ public class FactManager {
     private static Fact makeFact() {
         return Fact.builder()
                 .setTimestamp(new Date().getTime())
-                .setTitle("This day")
-                .setComment("The day i start the app!")
+                .setTitle(LOREM_TITLE)
+                .setComment(LOREM_COMMENT)
                 .setCount(true)
                 .build();
     }
