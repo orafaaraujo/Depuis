@@ -25,6 +25,7 @@
             android:layout_alignParentStart="true"
             android:layout_alignParentTop="true"
             android:background="?android:selectableItemBackgroundBorderless"
+            android:onClick="onBackButton"
             app:srcCompat="@drawable/ic_arrow_back_24dp"
             tools:targetApi="lollipop"/>
 
@@ -32,10 +33,20 @@
             android:id="@+id/new_fact_text_title"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="16dp"
             android:layout_below="@id/new_fact_button_back"
+            android:layout_marginTop="16dp"
             android:gravity="center"
             android:text="@string/new_fact_layout_title"
+            android:textColor="@color/new_fact_accent"
+            android:textSize="14sp"/>
+
+        <TextView
+            android:id="@+id/new_fact_text_subtitle"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/new_fact_text_title"
+            android:gravity="center"
+            android:text="@string/new_fact_layout_subtitle"
             android:textColor="@color/new_fact_accent"
             android:textSize="16sp"
             android:textStyle="bold"/>
@@ -48,24 +59,39 @@
             android:layout_marginTop="32dp">
 
             <android.support.design.widget.TextInputEditText
+                android:id="@+id/new_fact_text_edittext_title"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:hint="@string/new_fact_title"/>
+                android:hint="@string/new_fact_title"
+                android:textColor="@color/new_fact_accent"/>
 
         </android.support.design.widget.TextInputLayout>
 
         <android.support.design.widget.TextInputLayout
+            android:id="@+id/new_fact_text_input_comment"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_below="@id/new_fact_text_input_title"
             android:layout_marginTop="32dp">
 
             <android.support.design.widget.TextInputEditText
+                android:id="@+id/new_fact_text_edittext_comment"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:hint="@string/new_fact_comment"/>
+                android:hint="@string/new_fact_comment"
+                android:textColor="@color/new_fact_accent"/>
 
         </android.support.design.widget.TextInputLayout>
+
+        <Button
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/new_fact_text_input_comment"
+            android:layout_marginTop="32dp"
+            android:background="?android:selectableItemBackground"
+            android:onClick="onStartNewFact"
+            android:text="@string/new_fact_button_start"
+            android:textColor="@color/new_fact_accent"/>
     </RelativeLayout>
 
 </android.support.design.widget.CoordinatorLayout>
