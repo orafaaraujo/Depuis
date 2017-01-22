@@ -2,6 +2,8 @@ package com.orafaaraujo.depuis;
 
 import android.app.Application;
 
+import com.orafaaraujo.depuis.dagger.Injector;
+
 import timber.log.Timber;
 
 /**
@@ -17,5 +19,12 @@ public class DepuisApp extends Application {
         if (BuildConfig.DEBUG) {
             Timber.plant(new Timber.DebugTree());
         }
+
+        initDagger();
+    }
+
+    private void initDagger() {
+        Injector.initializeApplicationComponent(this);
+        Injector.getApplicationComponent().inject(this);
     }
 }

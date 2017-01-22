@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <android.support.design.widget.CoordinatorLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:application="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
@@ -17,7 +17,7 @@
             android:layout_width="match_parent"
             android:layout_height="?android:attr/actionBarSize"
             android:background="?android:attr/colorPrimary"
-            app:popupTheme="@style/AppTheme.PopupOverlay"
+            application:popupTheme="@style/AppTheme.PopupOverlay"
             tools:ignore="NewApi"/>
 
     </android.support.design.widget.AppBarLayout>
@@ -26,7 +26,7 @@
         android:id="@+id/main_recycler_fact"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        app:layout_behavior="@string/appbar_scrolling_view_behavior"/>
+        application:layout_behavior="@string/appbar_scrolling_view_behavior"/>
 
 
     <android.support.design.widget.FloatingActionButton
@@ -36,6 +36,6 @@
         android:layout_gravity="bottom|end"
         android:onClick="onNewItem"
         android:layout_margin="@dimen/fab_margin"
-        app:srcCompat="@drawable/ic_plus_one_24dp"/>
+        application:srcCompat="@drawable/ic_plus_one_24dp"/>
 
 </android.support.design.widget.CoordinatorLayout>

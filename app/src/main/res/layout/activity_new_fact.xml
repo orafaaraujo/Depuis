@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <android.support.design.widget.CoordinatorLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:application="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/activity_new_fact"
     android:layout_width="match_parent"
@@ -26,7 +26,7 @@
             android:layout_alignParentTop="true"
             android:background="?android:selectableItemBackgroundBorderless"
             android:onClick="onBackButton"
-            app:srcCompat="@drawable/ic_arrow_back_24dp"
+            application:srcCompat="@drawable/ic_arrow_back_24dp"
             tools:targetApi="lollipop"/>
 
         <TextView

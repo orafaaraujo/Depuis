@@ -48,7 +48,7 @@ public class MainActivity extends AppCompatActivity {
 
     private void setupRecyclerView() {
 
-        mAdapter = new FactAdapter(getApplicationContext());
+        mAdapter = new FactAdapter();
 
         mRecyclerView.setLayoutManager(new LinearLayoutManager(this));
         mRecyclerView.addItemDecoration(new DividerItemDecoration(this, DividerItemDecoration.VERTICAL));

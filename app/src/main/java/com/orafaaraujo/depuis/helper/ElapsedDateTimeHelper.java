@@ -1,8 +1,11 @@
-package com.orafaaraujo.depuis.view.helper;
+package com.orafaaraujo.depuis.helper;
 
-import android.content.res.Resources;
+import android.content.Context;
 
 import com.orafaaraujo.depuis.R;
+import com.orafaaraujo.depuis.dagger.Injector;
+
+import javax.inject.Inject;
 
 /**
  * Created by rafael on 21/01/17.
@@ -10,7 +13,14 @@ import com.orafaaraujo.depuis.R;
 
 public class ElapsedDateTimeHelper {
 
-    public static String getTime(Resources res, long timestamp) {
+    @Inject
+    Context mContext;
+
+    public ElapsedDateTimeHelper() {
+        Injector.getApplicationComponent().inject(this);
+    }
+
+    public String getTime(long timestamp) {
 
         long different = System.currentTimeMillis() - timestamp;
 
@@ -33,13 +43,13 @@ public class ElapsedDateTimeHelper {
         String correctTime = "";
 
         if (elapsedDays > 0) {
-            correctTime = res.getString(R.string.elapsed_days, elapsedDays);
+            correctTime = mContext.getString(R.string.elapsed_days, elapsedDays);
         } else if (elapsedHours > 0) {
-            correctTime = res.getString(R.string.elapsed_hours, elapsedHours);
+            correctTime = mContext.getString(R.string.elapsed_hours, elapsedHours);
         } else if (elapsedMinutes > 0) {
-            correctTime = res.getString(R.string.elapsed_minutes, elapsedMinutes);
+            correctTime = mContext.getString(R.string.elapsed_minutes, elapsedMinutes);
         } else {
-            correctTime = res.getString(R.string.elapsed_seconds, elapsedSeconds);
+            correctTime = mContext.getString(R.string.elapsed_seconds, elapsedSeconds);
         }
 
         return correctTime;

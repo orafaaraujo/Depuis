@@ -4,10 +4,13 @@ import android.content.Context;
 import android.databinding.BaseObservable;
 import android.view.View;
 
+import com.orafaaraujo.depuis.dagger.Injector;
 import com.orafaaraujo.depuis.model.Fact;
-import com.orafaaraujo.depuis.view.helper.DateTimeHelper;
-import com.orafaaraujo.depuis.view.helper.ElapsedDateTimeHelper;
-import com.orafaaraujo.depuis.view.helper.ShareContentHelper;
+import com.orafaaraujo.depuis.helper.DateTimeHelper;
+import com.orafaaraujo.depuis.helper.ElapsedDateTimeHelper;
+import com.orafaaraujo.depuis.helper.ShareContentHelper;
+
+import javax.inject.Inject;
 
 /**
  * Created by rafael on 18/01/17.
@@ -15,12 +18,23 @@ import com.orafaaraujo.depuis.view.helper.ShareContentHelper;
 
 public class FactViewModel extends BaseObservable {
 
-    private Context mContext;
+    @Inject
+    Context mContext;
+
+    @Inject
+    ElapsedDateTimeHelper mElapsedDateTimeHelper;
+
+    @Inject
+    DateTimeHelper mDateTimeHelper;
+
+    @Inject
+    ShareContentHelper mShareContentHelper;
+
     private Fact mFact;
 
-    public FactViewModel(Context context, Fact fact) {
-        mContext = context;
+    public FactViewModel(Fact fact) {
         mFact = fact;
+        Injector.getApplicationComponent().inject(this);
     }
 
     public String getFactTitle() {
@@ -32,11 +46,11 @@ public class FactViewModel extends BaseObservable {
     }
 
     public String getFactBegin() {
-        return DateTimeHelper.getTime(mFact.timestamp());
+        return mDateTimeHelper.getTime(mFact.timestamp());
     }
 
     public String getFactCurrentTime() {
-        return ElapsedDateTimeHelper.getTime(mContext.getResources(), mFact.timestamp());
+        return mElapsedDateTimeHelper.getTime(mFact.timestamp());
     }
 
     public boolean getFactCount() {
@@ -44,7 +58,7 @@ public class FactViewModel extends BaseObservable {
     }
 
     public View.OnClickListener onClickShare() {
-        return v -> ShareContentHelper.share(mContext, mFact);
+        return v -> mShareContentHelper.share(mFact);
     }
 
 }

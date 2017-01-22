@@ -4,7 +4,7 @@
 
     <string name="main_button_share">Share</string>
     <string name="fact_share_message">Share your memory</string>
-    <string name="fact_share_fact" formatted="false">Has been %1s that %2s (Depuis app by Android)</string>
+    <string name="fact_share_fact" formatted="false">Has been %1s that %2s (Depuis application by Android)</string>
 
     <string name="new_fact_layout_title">Here you record a thing that you would like to calculate the time from now</string>
     <string name="new_fact_layout_subtitle">Depuis will work for you</string>
