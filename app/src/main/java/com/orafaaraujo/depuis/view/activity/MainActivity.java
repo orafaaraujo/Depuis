@@ -8,10 +8,12 @@ import android.support.v7.widget.DividerItemDecoration;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
+import android.support.v7.widget.helper.ItemTouchHelper;
 import android.view.View;
 
 import com.orafaaraujo.depuis.R;
 import com.orafaaraujo.depuis.repository.FactManager;
+import com.orafaaraujo.depuis.view.helper.SimpleItemTouchHelperCallback;
 import com.orafaaraujo.depuis.view.adapter.FactAdapter;
 
 import butterknife.BindView;
@@ -63,7 +65,12 @@ public class MainActivity extends AppCompatActivity {
                 }
             }
         });
+
         mRecyclerView.setAdapter(mAdapter);
+
+        ItemTouchHelper.Callback callback = new SimpleItemTouchHelperCallback(mAdapter);
+        ItemTouchHelper touchHelper = new ItemTouchHelper(callback);
+        touchHelper.attachToRecyclerView(mRecyclerView);
     }
 
     private void populateRecyclerView() {

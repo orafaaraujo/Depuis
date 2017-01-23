@@ -50,4 +50,15 @@ public class FactAdapter extends RecyclerView.Adapter<BindingHolder> {
     public void setFacts(List<Fact> facts) {
         mFacts.addAll(facts);
     }
+
+    public void onItemDismiss(int position) {
+        removerItem(position);
+    }
+
+    private void removerItem(int position) {
+        mFacts.remove(position);
+        notifyItemRemoved(position);
+        notifyItemRangeChanged(position, mFacts.size());
+    }
+
 }
