@@ -66,7 +66,7 @@ public class SimpleItemTouchHelperCallback extends ItemTouchHelper.Callback {
                         R.color.main_primary, mContext.getTheme()));
                 paint.setAlpha(40);
 
-                final Bitmap bitmap = getBitmap(R.drawable.ic_delete_sweep_48dp);
+                final Bitmap bitmap = getBitmap(R.drawable.ic_delete_sweep_36dp);
                 float height = (itemView.getHeight() / 2) - (bitmap.getHeight() / 2);
                 float bitmapWidth = bitmap.getWidth();
 

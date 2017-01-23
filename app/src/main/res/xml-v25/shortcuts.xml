@@ -2,7 +2,7 @@
 <shortcuts xmlns:android="http://schemas.android.com/apk/res/android">
     <shortcut
         android:enabled="true"
-        android:icon="@drawable/ic_access_time_24dp"
+        android:icon="@drawable/ic_access_time_22dp"
         android:shortcutDisabledMessage="@string/app_name"
         android:shortcutId="static"
         android:shortcutLongLabel="@string/app_name"

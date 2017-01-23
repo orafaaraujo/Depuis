@@ -46,7 +46,7 @@ public class FactViewModel extends BaseObservable {
     }
 
     public String getFactBegin() {
-        return mDateTimeHelper.getTime(mFact.timestamp());
+        return mDateTimeHelper.getDayDate(mFact.timestamp());
     }
 
     public String getFactCurrentTime() {

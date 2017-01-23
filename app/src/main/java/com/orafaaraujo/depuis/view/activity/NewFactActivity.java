@@ -13,7 +13,9 @@ import com.orafaaraujo.depuis.R;
 import com.orafaaraujo.depuis.dagger.Injector;
 import com.orafaaraujo.depuis.helper.DateTimeHelper;
 
+import java.util.Calendar;
 import java.util.Date;
+import java.util.Locale;
 
 import javax.inject.Inject;
 
@@ -34,22 +36,24 @@ public class NewFactActivity extends AppCompatActivity {
 
     private ViewDataBinding viewDataBinding;
 
-    @Override
-    protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-
-        viewDataBinding = DataBindingUtil.setContentView(this, R.layout.activity_new_fact);
-
-        Injector.getApplicationComponent().inject(this);
-
-        ButterKnife.bind(this);
-        Timber.tag("NewFact");
-    }
+    private Calendar mCalendar;
 
     @Override
     protected void onResume() {
         super.onResume();
-        viewDataBinding.setVariable(BR.dateTime, mDateTimeHelper.getTime(new Date().getTime()));
+        mCalendar = Calendar.getInstance(Locale.getDefault());
+
+        viewDataBinding.setVariable(BR.new_fact_date, mDateTimeHelper.getDate(new Date().getTime()));
+        viewDataBinding.setVariable(BR.new_fact_time, mDateTimeHelper.getTime(mDateTimeHelper.getCleanTime(mCalendar)));
+    }
+
+    @Override
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        viewDataBinding = DataBindingUtil.setContentView(this, R.layout.activity_new_fact);
+        Injector.getApplicationComponent().inject(this);
+        ButterKnife.bind(this);
+        Timber.tag("NewFact");
     }
 
     public void onBackButton(View view) {

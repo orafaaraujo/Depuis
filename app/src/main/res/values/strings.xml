@@ -11,7 +11,7 @@
     <string name="new_fact_button_start">Start</string>
 
     <string name="new_fact_title">Title</string>
-    <string name="new_fact_comment">Comment</string>
+    <string name="new_fact_comment">Comment (optional)</string>
     <string name="new_fact_begin">Begin at</string>
     <string name="new_fact_back">Back</string>
 

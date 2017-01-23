@@ -6,7 +6,11 @@
     <data>
 
         <variable
-            name="dateTime"
+            name="new_fact_date"
+            type="String"/>
+
+        <variable
+            name="new_fact_time"
             type="String"/>
     </data>
 
@@ -93,25 +97,38 @@
 
             </android.support.design.widget.TextInputLayout>
 
-            <TextView
+            <LinearLayout
                 android:id="@+id/new_fact_text_date_time"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_below="@id/new_fact_text_input_comment"
                 android:layout_centerHorizontal="true"
                 android:layout_marginTop="24dp"
-                android:background="?android:selectableItemBackground"
-                android:clickable="true"
-                android:drawableLeft="@drawable/ic_access_time_24dp"
-                android:drawablePadding="4dp"
-                android:drawableStart="@drawable/ic_access_time_24dp"
                 android:gravity="center"
-                android:onClick="onDateTimeClick"
-                android:padding="8dp"
-                android:text="@{dateTime}"
-                android:textColor="@color/new_fact_accent"
-                android:textSize="16sp"
-                tools:text="23/01/17 - 20h05"/>
+
+                android:orientation="horizontal">
+
+                <TextView
+                    android:id="@+id/new_fact_text_date"
+                    style="@style/new_fact_date_time"
+                    android:layout_weight="1"
+                    android:drawableLeft="@drawable/ic_today_22dp"
+                    android:drawableStart="@drawable/ic_today_22dp"
+                    android:onClick="onDateTimeClick"
+                    android:text="@{new_fact_date}"
+                    tools:text="23/01/17"/>
+
+                <TextView
+                    android:id="@+id/new_fact_text_time"
+                    style="@style/new_fact_date_time"
+                    android:layout_weight="1"
+                    android:drawableLeft="@drawable/ic_access_time_22dp"
+                    android:drawableStart="@drawable/ic_access_time_22dp"
+                    android:onClick="onDateTimeClick"
+                    android:text="@{new_fact_time}"
+                    tools:text="20h05"/>
+            </LinearLayout>
+
 
             <Button
                 android:layout_width="match_parent"
