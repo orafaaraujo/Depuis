@@ -4,7 +4,7 @@
     <color name="main_primary_dark">#003665</color>
     <color name="main_accent">#EF4135</color>
 
-    <color name="new_fact_primary">#EF4135</color>
-    <color name="new_fact_primary_dark">#A40F03</color>
+    <color name="new_fact_primary">#FF8E85</color>
+    <color name="new_fact_primary_dark">#EF4335</color>
     <color name="new_fact_accent">@android:color/white</color>
 </resources>

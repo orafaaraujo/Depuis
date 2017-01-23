@@ -7,6 +7,7 @@ import com.orafaaraujo.depuis.dagger.module.FormatterModule;
 import com.orafaaraujo.depuis.helper.DateTimeHelper;
 import com.orafaaraujo.depuis.helper.ElapsedDateTimeHelper;
 import com.orafaaraujo.depuis.helper.ShareContentHelper;
+import com.orafaaraujo.depuis.view.activity.NewFactActivity;
 import com.orafaaraujo.depuis.view.helper.SimpleItemTouchHelperCallback;
 import com.orafaaraujo.depuis.viewModel.FactViewModel;
 
@@ -33,4 +34,6 @@ public interface ApplicationComponent {
     void inject(DateTimeHelper dateTimeHelper);
 
     void inject(SimpleItemTouchHelperCallback simpleItemTouchHelperCallback);
+
+    void inject(NewFactActivity newFactActivity);
 }
