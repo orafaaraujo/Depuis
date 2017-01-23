@@ -114,7 +114,7 @@
                     android:layout_weight="1"
                     android:drawableLeft="@drawable/ic_today_22dp"
                     android:drawableStart="@drawable/ic_today_22dp"
-                    android:onClick="onDateTimeClick"
+                    android:onClick="onDateClick"
                     android:text="@{new_fact_date}"
                     tools:text="23/01/17"/>
 
@@ -124,7 +124,7 @@
                     android:layout_weight="1"
                     android:drawableLeft="@drawable/ic_access_time_22dp"
                     android:drawableStart="@drawable/ic_access_time_22dp"
-                    android:onClick="onDateTimeClick"
+                    android:onClick="onTimeClick"
                     android:text="@{new_fact_time}"
                     tools:text="20h05"/>
             </LinearLayout>
