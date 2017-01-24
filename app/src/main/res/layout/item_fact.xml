@@ -3,6 +3,10 @@
 
     <data>
 
+        <import type="android.view.View"/>
+
+        <import type="android.text.TextUtils"/>
+
         <variable
             name="viewModel"
             type="com.orafaaraujo.depuis.viewModel.FactViewModel"/>
@@ -84,6 +88,7 @@
                 android:layout_marginBottom="12dp"
                 android:gravity="center|top"
                 android:text="@{viewModel.factComment}"
+                android:visibility="@{TextUtils.isEmpty(viewModel.factComment) ? View.GONE : View.VISIBLE}"
                 tools:text="This day was very crazy!!!!"/>
 
             <Button
