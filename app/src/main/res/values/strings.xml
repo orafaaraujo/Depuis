@@ -14,6 +14,7 @@
     <string name="new_fact_comment">Comment (optional)</string>
     <string name="new_fact_begin">Begin at</string>
     <string name="new_fact_back">Back</string>
+    <string name="new_fact_title_empty">Title cannot be empty</string>
 
     <string name="elapsed_days">%d dias</string>
     <string name="elapsed_hours">%dh</string>

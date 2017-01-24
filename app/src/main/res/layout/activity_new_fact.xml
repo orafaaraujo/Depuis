@@ -15,7 +15,6 @@
     </data>
 
     <android.support.design.widget.CoordinatorLayout
-
         android:id="@+id/activity_new_fact"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
@@ -39,7 +38,6 @@
                 android:layout_alignParentTop="true"
                 android:background="?android:selectableItemBackgroundBorderless"
                 android:contentDescription="@string/new_fact_back"
-                android:onClick="onBackButton"
                 application:srcCompat="@drawable/ic_arrow_back_24dp"
                 tools:targetApi="lollipop"/>
 
@@ -105,7 +103,6 @@
                 android:layout_centerHorizontal="true"
                 android:layout_marginTop="24dp"
                 android:gravity="center"
-
                 android:orientation="horizontal">
 
                 <TextView
@@ -114,7 +111,6 @@
                     android:layout_weight="1"
                     android:drawableLeft="@drawable/ic_today_22dp"
                     android:drawableStart="@drawable/ic_today_22dp"
-                    android:onClick="onDateClick"
                     android:text="@{new_fact_date}"
                     tools:text="23/01/17"/>
 
@@ -124,19 +120,17 @@
                     android:layout_weight="1"
                     android:drawableLeft="@drawable/ic_access_time_22dp"
                     android:drawableStart="@drawable/ic_access_time_22dp"
-                    android:onClick="onTimeClick"
                     android:text="@{new_fact_time}"
                     tools:text="20h05"/>
             </LinearLayout>
 
-
             <Button
+                android:id="@+id/new_fact_start_button"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_below="@id/new_fact_text_date_time"
                 android:layout_marginTop="32dp"
                 android:background="?android:selectableItemBackground"
-                android:onClick="onStartNewFact"
                 android:text="@string/new_fact_button_start"
                 android:textColor="@color/new_fact_accent"
                 android:textSize="16sp"/>
