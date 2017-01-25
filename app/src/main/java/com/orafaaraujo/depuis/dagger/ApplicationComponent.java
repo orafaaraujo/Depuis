@@ -36,4 +36,5 @@ public interface ApplicationComponent {
     void inject(SimpleItemTouchHelperCallback simpleItemTouchHelperCallback);
 
     void inject(NewFactActivity newFactActivity);
+
 }
