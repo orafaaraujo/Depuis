@@ -9,6 +9,7 @@ import javax.inject.Singleton;
 
 import dagger.Module;
 import dagger.Provides;
+import dagger.Reusable;
 
 /**
  * Created by rafael on 22/01/17.
@@ -34,9 +35,8 @@ public class ApplicationModule {
         return mApplication.getApplicationContext();
     }
 
-
     @Provides
-    @Singleton
+    @Reusable
     public ShareContentHelper shareContentHelper() {
         return new ShareContentHelper();
     }
