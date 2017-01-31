@@ -50,5 +50,9 @@ dependencies {
     provided 'com.jakewharton:butterknife-compiler:8.4.0'
     compile 'com.jakewharton.timber:timber:4.5.0'
 
+    compile 'io.requery:requery:1.1.2'
+    compile 'io.requery:requery-android:1.1.2'
+    annotationProcessor 'io.requery:requery-processor:1.1.2'
+    
     testCompile 'junit:junit:4.12'
 }
