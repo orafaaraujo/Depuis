@@ -12,7 +12,7 @@ import android.support.v7.widget.helper.ItemTouchHelper;
 import android.view.View;
 
 import com.orafaaraujo.depuis.R;
-import com.orafaaraujo.depuis.repository.FactManager;
+import com.orafaaraujo.depuis.repository.store.FactManager;
 import com.orafaaraujo.depuis.view.helper.SimpleItemTouchHelperCallback;
 import com.orafaaraujo.depuis.view.adapter.FactAdapter;
 
