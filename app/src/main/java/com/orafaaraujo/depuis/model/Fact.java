@@ -9,7 +9,7 @@ import com.google.auto.value.AutoValue;
 @AutoValue
 public abstract class Fact {
 
-    public abstract long timestamp();
+    public abstract long startTime();
 
     public abstract String title();
 
@@ -23,7 +23,7 @@ public abstract class Fact {
 
     @AutoValue.Builder
     public abstract static class Builder {
-        public abstract Builder setTimestamp(long timestamp);
+        public abstract Builder setStartTime(long timestamp);
 
         public abstract Builder setTitle(String title);
 

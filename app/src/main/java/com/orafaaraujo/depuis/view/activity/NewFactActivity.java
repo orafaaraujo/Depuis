@@ -99,7 +99,7 @@ public class NewFactActivity extends AppCompatActivity {
                 .setTitle(mTitle.getText().toString())
                 .setComment(mComment.getText().toString())
                 .setCount(true)
-                .setTimestamp(mCalendar.getTimeInMillis())
+                .setStartTime(mCalendar.getTimeInMillis())
                 .build();
         Timber.i("New fact: %s", fact.toString());
         onBackButton();

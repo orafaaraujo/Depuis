@@ -36,7 +36,7 @@ public class ShareContentHelper {
     private String makeText(Context context, Fact fact) {
         return context.getString(
                 R.string.fact_share_fact,
-                mElapsedDateTimeHelper.getTime(fact.timestamp()),
+                mElapsedDateTimeHelper.getTime(fact.startTime()),
                 fact.title()
         );
     }

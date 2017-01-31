@@ -27,7 +27,7 @@ public class FactManager {
 
     private static Fact makeFact() {
         return Fact.builder()
-                .setTimestamp(new Date().getTime())
+                .setStartTime(new Date().getTime())
                 .setTitle(LOREM_TITLE)
                 .setComment(LOREM_COMMENT)
                 .setCount(true)
