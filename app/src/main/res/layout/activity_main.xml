@@ -1,41 +1,57 @@
 <?xml version="1.0" encoding="utf-8"?>
-<android.support.design.widget.CoordinatorLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:application="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    tools:context="com.orafaaraujo.depuis.view.activity.MainActivity">
+    xmlns:tools="http://schemas.android.com/tools">
 
-    <android.support.design.widget.AppBarLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:theme="@style/AppTheme.AppBarOverlay">
+    <data>
 
-        <android.support.v7.widget.Toolbar
-            android:id="@+id/toolbar"
-            android:layout_width="match_parent"
-            android:layout_height="?android:attr/actionBarSize"
-            android:background="?android:attr/colorPrimary"
-            application:popupTheme="@style/AppTheme.PopupOverlay"
-            tools:ignore="NewApi"/>
+        <variable
+            name="viewModel"
+            type="com.orafaaraujo.depuis.viewModel.MainViewModel" />
+    </data>
 
-    </android.support.design.widget.AppBarLayout>
+    <android.support.design.widget.CoordinatorLayout
 
-    <android.support.v7.widget.RecyclerView
-        android:id="@+id/main_recycler_fact"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        application:layout_behavior="@string/appbar_scrolling_view_behavior"/>
+        tools:context="com.orafaaraujo.depuis.view.activity.MainActivity">
+
+        <android.support.design.widget.AppBarLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:theme="@style/AppTheme.AppBarOverlay">
+
+            <android.support.v7.widget.Toolbar
+                android:id="@+id/toolbar"
+                android:layout_width="match_parent"
+                android:layout_height="?android:attr/actionBarSize"
+                android:background="?android:attr/colorPrimary"
+                application:popupTheme="@style/AppTheme.PopupOverlay"
+                tools:ignore="NewApi" />
+
+        </android.support.design.widget.AppBarLayout>
+
+        <android.support.v7.widget.RecyclerView
+            android:id="@+id/main_recycler_fact"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            application:layout_behavior="@string/appbar_scrolling_view_behavior"
+            tools:adapter="@{viewModel.adapter}"
+            tools:divider_item="@{viewModel.dividerItemDecoration}"
+            tools:item_touch="@{viewModel.ItemTouch}"
+            tools:layout_manager="@{viewModel.layoutManager}"
+            tools:on_scroll_listener="@{viewModel.scrollListener}" />
 
 
-    <android.support.design.widget.FloatingActionButton
-        android:id="@+id/main_fab_new_fact"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_gravity="bottom|end"
-        android:onClick="onNewItem"
-        android:layout_margin="@dimen/fab_margin"
-        application:srcCompat="@drawable/ic_plus_one_24dp"/>
+        <android.support.design.widget.FloatingActionButton
+            android:id="@+id/main_fab_new_fact"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="bottom|end"
+            android:layout_margin="@dimen/fab_margin"
+            android:onClick="@{viewModel.fabClick}"
+            application:srcCompat="@drawable/ic_plus_one_24dp"
+            tools:fab_animation="@{viewModel.mShow}" />
 
-</android.support.design.widget.CoordinatorLayout>
+    </android.support.design.widget.CoordinatorLayout>
+</layout>

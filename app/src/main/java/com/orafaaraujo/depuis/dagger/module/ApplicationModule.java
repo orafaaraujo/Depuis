@@ -4,6 +4,7 @@ import android.content.Context;
 
 import com.orafaaraujo.depuis.DepuisApp;
 import com.orafaaraujo.depuis.helper.ShareContentHelper;
+import com.orafaaraujo.depuis.helper.buses.RxBus;
 
 import javax.inject.Singleton;
 
@@ -31,13 +32,19 @@ public class ApplicationModule {
 
     @Provides
     @Singleton
-    public Context applicationContext() {
+    Context applicationContext() {
         return mApplication.getApplicationContext();
     }
 
     @Provides
     @Reusable
-    public ShareContentHelper shareContentHelper() {
+    ShareContentHelper shareContentHelper() {
         return new ShareContentHelper();
+    }
+
+    @Provides
+    @Reusable
+    RxBus getRxBus() {
+        return new RxBus();
     }
 }

@@ -1,4 +1,4 @@
-package com.orafaaraujo.depuis.repository;
+package com.orafaaraujo.depuis.repository.entity;
 
 import com.google.auto.value.AutoValue;
 

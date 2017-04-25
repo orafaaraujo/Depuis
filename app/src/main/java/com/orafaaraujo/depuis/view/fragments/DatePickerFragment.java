@@ -9,9 +9,12 @@ import android.support.v7.app.AppCompatDialogFragment;
 import android.widget.DatePicker;
 
 import com.orafaaraujo.depuis.R;
-import com.orafaaraujo.depuis.view.activity.NewFactActivity;
+import com.orafaaraujo.depuis.helper.buses.DatetimeVO;
+import com.orafaaraujo.depuis.helper.buses.RxBus;
 
 import java.util.Calendar;
+
+import javax.inject.Inject;
 
 /**
  * Created by rafael on 23/01/17.
@@ -19,6 +22,13 @@ import java.util.Calendar;
 
 public class DatePickerFragment extends AppCompatDialogFragment
         implements DatePickerDialog.OnDateSetListener {
+
+    @Inject
+    RxBus mRxBus;
+
+    @Inject
+    public DatePickerFragment() {
+    }
 
     @NonNull
     @Override
@@ -42,8 +52,9 @@ public class DatePickerFragment extends AppCompatDialogFragment
         calendar.set(Calendar.MONTH, month);
         calendar.set(Calendar.DAY_OF_MONTH, dayOfMonth);
 
-        ((NewFactActivity) getActivity())
-                .getCalendarPublishSubject()
-                .onNext(calendar.getTimeInMillis());
+        mRxBus.sendEvent(
+                DatetimeVO.builder()
+                        .setMilliseconds(calendar.getTimeInMillis())
+                        .build());
     }
 }

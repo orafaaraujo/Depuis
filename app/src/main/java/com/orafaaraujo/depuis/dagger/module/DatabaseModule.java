@@ -11,9 +11,6 @@ import dagger.Provides;
 @Module
 public class DatabaseModule {
 
-    public DatabaseModule() {
-    }
-
     @Provides
     @Singleton
     String provideDatabase() {

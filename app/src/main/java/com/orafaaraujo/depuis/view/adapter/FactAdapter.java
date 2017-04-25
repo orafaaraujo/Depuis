@@ -1,5 +1,6 @@
 package com.orafaaraujo.depuis.view.adapter;
 
+import android.content.Context;
 import android.databinding.DataBindingUtil;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
@@ -14,14 +15,24 @@ import com.orafaaraujo.depuis.viewModel.FactViewModel;
 import java.util.ArrayList;
 import java.util.List;
 
+import javax.inject.Inject;
+import javax.inject.Provider;
+
 /**
  * Created by rafael on 18/01/17.
  */
 
 public class FactAdapter extends RecyclerView.Adapter<BindingHolder> {
 
-    final List<Fact> mFacts;
+    @Inject
+    Context mContext;
 
+    @Inject
+    Provider<FactViewModel> mFactViewModelProvider;
+
+    private final List<Fact> mFacts;
+
+    @Inject
     public FactAdapter() {
         mFacts = new ArrayList<>(0);
     }
@@ -39,7 +50,9 @@ public class FactAdapter extends RecyclerView.Adapter<BindingHolder> {
     @Override
     public void onBindViewHolder(BindingHolder holder, int position) {
         ItemFactBinding binding = holder.getBinding();
-        binding.setViewModel(new FactViewModel(mFacts.get(position)));
+        final FactViewModel factViewModel = mFactViewModelProvider.get();
+        binding.setViewModel(factViewModel);
+        factViewModel.setFact(mFacts.get(position));
     }
 
     @Override
@@ -47,7 +60,7 @@ public class FactAdapter extends RecyclerView.Adapter<BindingHolder> {
         return mFacts.size();
     }
 
-    public void setFacts(List<Fact> facts) {
+    public void updateFacts(List<Fact> facts) {
         mFacts.addAll(facts);
     }
 

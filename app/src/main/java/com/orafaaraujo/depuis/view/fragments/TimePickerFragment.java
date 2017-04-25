@@ -10,9 +10,12 @@ import android.text.format.DateFormat;
 import android.widget.TimePicker;
 
 import com.orafaaraujo.depuis.R;
-import com.orafaaraujo.depuis.view.activity.NewFactActivity;
+import com.orafaaraujo.depuis.helper.buses.DatetimeVO;
+import com.orafaaraujo.depuis.helper.buses.RxBus;
 
 import java.util.Calendar;
+
+import javax.inject.Inject;
 
 /**
  * Created by rafael on 23/01/17.
@@ -20,6 +23,13 @@ import java.util.Calendar;
 
 public class TimePickerFragment extends AppCompatDialogFragment
         implements TimePickerDialog.OnTimeSetListener {
+
+    @Inject
+    RxBus mRxBus;
+
+    @Inject
+    public TimePickerFragment() {
+    }
 
     @NonNull
     @Override
@@ -42,8 +52,9 @@ public class TimePickerFragment extends AppCompatDialogFragment
         calendar.set(Calendar.HOUR_OF_DAY, hourOfDay);
         calendar.set(Calendar.MINUTE, minute);
 
-        ((NewFactActivity) getActivity())
-                .getCalendarPublishSubject()
-                .onNext(calendar.getTimeInMillis());
+        mRxBus.sendEvent(
+                DatetimeVO.builder()
+                        .setMilliseconds(calendar.getTimeInMillis())
+                        .build());
     }
 }

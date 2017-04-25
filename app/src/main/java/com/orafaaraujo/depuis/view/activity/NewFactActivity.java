@@ -1,83 +1,104 @@
 package com.orafaaraujo.depuis.view.activity;
 
 import android.databinding.DataBindingUtil;
-import android.databinding.ViewDataBinding;
 import android.os.Build;
 import android.os.Bundle;
-import android.support.design.widget.TextInputEditText;
-import android.support.v4.app.DialogFragment;
+import android.support.design.widget.Snackbar;
 import android.support.v7.app.AppCompatActivity;
-import android.text.TextUtils;
 import android.view.View;
 
-import com.orafaaraujo.depuis.BR;
 import com.orafaaraujo.depuis.R;
 import com.orafaaraujo.depuis.dagger.Injector;
+import com.orafaaraujo.depuis.databinding.ActivityNewFactBinding;
 import com.orafaaraujo.depuis.helper.DateTimeHelper;
-import com.orafaaraujo.depuis.model.Fact;
+import com.orafaaraujo.depuis.helper.buses.DatetimeVO;
+import com.orafaaraujo.depuis.helper.buses.NewFactFeedbackVO;
+import com.orafaaraujo.depuis.helper.buses.RxBus;
 import com.orafaaraujo.depuis.view.fragments.DatePickerFragment;
 import com.orafaaraujo.depuis.view.fragments.TimePickerFragment;
-
-import java.util.Calendar;
+import com.orafaaraujo.depuis.viewModel.NewFactViewModel;
 
 import javax.inject.Inject;
 
-import butterknife.BindView;
-import butterknife.ButterKnife;
-import butterknife.OnClick;
-import io.reactivex.schedulers.Schedulers;
-import io.reactivex.subjects.PublishSubject;
 import timber.log.Timber;
 
 public class NewFactActivity extends AppCompatActivity {
 
     @Inject
+    NewFactViewModel mNewFactViewModel;
+
+    @Inject
     DateTimeHelper mDateTimeHelper;
 
-    @BindView(R.id.new_fact_text_edittext_title)
-    TextInputEditText mTitle;
+    @Inject
+    RxBus mRxBus;
 
-    @BindView(R.id.new_fact_text_edittext_comment)
-    TextInputEditText mComment;
+    @Inject
+    DatePickerFragment mDatePickerFragment;
 
-    private final PublishSubject<Long> mCalendarPublishSubject = PublishSubject.create();
-
-    private Calendar mCalendar;
+    @Inject
+    TimePickerFragment mTimePickerFragment;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        final ViewDataBinding binding = DataBindingUtil.setContentView(this, R.layout.activity_new_fact);
+        Timber.i("NewFact");
 
-        startComponents();
-        startPublishSubject(binding);
-    }
-
-    private void startComponents() {
         Injector.getApplicationComponent().inject(this);
-        ButterKnife.bind(this);
-        Timber.tag("NewFact");
+
+        final ActivityNewFactBinding newFactBinding = DataBindingUtil.setContentView(this,
+                R.layout.activity_new_fact);
+        newFactBinding.setViewModel(mNewFactViewModel);
     }
 
-    private void startPublishSubject(ViewDataBinding binding) {
-        mCalendarPublishSubject.subscribe(timeMillis -> {
-            mCalendar.setTimeInMillis(timeMillis);
-            binding.setVariable(BR.new_fact_date, mDateTimeHelper.getDate(timeMillis));
-            binding.setVariable(BR.new_fact_time, mDateTimeHelper.getTime(timeMillis));
-        });
-
-        mCalendar = Calendar.getInstance();
-        mCalendarPublishSubject.onNext(mDateTimeHelper.getCleanTime(mCalendar));
+    @Override
+    protected void onStart() {
+        super.onStart();
+        handleEvents();
     }
 
     @Override
     protected void onStop() {
         super.onStop();
-        mCalendarPublishSubject.unsubscribeOn(Schedulers.io());
+        completeObservables();
     }
 
-    @OnClick(R.id.new_fact_button_back)
-    public void onBackButton() {
+    private void handleEvents() {
+        mRxBus.getEvents()
+                .filter(o -> o instanceof DatetimeVO)
+                .map(o -> (DatetimeVO) o)
+                .subscribe(vo -> mNewFactViewModel.setMilliseconds(vo.milliseconds()), Timber::e);
+
+        mRxBus.getEvents()
+                .filter(o -> o instanceof NewFactFeedbackVO)
+                .map(o -> (NewFactFeedbackVO) o)
+                .subscribe(this::handlerNewFactFeedback, Timber::e);
+
+        mRxBus.sendEvent(
+                DatetimeVO.builder()
+                        .setMilliseconds(mDateTimeHelper.getCleanTime())
+                        .build());
+    }
+
+    private void handlerNewFactFeedback(NewFactFeedbackVO vo) {
+        if (vo.success()) {
+            onBackButton(null);
+        } else {
+            showSnackMessage(vo.message());
+        }
+    }
+
+    private void showSnackMessage(String s) {
+        Snackbar mySnackbar = Snackbar.make(findViewById(R.id.new_fact_text_title), s,
+                Snackbar.LENGTH_SHORT);
+        mySnackbar.show();
+    }
+
+    private void completeObservables() {
+        mRxBus.complete();
+    }
+
+    public void onBackButton(View view) {
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
             finishAndRemoveTask();
         } else {
@@ -85,47 +106,20 @@ public class NewFactActivity extends AppCompatActivity {
         }
     }
 
-    @OnClick(R.id.new_fact_start_button)
-    public void onStartNewFact() {
-        if (TextUtils.isEmpty(mTitle.getText())) {
-            mTitle.setError(getString(R.string.new_fact_title_empty));
-            return;
-        }
-        saveNewFact();
-    }
-
-    private void saveNewFact() {
-        Fact fact = Fact.builder()
-                .setTitle(mTitle.getText().toString())
-                .setComment(mComment.getText().toString())
-                .setCount(true)
-                .setStartTime(mCalendar.getTimeInMillis())
-                .build();
-        Timber.i("New fact: %s", fact.toString());
-        onBackButton();
-    }
-
-    @OnClick(R.id.new_fact_text_date)
     public void onDateClick(View view) {
-        final DialogFragment newFragment = new DatePickerFragment();
-        newFragment.setArguments(getCurrentTime());
-        newFragment.show(getSupportFragmentManager(), "datePicker");
+        mDatePickerFragment.setArguments(getCurrentTime());
+        mDatePickerFragment.show(getSupportFragmentManager(), "datePicker");
     }
 
-    @OnClick(R.id.new_fact_text_time)
     public void onTimeClick(View view) {
-        final DialogFragment newFragment = new TimePickerFragment();
-        newFragment.setArguments(getCurrentTime());
-        newFragment.show(getSupportFragmentManager(), "timePicker");
+        mTimePickerFragment.setArguments(getCurrentTime());
+        mTimePickerFragment.show(getSupportFragmentManager(), "timePicker");
     }
 
     private Bundle getCurrentTime() {
         final Bundle bundle = new Bundle();
-        bundle.putLong("TimeInMillis", mCalendar.getTimeInMillis());
+        bundle.putLong("TimeInMillis", mNewFactViewModel.getMilliseconds());
         return bundle;
     }
 
-    public PublishSubject<Long> getCalendarPublishSubject() {
-        return mCalendarPublishSubject;
-    }
 }

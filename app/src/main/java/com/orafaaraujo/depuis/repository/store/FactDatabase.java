@@ -1,6 +1,6 @@
 package com.orafaaraujo.depuis.repository.store;
 
-import com.orafaaraujo.depuis.repository.FactEntity;
+import com.orafaaraujo.depuis.repository.entity.FactEntity;
 
 import java.util.List;
 

@@ -8,6 +8,9 @@ import com.orafaaraujo.depuis.dagger.Injector;
 import javax.inject.Inject;
 
 /**
+ * Class used to calculate the elapsed datetime since the @{@link com.orafaaraujo.depuis.model.Fact}
+ * was created.
+ *
  * Created by rafael on 21/01/17.
  */
 
@@ -16,10 +19,18 @@ public class ElapsedDateTimeHelper {
     @Inject
     Context mContext;
 
+    @Inject
     public ElapsedDateTimeHelper() {
         Injector.getApplicationComponent().inject(this);
     }
 
+    /**
+     * Method that return the formatted String of elapsed date and time.
+     *
+     * @param timestamp The elapsed time in milliseconds
+     * @return The string formatted by the maximo time passed. For example, if was 15 minutes will
+     * return "15m", but if is 20 days will return "20 days" and go on.
+     */
     public String getTime(long timestamp) {
 
         long different = System.currentTimeMillis() - timestamp;

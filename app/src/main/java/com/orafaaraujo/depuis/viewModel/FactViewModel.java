@@ -5,10 +5,10 @@ import android.databinding.BaseObservable;
 import android.view.View;
 
 import com.orafaaraujo.depuis.dagger.Injector;
-import com.orafaaraujo.depuis.model.Fact;
 import com.orafaaraujo.depuis.helper.DateTimeHelper;
 import com.orafaaraujo.depuis.helper.ElapsedDateTimeHelper;
 import com.orafaaraujo.depuis.helper.ShareContentHelper;
+import com.orafaaraujo.depuis.model.Fact;
 
 import javax.inject.Inject;
 
@@ -32,9 +32,13 @@ public class FactViewModel extends BaseObservable {
 
     private Fact mFact;
 
-    public FactViewModel(Fact fact) {
-        mFact = fact;
+    @Inject
+    FactViewModel() {
         Injector.getApplicationComponent().inject(this);
+    }
+
+    public void setFact(Fact fact) {
+        mFact = fact;
     }
 
     public String getFactTitle() {
@@ -51,10 +55,6 @@ public class FactViewModel extends BaseObservable {
 
     public String getFactCurrentTime() {
         return mElapsedDateTimeHelper.getTime(mFact.startTime());
-    }
-
-    public boolean getFactCount() {
-        return mFact.count();
     }
 
     public View.OnClickListener onClickShare() {

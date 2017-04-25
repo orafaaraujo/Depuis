@@ -1,83 +1,35 @@
 package com.orafaaraujo.depuis.view.activity;
 
-import android.content.Intent;
+import android.databinding.DataBindingUtil;
 import android.os.Bundle;
-import android.support.design.widget.FloatingActionButton;
 import android.support.v7.app.AppCompatActivity;
-import android.support.v7.widget.DividerItemDecoration;
-import android.support.v7.widget.LinearLayoutManager;
-import android.support.v7.widget.RecyclerView;
-import android.support.v7.widget.Toolbar;
-import android.support.v7.widget.helper.ItemTouchHelper;
-import android.view.View;
 
 import com.orafaaraujo.depuis.R;
-import com.orafaaraujo.depuis.repository.store.FactManager;
-import com.orafaaraujo.depuis.view.helper.SimpleItemTouchHelperCallback;
-import com.orafaaraujo.depuis.view.adapter.FactAdapter;
+import com.orafaaraujo.depuis.dagger.Injector;
+import com.orafaaraujo.depuis.databinding.ActivityMainBinding;
+import com.orafaaraujo.depuis.viewModel.MainViewModel;
 
-import butterknife.BindView;
-import butterknife.ButterKnife;
+import javax.inject.Inject;
 
 public class MainActivity extends AppCompatActivity {
 
-    @BindView(R.id.toolbar)
-    Toolbar mToolbar;
-
-    @BindView(R.id.main_fab_new_fact)
-    FloatingActionButton mFab;
-
-    @BindView(R.id.main_recycler_fact)
-    RecyclerView mRecyclerView;
-
-    private FactAdapter mAdapter;
+    @Inject
+    public MainViewModel mMainViewModel;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_main);
 
-        ButterKnife.bind(this);
+        Injector.getApplicationComponent().inject(this);
 
-        setupToolbar();
-        setupRecyclerView();
-        populateRecyclerView();
+        ActivityMainBinding binding = DataBindingUtil.setContentView(this, R.layout.activity_main);
+        binding.setViewModel(mMainViewModel);
+        setSupportActionBar(binding.toolbar);
     }
 
-    private void setupToolbar() {
-        setSupportActionBar(mToolbar);
-    }
-
-    private void setupRecyclerView() {
-
-        mAdapter = new FactAdapter();
-
-        mRecyclerView.setLayoutManager(new LinearLayoutManager(this));
-        mRecyclerView.addItemDecoration(new DividerItemDecoration(this, DividerItemDecoration.VERTICAL));
-        mRecyclerView.setHasFixedSize(true);
-        mRecyclerView.addOnScrollListener(new RecyclerView.OnScrollListener() {
-            @Override
-            public void onScrolled(RecyclerView recyclerView, int dx, int dy) {
-                if (dy > 0) {
-                    mFab.hide();
-                } else if (dy < 0) {
-                    mFab.show();
-                }
-            }
-        });
-
-        mRecyclerView.setAdapter(mAdapter);
-
-        ItemTouchHelper.Callback callback = new SimpleItemTouchHelperCallback(mAdapter);
-        ItemTouchHelper touchHelper = new ItemTouchHelper(callback);
-        touchHelper.attachToRecyclerView(mRecyclerView);
-    }
-
-    private void populateRecyclerView() {
-        mAdapter.setFacts(FactManager.fetchFacts());
-    }
-
-    public void onNewItem(View view) {
-        startActivity(new Intent(this, NewFactActivity.class));
+    @Override
+    protected void onResume() {
+        super.onResume();
+        mMainViewModel.fetchFacts();
     }
 }

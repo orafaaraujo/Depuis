@@ -10,6 +10,8 @@ import com.orafaaraujo.depuis.model.Fact;
 import javax.inject.Inject;
 
 /**
+ * Class to handle all shareable content.
+ *
  * Created by rafael on 21/01/17.
  */
 
@@ -21,16 +23,23 @@ public class ShareContentHelper {
     @Inject
     ElapsedDateTimeHelper mElapsedDateTimeHelper;
 
+    @Inject
     public ShareContentHelper() {
         Injector.getApplicationComponent().inject(this);
     }
 
+    /**
+     * Method to share a fact on social networks.
+     *
+     * @param fact Fact that user want to share to.
+     */
     public void share(Fact fact) {
         Intent sendIntent = new Intent();
         sendIntent.setAction(Intent.ACTION_SEND);
         sendIntent.putExtra(Intent.EXTRA_TEXT, makeText(mContext, fact));
         sendIntent.setType("text/plain");
-        mContext.startActivity(Intent.createChooser(sendIntent, mContext.getString(R.string.fact_share_message)));
+        mContext.startActivity(
+                Intent.createChooser(sendIntent, mContext.getString(R.string.fact_share_message)));
     }
 
     private String makeText(Context context, Fact fact) {

@@ -6,6 +6,7 @@ import com.orafaaraujo.depuis.DepuisApp;
 import com.orafaaraujo.depuis.dagger.module.ApplicationModule;
 import com.orafaaraujo.depuis.dagger.module.DatabaseModule;
 import com.orafaaraujo.depuis.dagger.module.FormatterModule;
+import com.orafaaraujo.depuis.dagger.module.ViewModule;
 
 import java.util.Objects;
 
@@ -23,6 +24,7 @@ public class Injector {
     public static void initializeApplicationComponent(DepuisApp application) {
         sApplicationComponent = DaggerApplicationComponent.builder()
                 .applicationModule(new ApplicationModule(application))
+                .viewModule(new ViewModule())
                 .databaseModule(new DatabaseModule())
                 .formatterModule(new FormatterModule())
                 .build();

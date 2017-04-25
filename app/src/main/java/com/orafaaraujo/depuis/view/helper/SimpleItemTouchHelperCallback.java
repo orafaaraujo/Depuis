@@ -12,21 +12,23 @@ import android.support.v7.widget.helper.ItemTouchHelper;
 import android.view.View;
 
 import com.orafaaraujo.depuis.R;
-import com.orafaaraujo.depuis.dagger.Injector;
 import com.orafaaraujo.depuis.view.adapter.FactAdapter;
 
 import javax.inject.Inject;
 
 public class SimpleItemTouchHelperCallback extends ItemTouchHelper.Callback {
 
-    private final FactAdapter mAdapter;
+    private FactAdapter mAdapter;
 
-    @Inject
     Context mContext;
 
-    public SimpleItemTouchHelperCallback(FactAdapter adapter) {
+    @Inject
+    public SimpleItemTouchHelperCallback(Context context) {
+        mContext = context;
+    }
+
+    public void setAdapter(FactAdapter adapter) {
         mAdapter = adapter;
-        Injector.getApplicationComponent().inject(this);
     }
 
     @Override
@@ -49,12 +51,14 @@ public class SimpleItemTouchHelperCallback extends ItemTouchHelper.Callback {
         return makeMovementFlags(0, ItemTouchHelper.START);
     }
 
-    public boolean onMove(RecyclerView recyclerView, RecyclerView.ViewHolder viewHolder, RecyclerView.ViewHolder target) {
+    public boolean onMove(RecyclerView recyclerView, RecyclerView.ViewHolder viewHolder,
+            RecyclerView.ViewHolder target) {
         return false;
     }
 
     @Override
-    public void onChildDraw(Canvas c, RecyclerView recyclerView, RecyclerView.ViewHolder viewHolder, float dX, float dY, int actionState, boolean isCurrentlyActive) {
+    public void onChildDraw(Canvas c, RecyclerView recyclerView, RecyclerView.ViewHolder viewHolder,
+            float dX, float dY, int actionState, boolean isCurrentlyActive) {
 
         if (actionState == ItemTouchHelper.ACTION_STATE_SWIPE) {
 
