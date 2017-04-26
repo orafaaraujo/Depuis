@@ -34,6 +34,9 @@ public class MainViewModel extends BaseObservable {
     @Inject
     DividerItemDecoration mDividerItemDecoration;
 
+    @Inject
+    SimpleItemTouchHelperCallback mTouchHelperCallback;
+
     public ObservableField<Boolean> mShow = new ObservableField<>(true);
 
     @Inject
@@ -66,9 +69,8 @@ public class MainViewModel extends BaseObservable {
     }
 
     public ItemTouchHelper getItemTouch() {
-        SimpleItemTouchHelperCallback callback = new SimpleItemTouchHelperCallback(mContext);
-        callback.setAdapter(mAdapter);
-        return new ItemTouchHelper(callback);
+        mTouchHelperCallback.setAdapter(mAdapter);
+        return new ItemTouchHelper(mTouchHelperCallback);
     }
 
     public View.OnClickListener getFabClick() {

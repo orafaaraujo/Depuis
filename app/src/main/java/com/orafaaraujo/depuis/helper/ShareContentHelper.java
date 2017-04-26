@@ -4,17 +4,18 @@ import android.content.Context;
 import android.content.Intent;
 
 import com.orafaaraujo.depuis.R;
-import com.orafaaraujo.depuis.dagger.Injector;
 import com.orafaaraujo.depuis.model.Fact;
 
 import javax.inject.Inject;
+
+import dagger.Reusable;
 
 /**
  * Class to handle all shareable content.
  *
  * Created by rafael on 21/01/17.
  */
-
+@Reusable
 public class ShareContentHelper {
 
     @Inject
@@ -24,8 +25,7 @@ public class ShareContentHelper {
     ElapsedDateTimeHelper mElapsedDateTimeHelper;
 
     @Inject
-    public ShareContentHelper() {
-        Injector.getApplicationComponent().inject(this);
+    ShareContentHelper() {
     }
 
     /**

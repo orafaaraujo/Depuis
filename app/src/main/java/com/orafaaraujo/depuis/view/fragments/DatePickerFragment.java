@@ -9,8 +9,8 @@ import android.support.v7.app.AppCompatDialogFragment;
 import android.widget.DatePicker;
 
 import com.orafaaraujo.depuis.R;
-import com.orafaaraujo.depuis.helper.buses.DatetimeVO;
-import com.orafaaraujo.depuis.helper.buses.RxBus;
+import com.orafaaraujo.depuis.helper.buses.DatetimeTO;
+import com.orafaaraujo.depuis.helper.RxBus;
 
 import java.util.Calendar;
 
@@ -53,7 +53,7 @@ public class DatePickerFragment extends AppCompatDialogFragment
         calendar.set(Calendar.DAY_OF_MONTH, dayOfMonth);
 
         mRxBus.sendEvent(
-                DatetimeVO.builder()
+                DatetimeTO.builder()
                         .setMilliseconds(calendar.getTimeInMillis())
                         .build());
     }

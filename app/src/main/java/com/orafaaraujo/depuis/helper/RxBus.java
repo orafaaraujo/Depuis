@@ -1,5 +1,8 @@
-package com.orafaaraujo.depuis.helper.buses;
+package com.orafaaraujo.depuis.helper;
 
+import javax.inject.Inject;
+
+import dagger.Reusable;
 import io.reactivex.Observable;
 import io.reactivex.subjects.PublishSubject;
 
@@ -8,8 +11,12 @@ import io.reactivex.subjects.PublishSubject;
  *
  * Created by rafael on 25/04/17.
  */
-
+@Reusable
 public class RxBus {
+
+    @Inject
+    RxBus() {
+    }
 
     private PublishSubject<Object> subject = PublishSubject.create();
 

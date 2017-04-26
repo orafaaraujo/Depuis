@@ -11,9 +11,9 @@ import com.orafaaraujo.depuis.R;
 import com.orafaaraujo.depuis.dagger.Injector;
 import com.orafaaraujo.depuis.databinding.ActivityNewFactBinding;
 import com.orafaaraujo.depuis.helper.DateTimeHelper;
-import com.orafaaraujo.depuis.helper.buses.DatetimeVO;
-import com.orafaaraujo.depuis.helper.buses.NewFactFeedbackVO;
-import com.orafaaraujo.depuis.helper.buses.RxBus;
+import com.orafaaraujo.depuis.helper.buses.DatetimeTO;
+import com.orafaaraujo.depuis.helper.buses.NewFactFeedbackTO;
+import com.orafaaraujo.depuis.helper.RxBus;
 import com.orafaaraujo.depuis.view.fragments.DatePickerFragment;
 import com.orafaaraujo.depuis.view.fragments.TimePickerFragment;
 import com.orafaaraujo.depuis.viewModel.NewFactViewModel;
@@ -65,22 +65,22 @@ public class NewFactActivity extends AppCompatActivity {
 
     private void handleEvents() {
         mRxBus.getEvents()
-                .filter(o -> o instanceof DatetimeVO)
-                .map(o -> (DatetimeVO) o)
+                .filter(o -> o instanceof DatetimeTO)
+                .map(o -> (DatetimeTO) o)
                 .subscribe(vo -> mNewFactViewModel.setMilliseconds(vo.milliseconds()), Timber::e);
 
         mRxBus.getEvents()
-                .filter(o -> o instanceof NewFactFeedbackVO)
-                .map(o -> (NewFactFeedbackVO) o)
+                .filter(o -> o instanceof NewFactFeedbackTO)
+                .map(o -> (NewFactFeedbackTO) o)
                 .subscribe(this::handlerNewFactFeedback, Timber::e);
 
         mRxBus.sendEvent(
-                DatetimeVO.builder()
+                DatetimeTO.builder()
                         .setMilliseconds(mDateTimeHelper.getCleanTime())
                         .build());
     }
 
-    private void handlerNewFactFeedback(NewFactFeedbackVO vo) {
+    private void handlerNewFactFeedback(NewFactFeedbackTO vo) {
         if (vo.success()) {
             onBackButton(null);
         } else {
@@ -121,5 +121,4 @@ public class NewFactActivity extends AppCompatActivity {
         bundle.putLong("TimeInMillis", mNewFactViewModel.getMilliseconds());
         return bundle;
     }
-
 }

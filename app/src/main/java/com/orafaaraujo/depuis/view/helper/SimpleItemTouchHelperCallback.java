@@ -20,11 +20,11 @@ public class SimpleItemTouchHelperCallback extends ItemTouchHelper.Callback {
 
     private FactAdapter mAdapter;
 
+    @Inject
     Context mContext;
 
     @Inject
-    public SimpleItemTouchHelperCallback(Context context) {
-        mContext = context;
+    SimpleItemTouchHelperCallback() {
     }
 
     public void setAdapter(FactAdapter adapter) {

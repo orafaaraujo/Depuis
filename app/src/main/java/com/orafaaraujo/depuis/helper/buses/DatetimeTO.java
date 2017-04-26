@@ -7,12 +7,12 @@ import com.google.auto.value.AutoValue;
  */
 
 @AutoValue
-public abstract class DatetimeVO {
+public abstract class DatetimeTO {
 
     public abstract long milliseconds();
 
-    public static DatetimeVO.Builder builder() {
-        return new AutoValue_DatetimeVO.Builder();
+    public static DatetimeTO.Builder builder() {
+        return new AutoValue_DatetimeTO.Builder();
     }
 
     @AutoValue.Builder
@@ -20,6 +20,6 @@ public abstract class DatetimeVO {
 
         public abstract Builder setMilliseconds(long milliseconds);
 
-        public abstract DatetimeVO build();
+        public abstract DatetimeTO build();
     }
 }

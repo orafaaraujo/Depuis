@@ -4,13 +4,14 @@ import android.content.Context;
 import android.databinding.BaseObservable;
 import android.view.View;
 
-import com.orafaaraujo.depuis.dagger.Injector;
 import com.orafaaraujo.depuis.helper.DateTimeHelper;
 import com.orafaaraujo.depuis.helper.ElapsedDateTimeHelper;
 import com.orafaaraujo.depuis.helper.ShareContentHelper;
 import com.orafaaraujo.depuis.model.Fact;
 
 import javax.inject.Inject;
+
+import dagger.Lazy;
 
 /**
  * Created by rafael on 18/01/17.
@@ -28,13 +29,12 @@ public class FactViewModel extends BaseObservable {
     DateTimeHelper mDateTimeHelper;
 
     @Inject
-    ShareContentHelper mShareContentHelper;
+    Lazy<ShareContentHelper> mShareContentHelper;
 
     private Fact mFact;
 
     @Inject
     FactViewModel() {
-        Injector.getApplicationComponent().inject(this);
     }
 
     public void setFact(Fact fact) {
@@ -58,7 +58,7 @@ public class FactViewModel extends BaseObservable {
     }
 
     public View.OnClickListener onClickShare() {
-        return v -> mShareContentHelper.share(mFact);
+        return v -> mShareContentHelper.get().share(mFact);
     }
 
 }

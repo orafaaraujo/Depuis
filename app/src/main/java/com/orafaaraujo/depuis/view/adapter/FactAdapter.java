@@ -33,7 +33,7 @@ public class FactAdapter extends RecyclerView.Adapter<BindingHolder> {
     private final List<Fact> mFacts;
 
     @Inject
-    public FactAdapter() {
+    FactAdapter() {
         mFacts = new ArrayList<>(0);
     }
 

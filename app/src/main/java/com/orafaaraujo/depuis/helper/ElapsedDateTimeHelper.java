@@ -3,9 +3,10 @@ package com.orafaaraujo.depuis.helper;
 import android.content.Context;
 
 import com.orafaaraujo.depuis.R;
-import com.orafaaraujo.depuis.dagger.Injector;
 
 import javax.inject.Inject;
+
+import dagger.Reusable;
 
 /**
  * Class used to calculate the elapsed datetime since the @{@link com.orafaaraujo.depuis.model.Fact}
@@ -13,15 +14,14 @@ import javax.inject.Inject;
  *
  * Created by rafael on 21/01/17.
  */
-
+@Reusable
 public class ElapsedDateTimeHelper {
 
     @Inject
     Context mContext;
 
     @Inject
-    public ElapsedDateTimeHelper() {
-        Injector.getApplicationComponent().inject(this);
+    ElapsedDateTimeHelper() {
     }
 
     /**

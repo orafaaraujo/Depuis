@@ -7,14 +7,14 @@ import com.google.auto.value.AutoValue;
  */
 
 @AutoValue
-public abstract class NewFactFeedbackVO {
+public abstract class NewFactFeedbackTO {
 
     public abstract boolean success();
 
     public abstract String message();
 
-    public static NewFactFeedbackVO.Builder builder() {
-        return new AutoValue_NewFactFeedbackVO.Builder();
+    public static NewFactFeedbackTO.Builder builder() {
+        return new AutoValue_NewFactFeedbackTO.Builder();
     }
 
     @AutoValue.Builder
@@ -24,6 +24,6 @@ public abstract class NewFactFeedbackVO {
 
         public abstract Builder setSuccess(boolean success);
 
-        public abstract NewFactFeedbackVO build();
+        public abstract NewFactFeedbackTO build();
     }
 }

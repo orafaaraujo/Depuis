@@ -10,8 +10,8 @@ import android.view.View;
 
 import com.orafaaraujo.depuis.R;
 import com.orafaaraujo.depuis.helper.DateTimeHelper;
-import com.orafaaraujo.depuis.helper.buses.RxBus;
-import com.orafaaraujo.depuis.helper.buses.NewFactFeedbackVO;
+import com.orafaaraujo.depuis.helper.RxBus;
+import com.orafaaraujo.depuis.helper.buses.NewFactFeedbackTO;
 import com.orafaaraujo.depuis.model.Fact;
 
 import javax.inject.Inject;
@@ -83,13 +83,13 @@ public class NewFactViewModel extends BaseObservable {
     private void validateFact() {
         if (mTextIsFilled) {
             Timber.i("Fact complete");
-            mRxBus.sendEvent(NewFactFeedbackVO.builder()
+            mRxBus.sendEvent(NewFactFeedbackTO.builder()
                     .setSuccess(true)
                     .setMessage(mContext.getString(R.string.new_fact_success))
                     .build());
         } else {
             Timber.i("Title not filled");
-            mRxBus.sendEvent(NewFactFeedbackVO.builder()
+            mRxBus.sendEvent(NewFactFeedbackTO.builder()
                     .setSuccess(false)
                     .setMessage(mContext.getString(R.string.new_fact_failure_title))
                     .build());

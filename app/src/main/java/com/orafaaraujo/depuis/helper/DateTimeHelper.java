@@ -5,17 +5,28 @@ import java.util.Calendar;
 import java.util.Date;
 import java.util.Locale;
 
+import javax.inject.Inject;
+
+import dagger.Reusable;
+
 /**
  * Class responsible to formatted Dates.
  *
  * Created by rafael on 21/01/17.
  */
 
+@Reusable
 public class DateTimeHelper {
 
     private static final String DAY_DATE = "EEE, dd MMM yy";
+
     private static final String DATE = "dd MMM yy";
+
     private static final String TIME = "HH:mm";
+
+    @Inject
+    DateTimeHelper() {
+    }
 
     /**
      * Format date to day of week, day of month, month and year. For example "Sub, 29 mar 87".

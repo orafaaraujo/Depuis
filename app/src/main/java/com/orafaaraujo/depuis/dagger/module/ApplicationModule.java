@@ -3,14 +3,11 @@ package com.orafaaraujo.depuis.dagger.module;
 import android.content.Context;
 
 import com.orafaaraujo.depuis.DepuisApp;
-import com.orafaaraujo.depuis.helper.ShareContentHelper;
-import com.orafaaraujo.depuis.helper.buses.RxBus;
 
 import javax.inject.Singleton;
 
 import dagger.Module;
 import dagger.Provides;
-import dagger.Reusable;
 
 /**
  * Created by rafael on 22/01/17.
@@ -36,15 +33,4 @@ public class ApplicationModule {
         return mApplication.getApplicationContext();
     }
 
-    @Provides
-    @Reusable
-    ShareContentHelper shareContentHelper() {
-        return new ShareContentHelper();
-    }
-
-    @Provides
-    @Reusable
-    RxBus getRxBus() {
-        return new RxBus();
-    }
 }
