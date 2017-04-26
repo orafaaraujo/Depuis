@@ -16,7 +16,7 @@
     <string name="new_fact_back">Back</string>
     <string name="new_fact_title_empty">Title cannot be empty</string>
     <string name="new_fact_success">Fact created with success</string>
-    <string name="new_fact_failure_title">Fill the title</string>
+    <string name="new_fact_failure_title">Please, fill the title</string>
 
     <string name="elapsed_days">%d days</string>
     <string name="elapsed_hours">%dh</string>
