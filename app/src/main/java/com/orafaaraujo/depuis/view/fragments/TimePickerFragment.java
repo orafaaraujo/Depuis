@@ -27,6 +27,8 @@ public class TimePickerFragment extends AppCompatDialogFragment
     @Inject
     RxBus mRxBus;
 
+    Calendar mCalendar;
+
     @Inject
     public TimePickerFragment() {
     }
@@ -35,11 +37,11 @@ public class TimePickerFragment extends AppCompatDialogFragment
     @Override
     public Dialog onCreateDialog(Bundle savedInstanceState) {
 
-        Calendar calendar = Calendar.getInstance();
-        calendar.setTimeInMillis(getArguments().getLong("TimeInMillis"));
+        mCalendar = Calendar.getInstance();
+        mCalendar.setTimeInMillis(getArguments().getLong("TimeInMillis"));
 
-        int hour = calendar.get(Calendar.HOUR_OF_DAY);
-        int minute = calendar.get(Calendar.MINUTE);
+        int hour = mCalendar.get(Calendar.HOUR_OF_DAY);
+        int minute = mCalendar.get(Calendar.MINUTE);
 
         return new TimePickerDialog(getActivity(), R.style.DialogTheme, this, hour, minute,
                 DateFormat.is24HourFormat(getActivity()));
@@ -48,13 +50,12 @@ public class TimePickerFragment extends AppCompatDialogFragment
     @Override
     public void onTimeSet(TimePicker view, int hourOfDay, int minute) {
 
-        Calendar calendar = Calendar.getInstance();
-        calendar.set(Calendar.HOUR_OF_DAY, hourOfDay);
-        calendar.set(Calendar.MINUTE, minute);
+        mCalendar.set(Calendar.HOUR_OF_DAY, hourOfDay);
+        mCalendar.set(Calendar.MINUTE, minute);
 
         mRxBus.sendEvent(
                 DatetimeTO.builder()
-                        .setMilliseconds(calendar.getTimeInMillis())
+                        .setMilliseconds(mCalendar.getTimeInMillis())
                         .build());
     }
 }

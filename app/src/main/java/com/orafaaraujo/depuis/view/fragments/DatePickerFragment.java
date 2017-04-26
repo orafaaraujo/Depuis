@@ -26,6 +26,8 @@ public class DatePickerFragment extends AppCompatDialogFragment
     @Inject
     RxBus mRxBus;
 
+    Calendar mCalendar;
+
     @Inject
     public DatePickerFragment() {
     }
@@ -34,12 +36,12 @@ public class DatePickerFragment extends AppCompatDialogFragment
     @Override
     public Dialog onCreateDialog(Bundle savedInstanceState) {
 
-        Calendar calendar = Calendar.getInstance();
-        calendar.setTimeInMillis(getArguments().getLong("TimeInMillis"));
+        mCalendar = Calendar.getInstance();
+        mCalendar.setTimeInMillis(getArguments().getLong("TimeInMillis"));
 
-        int year = calendar.get(Calendar.YEAR);
-        int month = calendar.get(Calendar.MONTH);
-        int day = calendar.get(Calendar.DAY_OF_MONTH);
+        int year = mCalendar.get(Calendar.YEAR);
+        int month = mCalendar.get(Calendar.MONTH);
+        int day = mCalendar.get(Calendar.DAY_OF_MONTH);
 
         return new DatePickerDialog(getActivity(), R.style.DialogTheme, this, year, month, day);
     }
@@ -47,14 +49,13 @@ public class DatePickerFragment extends AppCompatDialogFragment
     @Override
     public void onDateSet(DatePicker view, int year, int month, int dayOfMonth) {
 
-        Calendar calendar = Calendar.getInstance();
-        calendar.set(Calendar.YEAR, year);
-        calendar.set(Calendar.MONTH, month);
-        calendar.set(Calendar.DAY_OF_MONTH, dayOfMonth);
+        mCalendar.set(Calendar.YEAR, year);
+        mCalendar.set(Calendar.MONTH, month);
+        mCalendar.set(Calendar.DAY_OF_MONTH, dayOfMonth);
 
         mRxBus.sendEvent(
                 DatetimeTO.builder()
-                        .setMilliseconds(calendar.getTimeInMillis())
+                        .setMilliseconds(mCalendar.getTimeInMillis())
                         .build());
     }
 }
