@@ -8,9 +8,6 @@ import android.support.v7.widget.RecyclerView;
 import dagger.Module;
 import dagger.Provides;
 
-/**
- * Created by venturus on 25/04/17.
- */
 @Module
 public class ViewModule {
 

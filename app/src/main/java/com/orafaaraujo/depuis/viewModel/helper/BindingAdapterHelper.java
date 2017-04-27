@@ -8,10 +8,6 @@ import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.helper.ItemTouchHelper;
 import android.text.TextWatcher;
 
-/**
- * Created by venturus on 25/04/17.
- */
-
 public class BindingAdapterHelper {
 
     @BindingAdapter({"bind:watcher"})

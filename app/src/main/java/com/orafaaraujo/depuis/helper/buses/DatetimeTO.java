@@ -2,10 +2,6 @@ package com.orafaaraujo.depuis.helper.buses;
 
 import com.google.auto.value.AutoValue;
 
-/**
- * Created by venturus on 25/04/17.
- */
-
 @AutoValue
 public abstract class DatetimeTO {
 
