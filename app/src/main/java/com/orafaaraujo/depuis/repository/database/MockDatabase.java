@@ -1,4 +1,4 @@
-package com.orafaaraujo.depuis.repository.store;
+package com.orafaaraujo.depuis.repository.database;
 
 import com.orafaaraujo.depuis.model.Fact;
 
@@ -10,7 +10,7 @@ import java.util.List;
  * Created by rafael on 20/01/17.
  */
 
-public class FactManager {
+public class MockDatabase {
 
     private static final int N = 10;
 

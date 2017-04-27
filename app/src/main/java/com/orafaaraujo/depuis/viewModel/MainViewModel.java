@@ -9,16 +9,13 @@ import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.helper.ItemTouchHelper;
 import android.view.View;
 
-import com.orafaaraujo.depuis.repository.store.FactManager;
+import com.orafaaraujo.depuis.repository.database.MockDatabase;
+import com.orafaaraujo.depuis.repository.database.RequeryDatabase;
 import com.orafaaraujo.depuis.view.activity.NewFactActivity;
 import com.orafaaraujo.depuis.view.adapter.FactAdapter;
 import com.orafaaraujo.depuis.view.helper.SimpleItemTouchHelperCallback;
 
 import javax.inject.Inject;
-
-/**
- * Created by venturus on 25/04/17.
- */
 
 public class MainViewModel extends BaseObservable {
 
@@ -36,6 +33,9 @@ public class MainViewModel extends BaseObservable {
 
     @Inject
     SimpleItemTouchHelperCallback mTouchHelperCallback;
+
+    @Inject
+    RequeryDatabase mDatabase;
 
     public ObservableField<Boolean> mShow = new ObservableField<>(true);
 
@@ -56,7 +56,7 @@ public class MainViewModel extends BaseObservable {
     }
 
     public void fetchFacts() {
-        mAdapter.updateFacts(FactManager.fetchFacts());
+        mAdapter.updateFacts(MockDatabase.fetchFacts());
     }
 
     public RecyclerView.OnScrollListener getScrollListener() {
