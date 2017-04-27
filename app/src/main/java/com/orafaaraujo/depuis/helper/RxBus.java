@@ -35,7 +35,4 @@ public class RxBus {
         return subject;
     }
 
-    public void complete() {
-        subject.onComplete();
-    }
 }

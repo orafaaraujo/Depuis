@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <style name="AppTheme" parent="Theme.AppCompat.Light.DarkActionBar">
+        <item name="colorPrimary">@color/main_primary</item>
+        <item name="colorPrimaryDark">@color/main_primary_dark</item>
+        <item name="colorAccent">@color/main_accent</item>
+        <item name="android:navigationBarColor">@color/main_primary_dark</item>
+        <item name="android:statusBarColor">@android:color/white</item>
+
+        <item name="android:windowContentTransitions">true</item>
+    </style>
+
+</resources>

@@ -1,7 +1,6 @@
 package com.orafaaraujo.depuis.view.activity;
 
 import android.databinding.DataBindingUtil;
-import android.os.Build;
 import android.os.Bundle;
 import android.support.design.widget.Snackbar;
 import android.support.v7.app.AppCompatActivity;
@@ -11,9 +10,9 @@ import com.orafaaraujo.depuis.R;
 import com.orafaaraujo.depuis.dagger.Injector;
 import com.orafaaraujo.depuis.databinding.ActivityNewFactBinding;
 import com.orafaaraujo.depuis.helper.DateTimeHelper;
+import com.orafaaraujo.depuis.helper.RxBus;
 import com.orafaaraujo.depuis.helper.buses.DatetimeTO;
 import com.orafaaraujo.depuis.helper.buses.NewFactFeedbackTO;
-import com.orafaaraujo.depuis.helper.RxBus;
 import com.orafaaraujo.depuis.view.fragments.DatePickerFragment;
 import com.orafaaraujo.depuis.view.fragments.TimePickerFragment;
 import com.orafaaraujo.depuis.viewModel.NewFactViewModel;
@@ -57,12 +56,6 @@ public class NewFactActivity extends AppCompatActivity {
         handleEvents();
     }
 
-    @Override
-    protected void onStop() {
-        super.onStop();
-        completeObservables();
-    }
-
     private void handleEvents() {
         mRxBus.getEvents()
                 .filter(o -> o instanceof DatetimeTO)
@@ -94,16 +87,8 @@ public class NewFactActivity extends AppCompatActivity {
         mySnackbar.show();
     }
 
-    private void completeObservables() {
-        mRxBus.complete();
-    }
-
     public void onBackButton(View view) {
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
-            finishAndRemoveTask();
-        } else {
-            finish();
-        }
+        supportFinishAfterTransition();
     }
 
     public void onDateClick(View view) {
