@@ -8,6 +8,8 @@ import android.view.ViewGroup;
 
 import com.orafaaraujo.depuis.R;
 import com.orafaaraujo.depuis.databinding.ItemFactBinding;
+import com.orafaaraujo.depuis.helper.RxBus;
+import com.orafaaraujo.depuis.helper.buses.FactTO;
 import com.orafaaraujo.depuis.model.Fact;
 import com.orafaaraujo.depuis.view.adapter.viewholder.BindingHolder;
 import com.orafaaraujo.depuis.viewModel.FactViewModel;
@@ -29,6 +31,9 @@ public class FactAdapter extends RecyclerView.Adapter<BindingHolder> {
 
     @Inject
     Provider<FactViewModel> mFactViewModelProvider;
+
+    @Inject
+    RxBus mRxBus;
 
     private final List<Fact> mFacts;
 
@@ -64,8 +69,23 @@ public class FactAdapter extends RecyclerView.Adapter<BindingHolder> {
         mFacts.addAll(facts);
     }
 
+    public void insertFact(FactTO factTO) {
+        mFacts.add(factTO.position(), factTO.fact());
+        notifyItemInserted(factTO.position());
+        notifyItemRangeChanged(factTO.position(), mFacts.size());
+    }
+
     public void onItemDismiss(int position) {
+        sendRemoveEvent(position);
         removerItem(position);
+    }
+
+    private void sendRemoveEvent(int position) {
+        mRxBus.sendEvent(
+                FactTO.builder()
+                        .setFact(mFacts.get(position))
+                        .setPosition(position)
+                        .build());
     }
 
     private void removerItem(int position) {
@@ -73,5 +93,4 @@ public class FactAdapter extends RecyclerView.Adapter<BindingHolder> {
         notifyItemRemoved(position);
         notifyItemRangeChanged(position, mFacts.size());
     }
-
 }

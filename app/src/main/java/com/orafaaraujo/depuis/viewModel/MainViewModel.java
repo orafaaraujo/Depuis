@@ -9,11 +9,16 @@ import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.helper.ItemTouchHelper;
 import android.view.View;
 
-import com.orafaaraujo.depuis.repository.database.MockDatabase;
-import com.orafaaraujo.depuis.repository.database.RequeryDatabase;
+import com.orafaaraujo.depuis.helper.buses.FactTO;
+import com.orafaaraujo.depuis.model.Fact;
+import com.orafaaraujo.depuis.repository.database.FactDatabase;
+import com.orafaaraujo.depuis.repository.entity.FactEntity;
 import com.orafaaraujo.depuis.view.activity.NewFactActivity;
 import com.orafaaraujo.depuis.view.adapter.FactAdapter;
 import com.orafaaraujo.depuis.view.helper.SimpleItemTouchHelperCallback;
+
+import java.util.ArrayList;
+import java.util.List;
 
 import javax.inject.Inject;
 
@@ -35,7 +40,7 @@ public class MainViewModel extends BaseObservable {
     SimpleItemTouchHelperCallback mTouchHelperCallback;
 
     @Inject
-    RequeryDatabase mDatabase;
+    FactDatabase mDatabase;
 
     public ObservableField<Boolean> mShow = new ObservableField<>(true);
 
@@ -56,7 +61,29 @@ public class MainViewModel extends BaseObservable {
     }
 
     public void fetchFacts() {
-        mAdapter.updateFacts(MockDatabase.fetchFacts());
+        List<FactEntity> factEntities = mDatabase.fetchAll();
+        List<Fact> facts = new ArrayList<>(factEntities.size());
+
+        factEntities
+                .stream()
+                .map(this::entityToModel)
+                .forEach(facts::add);
+
+        mAdapter.updateFacts(facts);
+    }
+
+    private Fact entityToModel(FactEntity fe) {
+        return Fact.builder()
+                .setTitle(fe.title())
+                .setComment(fe.comment())
+                .setCount(fe.count())
+                .setStartTime(fe.startTime())
+                .build();
+    }
+
+    public void insertFact(FactTO factTO) {
+        mAdapter.insertFact(factTO);
+        mLayoutManager.scrollToPosition(factTO.position());
     }
 
     public RecyclerView.OnScrollListener getScrollListener() {
