@@ -3,7 +3,11 @@ package com.orafaaraujo.depuis.dagger.module;
 import android.content.Context;
 
 import com.orafaaraujo.depuis.BuildConfig;
+import com.orafaaraujo.depuis.repository.database.FactDatabase;
+import com.orafaaraujo.depuis.repository.database.MockDatabase;
 import com.orafaaraujo.depuis.repository.entity.Models;
+
+import java.util.concurrent.Executors;
 
 import javax.inject.Singleton;
 
@@ -11,9 +15,11 @@ import dagger.Module;
 import dagger.Provides;
 import io.requery.Persistable;
 import io.requery.android.sqlite.DatabaseSource;
+import io.requery.meta.EntityModel;
 import io.requery.reactivex.ReactiveEntityStore;
 import io.requery.reactivex.ReactiveSupport;
 import io.requery.sql.Configuration;
+import io.requery.sql.ConfigurationBuilder;
 import io.requery.sql.EntityDataStore;
 import io.requery.sql.TableCreationMode;
 
@@ -25,14 +31,31 @@ public class DatabaseModule {
 
     @Provides
     @Singleton
-    ReactiveEntityStore<Persistable> provideDatabase(Configuration configuration) {
-        return ReactiveSupport.toReactiveStore(new EntityDataStore<Persistable>(configuration));
+    FactDatabase provideDatabase(ReactiveEntityStore<Persistable> entityStore) {
+        return new MockDatabase();
+//        return new RequeryDatabase(entityStore);
     }
 
     @Provides
     @Singleton
-    Configuration provideConfiguration(DatabaseSource source) {
-        return source.getConfiguration();
+    ReactiveEntityStore<Persistable> provideEntityStore(Configuration configuration) {
+        return ReactiveSupport
+                .toReactiveStore(new EntityDataStore<Persistable>(configuration));
+    }
+
+    @Provides
+    @Singleton
+    Configuration provideConfiguration(DatabaseSource source, EntityModel model) {
+        return new ConfigurationBuilder(source, model)
+                .useDefaultLogging()
+                .setWriteExecutor(Executors.newSingleThreadExecutor())
+                .build();
+    }
+
+    @Provides
+    @Singleton
+    EntityModel provideModels() {
+        return Models.DEFAULT;
     }
 
     @Provides

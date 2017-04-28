@@ -5,37 +5,36 @@ import com.orafaaraujo.depuis.repository.entity.FactEntityType;
 
 import java.util.List;
 
-import javax.inject.Inject;
-import javax.inject.Singleton;
-
 import io.reactivex.Observable;
+import io.reactivex.android.schedulers.AndroidSchedulers;
+import io.reactivex.schedulers.Schedulers;
 import io.requery.Persistable;
 import io.requery.reactivex.ReactiveEntityStore;
+import timber.log.Timber;
 
-@Singleton
-public class RequeryDatabase implements FactDatabaseInterface {
+public class RequeryDatabase implements FactDatabase {
 
-    @Inject
     ReactiveEntityStore<Persistable> mDatabase;
 
-    @Inject
-    RequeryDatabase() {
+    public RequeryDatabase(ReactiveEntityStore<Persistable> database) {
+        mDatabase = database;
     }
 
     @Override
-    public boolean saveFact(FactEntity fact) {
-        mDatabase
-                .insert(fact)
-                .blockingGet();
-        return fetchFact(fact.id()) != null;
+    public void saveFact(FactEntity fact) {
+        mDatabase.insert(fact)
+                .toObservable()
+                .subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe(factEntity -> Timber.i(factEntity.toString()));
     }
 
     @Override
     public List<FactEntity> fetchAll() {
         return mDatabase
                 .select(FactEntity.class)
-                .get().
-                        toList();
+                .get()
+                .toList();
     }
 
     @Override
@@ -55,9 +54,7 @@ public class RequeryDatabase implements FactDatabaseInterface {
     }
 
     @Override
-    public boolean deleteFact(FactEntity fact) {
-        mDatabase
-                .delete(fact);
-        return fetchFact(fact.id()) == null;
+    public void deleteFact(FactEntity fact) {
+        mDatabase.delete(fact);
     }
 }

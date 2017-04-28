@@ -12,7 +12,10 @@ import com.orafaaraujo.depuis.R;
 import com.orafaaraujo.depuis.helper.DateTimeHelper;
 import com.orafaaraujo.depuis.helper.RxBus;
 import com.orafaaraujo.depuis.helper.buses.NewFactFeedbackTO;
-import com.orafaaraujo.depuis.model.Fact;
+import com.orafaaraujo.depuis.repository.database.FactDatabase;
+import com.orafaaraujo.depuis.repository.entity.FactEntity;
+
+import java.util.Random;
 
 import javax.inject.Inject;
 
@@ -32,6 +35,9 @@ public class NewFactViewModel extends BaseObservable {
 
     @Inject
     DateTimeHelper mDateTimeHelper;
+
+    @Inject
+    FactDatabase mDatabase;
 
     public final ObservableField<String> titleFact = new ObservableField<>("");
 
@@ -68,16 +74,19 @@ public class NewFactViewModel extends BaseObservable {
 
     private void saveNewFact() {
         if (mTextIsFilled) {
-            Fact fact = Fact.builder()
-                    .setTitle(titleFact.get())
-                    .setComment(commentFact.get())
-                    .setCount(true)
-                    .setStartTime(mMilliseconds)
-                    .build();
-            // TODO Save Fact on Database
-            Timber.i("New fact: %s", fact.toString());
+            mDatabase.saveFact(createFact());
         }
         validateFact();
+    }
+
+    private FactEntity createFact() {
+        return FactEntity.builder()
+                .setId(new Random().nextInt(1000))
+                .setTitle(titleFact.get())
+                .setComment(commentFact.get())
+                .setCount(true)
+                .setStartTime(mMilliseconds)
+                .build();
     }
 
     private void validateFact() {

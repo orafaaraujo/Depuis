@@ -10,9 +10,9 @@ import io.reactivex.Observable;
  * Created by rafael on 06/02/17.
  */
 
-public interface FactDatabaseInterface {
+public interface FactDatabase {
 
-    boolean saveFact(FactEntity fact);
+    void saveFact(FactEntity fact);
 
     List<FactEntity> fetchAll();
 
@@ -20,6 +20,6 @@ public interface FactDatabaseInterface {
 
     FactEntity fetchFact(int id);
 
-    boolean deleteFact(FactEntity fact);
+    void deleteFact(FactEntity fact);
 
 }
