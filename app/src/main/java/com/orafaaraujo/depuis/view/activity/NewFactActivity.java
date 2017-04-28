@@ -82,9 +82,7 @@ public class NewFactActivity extends AppCompatActivity {
     }
 
     private void showSnackMessage(String s) {
-        Snackbar mySnackbar = Snackbar.make(findViewById(R.id.new_fact_text_title), s,
-                Snackbar.LENGTH_SHORT);
-        mySnackbar.show();
+        Snackbar.make(findViewById(R.id.new_fact_text_title), s, Snackbar.LENGTH_SHORT).show();
     }
 
     public void onBackButton(View view) {
