@@ -7,8 +7,6 @@
         <item name="colorAccent">@color/main_accent</item>
         <item name="android:navigationBarColor">@color/main_primary_dark</item>
         <item name="android:statusBarColor">@android:color/white</item>
-
-        <item name="android:windowContentTransitions">true</item>
     </style>
 
 </resources>

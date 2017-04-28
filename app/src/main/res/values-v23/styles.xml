@@ -6,7 +6,6 @@
         <item name="colorPrimaryDark">@color/main_primary_dark</item>
         <item name="colorAccent">@color/main_accent</item>
         <item name="android:navigationBarColor">@color/main_primary_dark</item>
-        <item name="android:windowContentTransitions">true</item>
     </style>
 
     <style name="NewFactTheme" parent="AppTheme.NoActionBar">
