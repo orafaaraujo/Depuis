@@ -46,6 +46,8 @@ public class MainViewModel extends BaseObservable {
 
     private FactTO mFactTO;
 
+    private boolean mFactIsOverwrite;
+
     @Inject
     MainViewModel() {
     }
@@ -102,21 +104,20 @@ public class MainViewModel extends BaseObservable {
     }
 
     public void setFactTO(FactTO factTO) {
+        mFactIsOverwrite = mFactTO != null;
         mFactTO = factTO;
+    }
+
+    public void undoDeleteFact() {
+        mAdapter.insertFact(mFactTO);
+        mLayoutManager.scrollToPosition(mFactTO.position());
     }
 
     public void deleteFact() {
         //TODO delete from Database
-        mFactTO = null;
-    }
-
-    public void undoDeleteFact() {
-        insertFact(mFactTO);
-    }
-
-    private void insertFact(FactTO factTO) {
-        mAdapter.insertFact(factTO);
-        mLayoutManager.scrollToPosition(factTO.position());
+        if (!mFactIsOverwrite) {
+            mFactTO = null;
+        }
     }
 
 }
