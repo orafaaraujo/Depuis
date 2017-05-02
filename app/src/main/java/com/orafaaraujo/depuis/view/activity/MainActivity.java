@@ -36,9 +36,7 @@ public class MainActivity extends AppCompatActivity {
         binding.setViewModel(mMainViewModel);
         setSupportActionBar(binding.toolbar);
 
-        mRxBus.getEvents()
-                .filter(o -> o instanceof FactTO)
-                .map(o -> (FactTO) o)
+        mRxBus.getFactEvents()
                 .subscribe(this::handlerRemoveFact, Timber::e);
     }
 

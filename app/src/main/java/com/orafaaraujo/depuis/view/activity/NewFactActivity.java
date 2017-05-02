@@ -57,14 +57,10 @@ public class NewFactActivity extends AppCompatActivity {
     }
 
     private void handleEvents() {
-        mRxBus.getEvents()
-                .filter(o -> o instanceof DatetimeTO)
-                .map(o -> (DatetimeTO) o)
+        mRxBus.getDatetimeEvents()
                 .subscribe(vo -> mNewFactViewModel.setMilliseconds(vo.milliseconds()), Timber::e);
 
-        mRxBus.getEvents()
-                .filter(o -> o instanceof NewFactFeedbackTO)
-                .map(o -> (NewFactFeedbackTO) o)
+        mRxBus.getNewFactFeedbackEvents()
                 .subscribe(this::handlerNewFactFeedback, Timber::e);
 
         mRxBus.sendEvent(

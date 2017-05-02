@@ -1,5 +1,9 @@
 package com.orafaaraujo.depuis.helper;
 
+import com.orafaaraujo.depuis.helper.buses.DatetimeTO;
+import com.orafaaraujo.depuis.helper.buses.FactTO;
+import com.orafaaraujo.depuis.helper.buses.NewFactFeedbackTO;
+
 import javax.inject.Inject;
 
 import dagger.Reusable;
@@ -29,10 +33,32 @@ public class RxBus {
 
     /**
      * Method that return a {@link Observable} to implement a {@link io.reactivex.subjects.Subject}
-     * to receive the events.
+     * to receive the @{@link DatetimeTO} events.
      */
-    public Observable<Object> getEvents() {
-        return subject;
+    public Observable<DatetimeTO> getDatetimeEvents() {
+        return subject
+                .filter(o -> o instanceof DatetimeTO)
+                .map(o -> (DatetimeTO) o);
+    }
+
+    /**
+     * Method that return a {@link Observable} to implement a {@link io.reactivex.subjects.Subject}
+     * to receive the @{@link NewFactFeedbackTO} events.
+     */
+    public Observable<NewFactFeedbackTO> getNewFactFeedbackEvents() {
+        return subject
+                .filter(o -> o instanceof NewFactFeedbackTO)
+                .map(o -> (NewFactFeedbackTO) o);
+    }
+
+    /**
+     * Method that return a {@link Observable} to implement a {@link io.reactivex.subjects.Subject}
+     * to receive the @{@link FactTO} events.
+     */
+    public Observable<FactTO> getFactEvents() {
+        return subject
+                .filter(o -> o instanceof FactTO)
+                .map(o -> (FactTO) o);
     }
 
 }
