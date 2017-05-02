@@ -1,11 +1,9 @@
 package com.orafaaraujo.depuis.repository.database;
 
 import com.orafaaraujo.depuis.model.Fact;
-import com.orafaaraujo.depuis.model.FactType;
 
 import java.util.List;
 
-import io.reactivex.Observable;
 import io.reactivex.android.schedulers.AndroidSchedulers;
 import io.reactivex.schedulers.Schedulers;
 import io.requery.Persistable;
@@ -36,23 +34,6 @@ public class RequeryDatabase implements FactDatabase {
                 .select(Fact.class)
                 .get()
                 .toList();
-    }
-
-    @Override
-    public Observable<Fact> getObservable() {
-        return mDatabase
-                .select(Fact.class)
-                .get()
-                .observable();
-    }
-
-    @Override
-    public Fact fetchFact(int id) {
-        return mDatabase
-                .select(Fact.class)
-                .where(FactType.ID.eq(id))
-                .get()
-                .first();
     }
 
     @Override

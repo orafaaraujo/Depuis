@@ -7,8 +7,6 @@ import java.util.Date;
 import java.util.List;
 import java.util.Locale;
 
-import io.reactivex.Observable;
-
 /**
  * Created by rafael on 20/01/17.
  */
@@ -57,16 +55,6 @@ public class MockDatabase implements FactDatabase {
     @Override
     public List<Fact> fetchAll() {
         return mFacts;
-    }
-
-    @Override
-    public Observable<Fact> getObservable() {
-        return Observable.just((Fact) mFacts);
-    }
-
-    @Override
-    public Fact fetchFact(int id) {
-        return mFacts.get(id);
     }
 
     @Override
