@@ -1,7 +1,7 @@
 package com.orafaaraujo.depuis.repository.database;
 
-import com.orafaaraujo.depuis.repository.entity.FactEntity;
-import com.orafaaraujo.depuis.repository.entity.FactEntityType;
+import com.orafaaraujo.depuis.model.Fact;
+import com.orafaaraujo.depuis.model.FactType;
 
 import java.util.List;
 
@@ -21,8 +21,9 @@ public class RequeryDatabase implements FactDatabase {
     }
 
     @Override
-    public void saveFact(FactEntity fact) {
-        mDatabase.insert(fact)
+    public void saveFact(Fact fact) {
+        mDatabase
+                .insert(fact)
                 .toObservable()
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
@@ -30,31 +31,37 @@ public class RequeryDatabase implements FactDatabase {
     }
 
     @Override
-    public List<FactEntity> fetchAll() {
+    public List<Fact> fetchAll() {
         return mDatabase
-                .select(FactEntity.class)
+                .select(Fact.class)
                 .get()
                 .toList();
     }
 
     @Override
-    public Observable<FactEntity> getObservable() {
-        return mDatabase.select(FactEntity.class)
+    public Observable<Fact> getObservable() {
+        return mDatabase
+                .select(Fact.class)
                 .get()
                 .observable();
     }
 
     @Override
-    public FactEntity fetchFact(int id) {
+    public Fact fetchFact(int id) {
         return mDatabase
-                .select(FactEntity.class)
-                .where(FactEntityType.ID.eq(id))
+                .select(Fact.class)
+                .where(FactType.ID.eq(id))
                 .get()
                 .first();
     }
 
     @Override
-    public void deleteFact(FactEntity fact) {
-        mDatabase.delete(fact);
+    public void deleteFact(Fact fact) {
+        mDatabase
+                .delete(fact)
+                .toObservable()
+                .subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe(factEntity -> Timber.i(factEntity.toString()));
     }
 }

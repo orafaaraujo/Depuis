@@ -3,9 +3,9 @@ package com.orafaaraujo.depuis.dagger.module;
 import android.content.Context;
 
 import com.orafaaraujo.depuis.BuildConfig;
+import com.orafaaraujo.depuis.model.Models;
 import com.orafaaraujo.depuis.repository.database.FactDatabase;
-import com.orafaaraujo.depuis.repository.database.MockDatabase;
-import com.orafaaraujo.depuis.repository.entity.Models;
+import com.orafaaraujo.depuis.repository.database.RequeryDatabase;
 
 import java.util.concurrent.Executors;
 
@@ -32,8 +32,8 @@ public class DatabaseModule {
     @Provides
     @Singleton
     FactDatabase provideDatabase(ReactiveEntityStore<Persistable> entityStore) {
-        return new MockDatabase();
-//        return new RequeryDatabase(entityStore);
+//        return new MockDatabase();
+        return new RequeryDatabase(entityStore);
     }
 
     @Provides

@@ -12,8 +12,8 @@ import com.orafaaraujo.depuis.R;
 import com.orafaaraujo.depuis.helper.DateTimeHelper;
 import com.orafaaraujo.depuis.helper.RxBus;
 import com.orafaaraujo.depuis.helper.buses.NewFactFeedbackTO;
+import com.orafaaraujo.depuis.model.Fact;
 import com.orafaaraujo.depuis.repository.database.FactDatabase;
-import com.orafaaraujo.depuis.repository.entity.FactEntity;
 
 import java.util.Random;
 
@@ -79,8 +79,8 @@ public class NewFactViewModel extends BaseObservable {
         validateFact();
     }
 
-    private FactEntity createFact() {
-        return FactEntity.builder()
+    private Fact createFact() {
+        return Fact.builder()
                 .setId(new Random().nextInt(1000))
                 .setTitle(titleFact.get())
                 .setComment(commentFact.get())

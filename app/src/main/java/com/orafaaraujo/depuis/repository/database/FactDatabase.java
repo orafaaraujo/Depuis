@@ -1,6 +1,6 @@
 package com.orafaaraujo.depuis.repository.database;
 
-import com.orafaaraujo.depuis.repository.entity.FactEntity;
+import com.orafaaraujo.depuis.model.Fact;
 
 import java.util.List;
 
@@ -12,14 +12,14 @@ import io.reactivex.Observable;
 
 public interface FactDatabase {
 
-    void saveFact(FactEntity fact);
+    void saveFact(Fact fact);
 
-    List<FactEntity> fetchAll();
+    List<Fact> fetchAll();
 
-    Observable<FactEntity> getObservable();
+    Observable<Fact> getObservable();
 
-    FactEntity fetchFact(int id);
+    Fact fetchFact(int id);
 
-    void deleteFact(FactEntity fact);
+    void deleteFact(Fact fact);
 
 }

@@ -12,12 +12,10 @@ import android.view.View;
 import com.orafaaraujo.depuis.helper.buses.FactTO;
 import com.orafaaraujo.depuis.model.Fact;
 import com.orafaaraujo.depuis.repository.database.FactDatabase;
-import com.orafaaraujo.depuis.repository.entity.FactEntity;
 import com.orafaaraujo.depuis.view.activity.NewFactActivity;
 import com.orafaaraujo.depuis.view.adapter.FactAdapter;
 import com.orafaaraujo.depuis.view.helper.SimpleItemTouchHelperCallback;
 
-import java.util.ArrayList;
 import java.util.List;
 
 import javax.inject.Inject;
@@ -65,18 +63,11 @@ public class MainViewModel extends BaseObservable {
     }
 
     public void fetchFacts() {
-        List<FactEntity> factEntities = mDatabase.fetchAll();
-        List<Fact> facts = new ArrayList<>(factEntities.size());
-
-        factEntities
-                .stream()
-                .map(this::entityToModel)
-                .forEach(facts::add);
-
+        List<Fact> facts = mDatabase.fetchAll();
         mAdapter.updateFacts(facts);
     }
 
-    private Fact entityToModel(FactEntity fe) {
+    private Fact entityToModel(Fact fe) {
         return Fact.builder()
                 .setTitle(fe.title())
                 .setComment(fe.comment())
@@ -118,6 +109,9 @@ public class MainViewModel extends BaseObservable {
         if (!mFactIsOverwrite) {
             mFactTO = null;
         }
+    }
+
+    private void deleteFromDatabase(FactTO factTO) {
     }
 
 }

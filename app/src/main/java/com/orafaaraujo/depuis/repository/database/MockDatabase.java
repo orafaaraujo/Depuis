@@ -1,6 +1,6 @@
 package com.orafaaraujo.depuis.repository.database;
 
-import com.orafaaraujo.depuis.repository.entity.FactEntity;
+import com.orafaaraujo.depuis.model.Fact;
 
 import java.util.ArrayList;
 import java.util.Date;
@@ -14,7 +14,7 @@ import io.reactivex.Observable;
  */
 public class MockDatabase implements FactDatabase {
 
-    List<FactEntity> mFacts = new ArrayList<>();
+    List<Fact> mFacts = new ArrayList<>();
 
     private static final String LOREM_TITLE = "Lorem ipsum dolor sit amet";
 
@@ -34,13 +34,13 @@ public class MockDatabase implements FactDatabase {
     }
 
     private void fetchFacts() {
-        for (int i = 0; i < 4; i++) {
+        for (int i = 0; i < 3; i++) {
             mFacts.add(makeFact(i));
         }
     }
 
-    private static FactEntity makeFact(int i) {
-        return FactEntity.builder()
+    private static Fact makeFact(int i) {
+        return Fact.builder()
                 .setId((int) new Date().getTime())
                 .setStartTime(new Date().getTime())
                 .setTitle(String.format(Locale.getDefault(), "%d %s", i, LOREM_TITLE))
@@ -50,27 +50,27 @@ public class MockDatabase implements FactDatabase {
     }
 
     @Override
-    public void saveFact(FactEntity fact) {
+    public void saveFact(Fact fact) {
         mFacts.add(fact);
     }
 
     @Override
-    public List<FactEntity> fetchAll() {
+    public List<Fact> fetchAll() {
         return mFacts;
     }
 
     @Override
-    public Observable<FactEntity> getObservable() {
-        return Observable.just((FactEntity) mFacts);
+    public Observable<Fact> getObservable() {
+        return Observable.just((Fact) mFacts);
     }
 
     @Override
-    public FactEntity fetchFact(int id) {
+    public Fact fetchFact(int id) {
         return mFacts.get(id);
     }
 
     @Override
-    public void deleteFact(FactEntity fact) {
+    public void deleteFact(Fact fact) {
         mFacts.remove(fact);
     }
 }
