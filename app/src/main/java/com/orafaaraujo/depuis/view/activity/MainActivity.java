@@ -4,6 +4,7 @@ import android.databinding.DataBindingUtil;
 import android.os.Bundle;
 import android.support.design.widget.BaseTransientBottomBar;
 import android.support.design.widget.Snackbar;
+import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AppCompatActivity;
 
 import com.orafaaraujo.depuis.R;
@@ -48,12 +49,12 @@ public class MainActivity extends AppCompatActivity {
 
     private void showSnackBar(Fact fact) {
         Snackbar snackbar = Snackbar.make(findViewById(R.id.main_recycler_fact),
-                "Remove " + fact.title() + "?", Snackbar.LENGTH_LONG);
-        snackbar.setAction("UNDO", v -> mMainViewModel.undoDeleteFact());
+                getString(R.string.main_deleted, fact.title()), Snackbar.LENGTH_LONG);
+        snackbar.setAction(R.string.main_deleted_undo, v -> mMainViewModel.undoDeleteFact());
+        snackbar.setActionTextColor(ContextCompat.getColor(this, R.color.main_delete_undo));
         snackbar.addCallback(new BaseTransientBottomBar.BaseCallback<Snackbar>() {
             @Override
             public void onDismissed(Snackbar transientBottomBar, int event) {
-                super.onDismissed(transientBottomBar, event);
                 mMainViewModel.deleteFact();
             }
         });
