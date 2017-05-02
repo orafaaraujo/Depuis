@@ -20,6 +20,8 @@ import java.util.List;
 
 import javax.inject.Inject;
 
+import timber.log.Timber;
+
 public class MainViewModel extends BaseObservable {
 
     @Inject
@@ -42,12 +44,13 @@ public class MainViewModel extends BaseObservable {
 
     public ObservableField<Boolean> mShow = new ObservableField<>(true);
 
-    private FactTO mFactTO;
+    private FactTO mFactToDelete;
 
-    private boolean mFactIsOverwrite;
+//    private boolean mIgnoreNext = false;
 
     @Inject
     MainViewModel() {
+        Timber.tag("deleteFact");
     }
 
     public FactAdapter getAdapter() {
@@ -65,15 +68,6 @@ public class MainViewModel extends BaseObservable {
     public void fetchFacts() {
         List<Fact> facts = mDatabase.fetchAll();
         mAdapter.updateFacts(facts);
-    }
-
-    private Fact entityToModel(Fact fe) {
-        return Fact.builder()
-                .setTitle(fe.title())
-                .setComment(fe.comment())
-                .setCount(fe.count())
-                .setStartTime(fe.startTime())
-                .build();
     }
 
     public RecyclerView.OnScrollListener getScrollListener() {
@@ -95,23 +89,26 @@ public class MainViewModel extends BaseObservable {
     }
 
     public void setFactTO(FactTO factTO) {
-        mFactIsOverwrite = mFactTO != null;
-        mFactTO = factTO;
-    }
-
-    public void undoDeleteFact() {
-        mAdapter.insertFact(mFactTO);
-        mLayoutManager.scrollToPosition(mFactTO.position());
+        Timber.i("setFactTO");
+        if (mFactToDelete != null) {
+            mDatabase.deleteFact(mFactToDelete.fact());
+        }
+        mFactToDelete = factTO;
     }
 
     public void deleteFact() {
-        //TODO delete from Database
-        if (!mFactIsOverwrite) {
-            mFactTO = null;
+        Timber.i("deleteFact");
+        if (mFactToDelete != null) {
+            mDatabase.deleteFact(mFactToDelete.fact());
         }
+        mFactToDelete = null;
     }
 
-    private void deleteFromDatabase(FactTO factTO) {
+    public void undoDeleteFact() {
+        Timber.i("undoDeleteFact");
+        mAdapter.insertFact(mFactToDelete);
+        mLayoutManager.scrollToPosition(mFactToDelete.position());
+        mFactToDelete = null;
     }
-
 }
+
