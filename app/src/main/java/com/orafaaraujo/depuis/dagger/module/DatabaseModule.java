@@ -1,8 +1,10 @@
 package com.orafaaraujo.depuis.dagger.module;
 
 import android.content.Context;
+import android.content.SharedPreferences;
 
 import com.orafaaraujo.depuis.BuildConfig;
+import com.orafaaraujo.depuis.helper.IntPreference;
 import com.orafaaraujo.depuis.model.Models;
 import com.orafaaraujo.depuis.repository.database.FactDatabase;
 import com.orafaaraujo.depuis.repository.database.RequeryDatabase;
@@ -66,6 +68,12 @@ public class DatabaseModule {
             source.setTableCreationMode(TableCreationMode.DROP_CREATE);
         }
         return source;
+    }
+
+    @Provides
+    @Singleton
+    IntPreference provideDatabaseKey(SharedPreferences prefs) {
+        return new IntPreference(prefs, "databaseKey", 0);
     }
 
 }
