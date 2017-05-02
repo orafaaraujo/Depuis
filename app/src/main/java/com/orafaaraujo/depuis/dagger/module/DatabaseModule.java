@@ -7,7 +7,7 @@ import com.orafaaraujo.depuis.BuildConfig;
 import com.orafaaraujo.depuis.helper.IntPreference;
 import com.orafaaraujo.depuis.model.Models;
 import com.orafaaraujo.depuis.repository.database.FactDatabase;
-import com.orafaaraujo.depuis.repository.database.RequeryDatabase;
+import com.orafaaraujo.depuis.repository.database.SQLiteDatabase;
 
 import java.util.concurrent.Executors;
 
@@ -33,9 +33,10 @@ public class DatabaseModule {
 
     @Provides
     @Singleton
-    FactDatabase provideDatabase(ReactiveEntityStore<Persistable> entityStore) {
+    FactDatabase provideDatabase(Context context, ReactiveEntityStore<Persistable> entityStore) {
 //        return new MockDatabase();
-        return new RequeryDatabase(entityStore);
+//        return new RequeryDatabase(entityStore);
+        return new SQLiteDatabase(context);
     }
 
     @Provides
