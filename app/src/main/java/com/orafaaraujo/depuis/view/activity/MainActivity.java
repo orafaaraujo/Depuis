@@ -26,8 +26,6 @@ public class MainActivity extends AppCompatActivity {
     @Inject
     RxBus mRxBus;
 
-    private FactTO mFactTO;
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -44,26 +42,22 @@ public class MainActivity extends AppCompatActivity {
     }
 
     private void handlerRemoveFact(FactTO factTO) {
-        mFactTO = factTO;
+        mMainViewModel.setFactTO(factTO);
         showSnackBar(factTO.fact());
     }
 
     private void showSnackBar(Fact fact) {
         Snackbar snackbar = Snackbar.make(findViewById(R.id.main_recycler_fact),
                 "Remove " + fact.title() + "?", Snackbar.LENGTH_LONG);
-        snackbar.setAction("UNDO", v -> undoAction());
+        snackbar.setAction("UNDO", v -> mMainViewModel.undoDeleteFact());
         snackbar.addCallback(new BaseTransientBottomBar.BaseCallback<Snackbar>() {
             @Override
             public void onDismissed(Snackbar transientBottomBar, int event) {
                 super.onDismissed(transientBottomBar, event);
-                mFactTO = null;
+                mMainViewModel.deleteFact();
             }
         });
         snackbar.show();
-    }
-
-    private void undoAction() {
-        mMainViewModel.insertFact(mFactTO);
     }
 
     @Override
@@ -71,6 +65,4 @@ public class MainActivity extends AppCompatActivity {
         super.onResume();
         mMainViewModel.fetchFacts();
     }
-
-
 }

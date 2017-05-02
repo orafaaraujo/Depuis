@@ -44,6 +44,8 @@ public class MainViewModel extends BaseObservable {
 
     public ObservableField<Boolean> mShow = new ObservableField<>(true);
 
+    private FactTO mFactTO;
+
     @Inject
     MainViewModel() {
     }
@@ -81,11 +83,6 @@ public class MainViewModel extends BaseObservable {
                 .build();
     }
 
-    public void insertFact(FactTO factTO) {
-        mAdapter.insertFact(factTO);
-        mLayoutManager.scrollToPosition(factTO.position());
-    }
-
     public RecyclerView.OnScrollListener getScrollListener() {
         return new RecyclerView.OnScrollListener() {
             @Override
@@ -103,4 +100,23 @@ public class MainViewModel extends BaseObservable {
     public View.OnClickListener getFabClick() {
         return v -> mContext.startActivity(new Intent(mContext, NewFactActivity.class));
     }
+
+    public void setFactTO(FactTO factTO) {
+        mFactTO = factTO;
+    }
+
+    public void deleteFact() {
+        //TODO delete from Database
+        mFactTO = null;
+    }
+
+    public void undoDeleteFact() {
+        insertFact(mFactTO);
+    }
+
+    private void insertFact(FactTO factTO) {
+        mAdapter.insertFact(factTO);
+        mLayoutManager.scrollToPosition(factTO.position());
+    }
+
 }
