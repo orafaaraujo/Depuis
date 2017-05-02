@@ -16,11 +16,10 @@ import com.orafaaraujo.depuis.view.activity.NewFactActivity;
 import com.orafaaraujo.depuis.view.adapter.FactAdapter;
 import com.orafaaraujo.depuis.view.helper.SimpleItemTouchHelperCallback;
 
+import java.util.LinkedList;
 import java.util.List;
 
 import javax.inject.Inject;
-
-import timber.log.Timber;
 
 public class MainViewModel extends BaseObservable {
 
@@ -44,13 +43,12 @@ public class MainViewModel extends BaseObservable {
 
     public ObservableField<Boolean> mShow = new ObservableField<>(true);
 
-    private FactTO mFactToDelete;
+    private LinkedList<FactTO> mDeleteFacts = new LinkedList<>();
 
-//    private boolean mIgnoreNext = false;
+    private LinkedList<FactTO> mUndoDelete = new LinkedList<>();
 
     @Inject
     MainViewModel() {
-        Timber.tag("deleteFact");
     }
 
     public FactAdapter getAdapter() {
@@ -89,26 +87,22 @@ public class MainViewModel extends BaseObservable {
     }
 
     public void setFactTO(FactTO factTO) {
-        Timber.i("setFactTO");
-        if (mFactToDelete != null) {
-            mDatabase.deleteFact(mFactToDelete.fact());
-        }
-        mFactToDelete = factTO;
+        mDeleteFacts.add(factTO);
     }
 
     public void deleteFact() {
-        Timber.i("deleteFact");
-        if (mFactToDelete != null) {
-            mDatabase.deleteFact(mFactToDelete.fact());
+        final FactTO factTO = mDeleteFacts.poll();
+        if (mUndoDelete.contains(factTO)) {
+            mUndoDelete.remove();
+        } else {
+            mDatabase.deleteFact(factTO.fact());
         }
-        mFactToDelete = null;
     }
 
     public void undoDeleteFact() {
-        Timber.i("undoDeleteFact");
-        mAdapter.insertFact(mFactToDelete);
-        mLayoutManager.scrollToPosition(mFactToDelete.position());
-        mFactToDelete = null;
+        final FactTO factTO = mDeleteFacts.peek();
+        mUndoDelete.add(factTO);
+        mAdapter.insertFact(factTO);
+        mLayoutManager.scrollToPosition(factTO.position());
     }
 }
-
