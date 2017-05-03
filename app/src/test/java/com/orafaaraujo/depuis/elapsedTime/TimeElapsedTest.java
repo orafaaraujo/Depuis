@@ -1,8 +1,10 @@
-package com.orafaaraujo.depuis;
+package com.orafaaraujo.depuis.elapsedTime;
 
 import static org.junit.Assert.assertEquals;
 
 import android.app.Application;
+
+import com.orafaaraujo.depuis.BuildConfig;
 
 import org.junit.Before;
 import org.junit.Test;
@@ -21,7 +23,7 @@ import org.threeten.bp.Period;
  * Created by rafael on 03/05/17.
  */
 @RunWith(RobolectricTestRunner.class)
-@Config(constants = BuildConfig.class, sdk = 21, application = TimeElapsedTest.class)
+@Config(constants = BuildConfig.class, sdk = 25, application = TimeElapsedTest.class)
 public class TimeElapsedTest extends Application {
 
     private LocalDateTime mEndDateBind;

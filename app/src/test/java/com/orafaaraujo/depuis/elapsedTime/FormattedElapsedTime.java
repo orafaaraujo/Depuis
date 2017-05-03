@@ -26,8 +26,8 @@ import org.threeten.bp.Period;
  */
 @RunWith(RobolectricTestRunner.class)
 @Config(constants = BuildConfig.class, manifest = "src/main/AndroidManifest.xml", sdk = 25,
-        application = FormatedElapsedTime.class)
-public class FormatedElapsedTime extends Application {
+        application = FormattedElapsedTime.class)
+public class FormattedElapsedTime extends Application {
 
     private Context mContext;
 
@@ -43,7 +43,7 @@ public class FormatedElapsedTime extends Application {
 
     @Before
     public void setup() {
-        
+
         mContext = RuntimeEnvironment.application;
 
         LocalTime localTime = LocalTime.of(15, 5, 5);
@@ -117,7 +117,6 @@ public class FormatedElapsedTime extends Application {
         String time = calculate(mBeginDateTime, mEndDateTime);
         assertEquals(MAX_YEARS, time);
     }
-
 
     private String calculate(LocalDateTime beginDateTime, LocalDateTime endDateTime) {
         String elapsed = calculeDate(beginDateTime.toLocalDate(), endDateTime.toLocalDate());
