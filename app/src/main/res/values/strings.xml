@@ -21,8 +21,10 @@
     <string name="new_fact_success">Fact created with success</string>
     <string name="new_fact_failure_title">Please, fill the title</string>
 
-    <string name="elapsed_days">%d days</string>
-    <string name="elapsed_hours">%dh</string>
-    <string name="elapsed_minutes">%dm</string>
-    <string name="elapsed_seconds">%ds</string>
+    <string name="elapsed_years" formatted="false">%d years and %d months and %d days</string>
+    <string name="elapsed_months" formatted="false">%d months and %d days</string>
+    <string name="elapsed_days" formatted="false">%d days</string>
+    <string name="elapsed_hours" formatted="false">%dh</string>
+    <string name="elapsed_minutes" formatted="false">%dm</string>
+    <string name="elapsed_seconds" formatted="false">%ds</string>
 </resources>
