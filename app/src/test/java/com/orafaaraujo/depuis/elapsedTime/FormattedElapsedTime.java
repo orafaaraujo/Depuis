@@ -22,7 +22,9 @@ import org.threeten.bp.LocalTime;
 import org.threeten.bp.Period;
 
 /**
- * Created by venturus on 03/05/17.
+ * Test with elapsed time formatted to human.
+ *
+ * Created by rafael on 03/05/17.
  */
 @RunWith(RobolectricTestRunner.class)
 @Config(constants = BuildConfig.class, manifest = "src/main/AndroidManifest.xml", sdk = 25,
