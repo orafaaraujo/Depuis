@@ -1,5 +1,6 @@
 apply plugin: 'com.android.application'
 apply plugin: 'me.tatarka.retrolambda'
+apply plugin: 'project-report'
 
 android {
     compileSdkVersion 25
@@ -26,13 +27,35 @@ android {
         sourceCompatibility JavaVersion.VERSION_1_8
         targetCompatibility JavaVersion.VERSION_1_8
     }
+    defaultConfig {
+        testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
+    }
 }
 
 dependencies {
     compile fileTree(include: ['*.jar'], dir: 'libs')
-    androidTestCompile('com.android.support.test.espresso:espresso-core:2.2.2', {
+
+    testCompile 'junit:junit:4.12'
+    testCompile 'org.mockito:mockito-core:1.10.19'
+    testCompile('org.threeten:threetenbp:1.3.2') {
+        exclude group: 'com.jakewharton.threetenabp', module: 'threetenabp'
+    }
+    testCompile('org.robolectric:robolectric:3.3.2') {
+        exclude group: 'commons-logging', module: 'commons-logging'
+        exclude group: 'org.apache.httpcomponents', module: 'httpclient'
+    }
+
+    androidTestCompile 'com.android.support.test.uiautomator:uiautomator-v18:2.1.2'
+    androidTestCompile ('com.android.support.test:rules:0.5') {
         exclude group: 'com.android.support', module: 'support-annotations'
-    })
+    }
+    androidTestCompile ('com.android.support.test:runner:0.5') {
+        exclude group: 'com.android.support', module: 'support-annotations'
+    }
+    androidTestCompile('com.android.support.test.espresso:espresso-core:2.2.2') {
+        exclude group: 'com.android.support', module: 'support-annotations'
+    }
+
     compile 'com.android.support:appcompat-v7:25.3.1'
     compile 'com.android.support:recyclerview-v7:25.3.1'
     compile 'com.android.support:design:25.3.1'
@@ -47,15 +70,6 @@ dependencies {
     compile 'io.reactivex.rxjava2:rxandroid:2.0.1'
 
     compile 'com.jakewharton.timber:timber:4.5.0'
-    compile 'com.jakewharton.threetenabp:threetenabp:1.0.5'
 
-    testCompile 'junit:junit:4.12'
-    testCompile 'org.mockito:mockito-core:1.10.19'
-    testCompile ('org.threeten:threetenbp:1.3.2'){
-        exclude group:'com.jakewharton.threetenabp', module:'threetenabp'
-    }
-    testCompile('org.robolectric:robolectric:3.3.2') {
-        exclude group: 'commons-logging', module: 'commons-logging'
-        exclude group: 'org.apache.httpcomponents', module: 'httpclient'
-    }
+    compile 'com.jakewharton.threetenabp:threetenabp:1.0.5'
 }
