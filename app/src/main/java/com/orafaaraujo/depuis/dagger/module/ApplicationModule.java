@@ -1,8 +1,6 @@
 package com.orafaaraujo.depuis.dagger.module;
 
 import android.content.Context;
-import android.content.SharedPreferences;
-import android.preference.PreferenceManager;
 
 import com.orafaaraujo.depuis.DepuisApplication;
 
@@ -35,9 +33,4 @@ public class ApplicationModule {
         return mApplication.getApplicationContext();
     }
 
-    @Provides
-    @Singleton
-    SharedPreferences provideSharedPreferences(DepuisApplication app) {
-        return PreferenceManager.getDefaultSharedPreferences(app);
-    }
 }

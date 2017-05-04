@@ -10,7 +10,6 @@ import android.view.View;
 
 import com.orafaaraujo.depuis.R;
 import com.orafaaraujo.depuis.helper.DateTimeHelper;
-import com.orafaaraujo.depuis.helper.IntPreference;
 import com.orafaaraujo.depuis.helper.RxBus;
 import com.orafaaraujo.depuis.helper.buses.NewFactFeedbackTO;
 import com.orafaaraujo.depuis.model.Fact;
@@ -37,9 +36,6 @@ public class NewFactViewModel extends BaseObservable {
 
     @Inject
     FactDatabase mDatabase;
-
-    @Inject
-    IntPreference mIntPreference;
 
     public final ObservableField<String> titleFact = new ObservableField<>("");
 
@@ -83,13 +79,8 @@ public class NewFactViewModel extends BaseObservable {
 
     private Fact createFact() {
 
-        // Using this approach because Requery doesn't support auto increment key
-        // when using AutoValue.
-        final int key = mIntPreference.get();
-        mIntPreference.set(1 + key);
-
         return Fact.builder()
-                .setId(key)
+                .setId(0) // Will be replaced by Database.
                 .setTitle(titleFact.get())
                 .setComment(commentFact.get())
                 .setCount(true)
