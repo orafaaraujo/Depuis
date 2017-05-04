@@ -95,7 +95,9 @@ public class MainViewModel extends BaseObservable {
         if (mUndoDelete.contains(factTO)) {
             mUndoDelete.remove();
         } else {
-            mDatabase.deleteFact(factTO.fact());
+            if (factTO != null) {
+                mDatabase.deleteFact(factTO.fact());
+            }
         }
     }
 
