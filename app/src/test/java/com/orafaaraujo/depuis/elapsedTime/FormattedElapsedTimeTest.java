@@ -128,17 +128,6 @@ public class FormattedElapsedTime extends Application {
         return elapsed;
     }
 
-    private String calculeTime(LocalTime timeBegin, LocalTime timeEnd) {
-        Duration d = Duration.between(timeBegin, timeEnd);
-        if (d.toHours() > 0) {
-            return mContext.getString(R.string.elapsed_hours, d.toHours());
-        } else if (d.toMinutes() > 0) {
-            return mContext.getString(R.string.elapsed_minutes, d.toMinutes());
-        } else {
-            return mContext.getString(R.string.elapsed_seconds, d.getSeconds());
-        }
-    }
-
     private String calculeDate(LocalDate dateBegin, LocalDate dateEnd) {
         Period p = Period.between(dateBegin, dateEnd);
         if (p.getYears() > 0) {
@@ -150,6 +139,17 @@ public class FormattedElapsedTime extends Application {
             return mContext.getString(R.string.elapsed_days, p.getDays());
         } else {
             return null;
+        }
+    }
+
+    private String calculeTime(LocalTime timeBegin, LocalTime timeEnd) {
+        Duration d = Duration.between(timeBegin, timeEnd);
+        if (d.toHours() > 0) {
+            return mContext.getString(R.string.elapsed_hours, d.toHours());
+        } else if (d.toMinutes() > 0) {
+            return mContext.getString(R.string.elapsed_minutes, d.toMinutes());
+        } else {
+            return mContext.getString(R.string.elapsed_seconds, d.getSeconds());
         }
     }
 
