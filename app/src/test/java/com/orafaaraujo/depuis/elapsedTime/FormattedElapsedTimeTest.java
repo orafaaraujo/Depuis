@@ -28,19 +28,31 @@ import org.threeten.bp.Period;
  */
 @RunWith(RobolectricTestRunner.class)
 @Config(constants = BuildConfig.class, manifest = "src/main/AndroidManifest.xml", sdk = 25,
-        application = FormattedElapsedTime.class)
-public class FormattedElapsedTime extends Application {
+        application = FormattedElapsedTimeTest.class)
+public class FormattedElapsedTimeTest extends Application {
 
     private Context mContext;
 
     private LocalDateTime mBeginDateTime;
+
     private LocalDateTime mEndDateTime;
 
+    @SuppressWarnings("FieldCanBeLocal")
     private final String MAX_SECONDS = "5s";
+
+    @SuppressWarnings("FieldCanBeLocal")
     private final String MAX_MINUTES = "5m";
+
+    @SuppressWarnings("FieldCanBeLocal")
     private final String MAX_HOURS = "5h";
+
+    @SuppressWarnings("FieldCanBeLocal")
     private final String MAX_DAYS = "5 days";
+
+    @SuppressWarnings("FieldCanBeLocal")
     private final String MAX_MONTHS = "5 months and 5 days";
+
+    @SuppressWarnings("FieldCanBeLocal")
     private final String MAX_YEARS = "5 years and 5 months and 5 days";
 
     @Before
