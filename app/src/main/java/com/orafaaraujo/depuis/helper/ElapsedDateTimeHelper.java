@@ -1,8 +1,17 @@
 package com.orafaaraujo.depuis.helper;
 
 import android.content.Context;
+import android.text.TextUtils;
 
 import com.orafaaraujo.depuis.R;
+
+import org.threeten.bp.Duration;
+import org.threeten.bp.Instant;
+import org.threeten.bp.LocalDate;
+import org.threeten.bp.LocalDateTime;
+import org.threeten.bp.LocalTime;
+import org.threeten.bp.Period;
+import org.threeten.bp.ZoneId;
 
 import javax.inject.Inject;
 
@@ -33,38 +42,44 @@ public class ElapsedDateTimeHelper {
      */
     public String getTime(long timestamp) {
 
-        long different = System.currentTimeMillis() - timestamp;
+        final LocalDateTime beginDateTime = LocalDateTime.ofInstant(
+                Instant.ofEpochMilli(timestamp), ZoneId.systemDefault());
 
-        long secondsInMilli = 1000;
-        long minutesInMilli = secondsInMilli * 60;
-        long hoursInMilli = minutesInMilli * 60;
-        long daysInMilli = hoursInMilli * 24;
+        final LocalDateTime endDateTime = LocalDateTime.now();
 
-        long elapsedDays = different / daysInMilli;
-        different = different % daysInMilli;
-
-        long elapsedHours = different / hoursInMilli;
-        different = different % hoursInMilli;
-
-        long elapsedMinutes = different / minutesInMilli;
-        different = different % minutesInMilli;
-
-        long elapsedSeconds = different / secondsInMilli;
-
-        String correctTime = "";
-
-        if (elapsedDays > 0) {
-            correctTime = mContext.getString(R.string.elapsed_days, elapsedDays);
-        } else if (elapsedHours > 0) {
-            correctTime = mContext.getString(R.string.elapsed_hours, elapsedHours);
-        } else if (elapsedMinutes > 0) {
-            correctTime = mContext.getString(R.string.elapsed_minutes, elapsedMinutes);
-        } else {
-            correctTime = mContext.getString(R.string.elapsed_seconds, elapsedSeconds);
-        }
-
-        return correctTime;
-
+        return calculate(beginDateTime, endDateTime);
     }
 
+    private String calculate(LocalDateTime beginDateTime, LocalDateTime endDateTime) {
+        String elapsed = calculeDate(beginDateTime.toLocalDate(), endDateTime.toLocalDate());
+        if (TextUtils.isEmpty(elapsed)) {
+            elapsed = calculeTime(beginDateTime.toLocalTime(), endDateTime.toLocalTime());
+        }
+        return elapsed;
+    }
+
+    private String calculeDate(LocalDate dateBegin, LocalDate dateEnd) {
+        Period p = Period.between(dateBegin, dateEnd);
+        if (p.getYears() > 0) {
+            return mContext.getString(R.string.elapsed_years, p.getDays(), p.getMonths(),
+                    p.getDays());
+        } else if (p.getMonths() > 0) {
+            return mContext.getString(R.string.elapsed_months, p.getDays(), p.getMonths());
+        } else if (p.getDays() > 0) {
+            return mContext.getString(R.string.elapsed_days, p.getDays());
+        } else {
+            return null;
+        }
+    }
+
+    private String calculeTime(LocalTime timeBegin, LocalTime timeEnd) {
+        Duration d = Duration.between(timeBegin, timeEnd);
+        if (d.toHours() > 0) {
+            return mContext.getString(R.string.elapsed_hours, d.toHours());
+        } else if (d.toMinutes() > 0) {
+            return mContext.getString(R.string.elapsed_minutes, d.toMinutes());
+        } else {
+            return mContext.getString(R.string.elapsed_seconds, d.getSeconds());
+        }
+    }
 }

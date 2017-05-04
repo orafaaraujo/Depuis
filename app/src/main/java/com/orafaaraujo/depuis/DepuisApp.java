@@ -2,6 +2,7 @@ package com.orafaaraujo.depuis;
 
 import android.app.Application;
 
+import com.jakewharton.threetenabp.AndroidThreeTen;
 import com.orafaaraujo.depuis.dagger.Injector;
 
 import timber.log.Timber;
@@ -21,6 +22,8 @@ public class DepuisApp extends Application {
         }
 
         initDagger();
+
+        AndroidThreeTen.init(this);
     }
 
     private void initDagger() {
