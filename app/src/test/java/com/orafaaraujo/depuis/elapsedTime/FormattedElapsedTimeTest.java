@@ -3,23 +3,25 @@ package com.orafaaraujo.depuis.elapsedTime;
 import static org.junit.Assert.assertEquals;
 
 import android.app.Application;
-import android.content.Context;
 import android.text.TextUtils;
 
 import com.orafaaraujo.depuis.BuildConfig;
-import com.orafaaraujo.depuis.R;
 
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.robolectric.RobolectricTestRunner;
-import org.robolectric.RuntimeEnvironment;
 import org.robolectric.annotation.Config;
 import org.threeten.bp.Duration;
+import org.threeten.bp.Instant;
 import org.threeten.bp.LocalDate;
 import org.threeten.bp.LocalDateTime;
 import org.threeten.bp.LocalTime;
 import org.threeten.bp.Period;
+import org.threeten.bp.ZoneId;
+
+import java.util.Calendar;
+import java.util.Locale;
 
 /**
  * Test with elapsed time formatted to human.
@@ -31,8 +33,6 @@ import org.threeten.bp.Period;
         application = FormattedElapsedTimeTest.class)
 public class FormattedElapsedTimeTest extends Application {
 
-    private Context mContext;
-
     private LocalDateTime mBeginDateTime;
 
     private LocalDateTime mEndDateTime;
@@ -41,24 +41,40 @@ public class FormattedElapsedTimeTest extends Application {
     private final String MAX_SECONDS = "5s";
 
     @SuppressWarnings("FieldCanBeLocal")
+    private final String FORMAT_SECONDS = "%ds";
+
+    @SuppressWarnings("FieldCanBeLocal")
     private final String MAX_MINUTES = "5m";
+
+    @SuppressWarnings("FieldCanBeLocal")
+    private final String FORMAT_MINUTES = "%dm";
 
     @SuppressWarnings("FieldCanBeLocal")
     private final String MAX_HOURS = "5h";
 
     @SuppressWarnings("FieldCanBeLocal")
+    private final String FORMAT_HOURS = "%dh";
+
+    @SuppressWarnings("FieldCanBeLocal")
     private final String MAX_DAYS = "5 days";
 
     @SuppressWarnings("FieldCanBeLocal")
-    private final String MAX_MONTHS = "5 months and 5 days";
+    private final String FORMAT_DAYS = "%d days";
 
     @SuppressWarnings("FieldCanBeLocal")
-    private final String MAX_YEARS = "5 years and 5 months and 5 days";
+    private final String MAX_MONTHS = "4 months and 5 days";
+
+    @SuppressWarnings("FieldCanBeLocal")
+    private final String FORMAT_MONTH = "%d months and %d days";
+
+    @SuppressWarnings("FieldCanBeLocal")
+    private final String MAX_YEARS = "3 years and 4 months and 5 days";
+
+    @SuppressWarnings("FieldCanBeLocal")
+    private final String FORMAT_YEARS = "%d years and %d months and %d days";
 
     @Before
     public void setup() {
-
-        mContext = RuntimeEnvironment.application;
 
         LocalTime localTime = LocalTime.of(15, 5, 5);
         LocalDate localDate = LocalDate.of(2017, 8, 8);
@@ -114,7 +130,7 @@ public class FormattedElapsedTimeTest extends Application {
     public void maxIsMonths() {
 
         mBeginDateTime = LocalDateTime.of(
-                mEndDateTime.toLocalDate().minusDays(5).minusMonths(5),
+                mEndDateTime.toLocalDate().minusDays(5).minusMonths(4),
                 mEndDateTime.toLocalTime());
 
         String time = calculate(mBeginDateTime, mEndDateTime);
@@ -125,11 +141,26 @@ public class FormattedElapsedTimeTest extends Application {
     public void maxIsYears() {
 
         mBeginDateTime = LocalDateTime.of(
-                mEndDateTime.toLocalDate().minusDays(5).minusMonths(5).minusYears(5),
+                mEndDateTime.toLocalDate().minusDays(5).minusMonths(4).minusYears(3),
                 mEndDateTime.toLocalTime());
 
         String time = calculate(mBeginDateTime, mEndDateTime);
         assertEquals(MAX_YEARS, time);
+    }
+
+    @Test
+    public void myBirthday() {
+
+        final Calendar cal = Calendar.getInstance();
+        cal.set(1987, 2, 29, 9, 15, 0);
+
+        final LocalDateTime beginDateTime = LocalDateTime
+                .ofInstant(Instant.ofEpochMilli(cal.getTimeInMillis()), ZoneId.systemDefault());
+
+        final String calculate = calculate(beginDateTime, LocalDateTime.now());
+
+        System.out.printf(calculate);
+
     }
 
     private String calculate(LocalDateTime beginDateTime, LocalDateTime endDateTime) {
@@ -143,12 +174,12 @@ public class FormattedElapsedTimeTest extends Application {
     private String calculeDate(LocalDate dateBegin, LocalDate dateEnd) {
         Period p = Period.between(dateBegin, dateEnd);
         if (p.getYears() > 0) {
-            return mContext.getString(R.string.elapsed_years, p.getDays(), p.getMonths(),
+            return String.format(Locale.getDefault(),FORMAT_YEARS, p.getYears(), p.getMonths(),
                     p.getDays());
         } else if (p.getMonths() > 0) {
-            return mContext.getString(R.string.elapsed_months, p.getDays(), p.getMonths());
+            return String.format(Locale.getDefault(),FORMAT_MONTH, p.getMonths(), p.getDays());
         } else if (p.getDays() > 0) {
-            return mContext.getString(R.string.elapsed_days, p.getDays());
+            return String.format(Locale.getDefault(),FORMAT_DAYS, p.getDays());
         } else {
             return null;
         }
@@ -157,12 +188,11 @@ public class FormattedElapsedTimeTest extends Application {
     private String calculeTime(LocalTime timeBegin, LocalTime timeEnd) {
         Duration d = Duration.between(timeBegin, timeEnd);
         if (d.toHours() > 0) {
-            return mContext.getString(R.string.elapsed_hours, d.toHours());
+            return String.format(Locale.getDefault(),FORMAT_HOURS, d.toHours());
         } else if (d.toMinutes() > 0) {
-            return mContext.getString(R.string.elapsed_minutes, d.toMinutes());
+            return String.format(Locale.getDefault(),FORMAT_MINUTES, d.toMinutes());
         } else {
-            return mContext.getString(R.string.elapsed_seconds, d.getSeconds());
+            return String.format(Locale.getDefault(),FORMAT_SECONDS, d.getSeconds());
         }
     }
-
 }
