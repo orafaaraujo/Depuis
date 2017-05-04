@@ -11,6 +11,8 @@ import java.util.List;
 import java.util.Locale;
 import java.util.Optional;
 
+import io.reactivex.Observable;
+
 /**
  * Created by rafael on 20/01/17.
  */
@@ -31,14 +33,16 @@ public class MockDatabase implements FactDatabase {
                     + "sociosqu ad litora torquent per conubia nostra, per inceptos himenaeos. In"
                     + " vel sodales lacus";
 
-    private MockDatabase() {
-        fetchFacts();
+    public MockDatabase(boolean dbStarted) {
+        if (dbStarted) {
+            fetchFacts();
+        }
     }
 
     private void fetchFacts() {
-        for (int i = 0; i < 3; i++) {
-            mFacts.add(makeFact(i));
-        }
+        Observable
+                .just(3)
+                .forEach(i -> mFacts.add(makeFact(i)));
     }
 
     private static Fact makeFact(int i) {
@@ -65,8 +69,11 @@ public class MockDatabase implements FactDatabase {
                 .filter(fact1 -> fact1.id() == fact.id())
                 .findFirst();
 
-
-        return first.get();
+        if (first.isPresent()) {
+            return first.get();
+        } else {
+            return  null;
+        }
     }
 
     @NonNull
