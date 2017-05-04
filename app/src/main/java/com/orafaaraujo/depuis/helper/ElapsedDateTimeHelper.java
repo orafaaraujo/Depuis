@@ -45,9 +45,7 @@ public class ElapsedDateTimeHelper {
         final LocalDateTime beginDateTime = LocalDateTime.ofInstant(
                 Instant.ofEpochMilli(timestamp), ZoneId.systemDefault());
 
-        final LocalDateTime endDateTime = LocalDateTime.now();
-
-        return calculate(beginDateTime, endDateTime);
+        return calculate(beginDateTime, LocalDateTime.now());
     }
 
     private String calculate(LocalDateTime beginDateTime, LocalDateTime endDateTime) {
@@ -61,10 +59,10 @@ public class ElapsedDateTimeHelper {
     private String calculeDate(LocalDate dateBegin, LocalDate dateEnd) {
         Period p = Period.between(dateBegin, dateEnd);
         if (p.getYears() > 0) {
-            return mContext.getString(R.string.elapsed_years, p.getDays(), p.getMonths(),
+            return mContext.getString(R.string.elapsed_years, p.getYears(), p.getMonths(),
                     p.getDays());
         } else if (p.getMonths() > 0) {
-            return mContext.getString(R.string.elapsed_months, p.getDays(), p.getMonths());
+            return mContext.getString(R.string.elapsed_months, p.getMonths(), p.getDays());
         } else if (p.getDays() > 0) {
             return mContext.getString(R.string.elapsed_days, p.getDays());
         } else {
