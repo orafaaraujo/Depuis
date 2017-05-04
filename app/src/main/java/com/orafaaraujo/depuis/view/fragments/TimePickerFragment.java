@@ -10,8 +10,8 @@ import android.text.format.DateFormat;
 import android.widget.TimePicker;
 
 import com.orafaaraujo.depuis.R;
-import com.orafaaraujo.depuis.helper.buses.DatetimeTO;
 import com.orafaaraujo.depuis.helper.RxBus;
+import com.orafaaraujo.depuis.helper.buses.DatetimeTO;
 
 import java.util.Calendar;
 
@@ -27,7 +27,7 @@ public class TimePickerFragment extends AppCompatDialogFragment
     @Inject
     RxBus mRxBus;
 
-    Calendar mCalendar;
+    private Calendar mCalendar;
 
     @Inject
     public TimePickerFragment() {

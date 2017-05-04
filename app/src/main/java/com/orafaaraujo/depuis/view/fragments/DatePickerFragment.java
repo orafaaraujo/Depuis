@@ -26,7 +26,7 @@ public class DatePickerFragment extends AppCompatDialogFragment
     @Inject
     RxBus mRxBus;
 
-    Calendar mCalendar;
+    private Calendar mCalendar;
 
     @Inject
     public DatePickerFragment() {
