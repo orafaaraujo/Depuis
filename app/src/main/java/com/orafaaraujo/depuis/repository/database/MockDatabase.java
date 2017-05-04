@@ -1,11 +1,15 @@
 package com.orafaaraujo.depuis.repository.database;
 
+import android.support.annotation.NonNull;
+import android.support.annotation.Nullable;
+
 import com.orafaaraujo.depuis.model.Fact;
 
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 import java.util.Locale;
+import java.util.Optional;
 
 /**
  * Created by rafael on 20/01/17.
@@ -27,7 +31,7 @@ public class MockDatabase implements FactDatabase {
                     + "sociosqu ad litora torquent per conubia nostra, per inceptos himenaeos. In"
                     + " vel sodales lacus";
 
-    public MockDatabase() {
+    private MockDatabase() {
         fetchFacts();
     }
 
@@ -52,6 +56,20 @@ public class MockDatabase implements FactDatabase {
         mFacts.add(fact);
     }
 
+    @Nullable
+    @Override
+    public Fact findFact(Fact fact) {
+
+        Optional<Fact> first = mFacts
+                .stream()
+                .filter(fact1 -> fact1.id() == fact.id())
+                .findFirst();
+
+
+        return first.get();
+    }
+
+    @NonNull
     @Override
     public List<Fact> fetchAll() {
         return mFacts;
@@ -60,5 +78,11 @@ public class MockDatabase implements FactDatabase {
     @Override
     public void deleteFact(Fact fact) {
         mFacts.remove(fact);
+    }
+
+    @Override
+    public void deleteTable() {
+        mFacts.clear();
+        mFacts = new ArrayList<>();
     }
 }
