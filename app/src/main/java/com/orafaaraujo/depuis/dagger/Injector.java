@@ -2,7 +2,7 @@ package com.orafaaraujo.depuis.dagger;
 
 import android.os.Build;
 
-import com.orafaaraujo.depuis.DepuisApp;
+import com.orafaaraujo.depuis.DepuisApplication;
 import com.orafaaraujo.depuis.dagger.module.ApplicationModule;
 import com.orafaaraujo.depuis.dagger.module.DatabaseModule;
 import com.orafaaraujo.depuis.dagger.module.ViewModule;
@@ -20,7 +20,7 @@ public class Injector {
     public Injector() {
     }
 
-    public static void initializeApplicationComponent(DepuisApp application) {
+    public static void initializeApplicationComponent(DepuisApplication application) {
         sApplicationComponent = DaggerApplicationComponent.builder()
                 .applicationModule(new ApplicationModule(application))
                 .viewModule(new ViewModule())

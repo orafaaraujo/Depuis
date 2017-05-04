@@ -1,6 +1,6 @@
 package com.orafaaraujo.depuis.dagger;
 
-import com.orafaaraujo.depuis.DepuisApp;
+import com.orafaaraujo.depuis.DepuisApplication;
 import com.orafaaraujo.depuis.dagger.module.ApplicationModule;
 import com.orafaaraujo.depuis.dagger.module.DatabaseModule;
 import com.orafaaraujo.depuis.dagger.module.ViewModule;
@@ -19,7 +19,7 @@ import dagger.Component;
 @Component(modules = {ApplicationModule.class, ViewModule.class, DatabaseModule.class})
 public interface ApplicationComponent {
 
-    void inject(DepuisApp depuisApp);
+    void inject(DepuisApplication depuisApplication);
 
     void inject(MainActivity mainActivity);
 

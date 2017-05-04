@@ -11,7 +11,7 @@ import timber.log.Timber;
  * Created by rafael on 22/01/17.
  */
 
-public class DepuisApp extends Application {
+public class DepuisApplication extends Application {
 
     @Override
     public void onCreate() {

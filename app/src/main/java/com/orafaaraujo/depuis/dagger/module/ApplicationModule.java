@@ -4,7 +4,7 @@ import android.content.Context;
 import android.content.SharedPreferences;
 import android.preference.PreferenceManager;
 
-import com.orafaaraujo.depuis.DepuisApp;
+import com.orafaaraujo.depuis.DepuisApplication;
 
 import javax.inject.Singleton;
 
@@ -17,15 +17,15 @@ import dagger.Provides;
 @Module
 public class ApplicationModule {
 
-    private final DepuisApp mApplication;
+    private final DepuisApplication mApplication;
 
-    public ApplicationModule(DepuisApp application) {
+    public ApplicationModule(DepuisApplication application) {
         mApplication = application;
     }
 
     @Provides
     @Singleton
-    public DepuisApp application() {
+    public DepuisApplication application() {
         return mApplication;
     }
 
@@ -37,7 +37,7 @@ public class ApplicationModule {
 
     @Provides
     @Singleton
-    SharedPreferences provideSharedPreferences(DepuisApp app) {
+    SharedPreferences provideSharedPreferences(DepuisApplication app) {
         return PreferenceManager.getDefaultSharedPreferences(app);
     }
 }
