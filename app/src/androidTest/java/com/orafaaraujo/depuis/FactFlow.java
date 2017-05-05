@@ -82,12 +82,14 @@ public class FactFlow {
     @Test
     public void createButNotSaving() {
 
+        String title = "Lorem";
+
         onView(withId(R.id.main_fab_new_fact))
                 .perform(click());
 
         onView(withId(R.id.new_fact_text_edittext_title))
-                .perform(typeText("Lorem"), closeSoftKeyboard())
-                .check(matches(withText("Lorem")));
+                .perform(typeText(title), closeSoftKeyboard())
+                .check(matches(withText(title)));
 
         onView(withId(R.id.new_fact_button_back))
                 .perform(click());
@@ -98,7 +100,7 @@ public class FactFlow {
                 .check(matches(is(isEnabled())));
 
         onView(withId(R.id.main_recycler_fact))
-                .check(matches(not(hasDescendant(withText("Lorem")))));
+                .check(matches(not(hasDescendant(withText(title)))));
 
     }
 
@@ -111,6 +113,29 @@ public class FactFlow {
         createSuccess();
 
         onView(withId(R.id.main_recycler_fact))
+                .check(matches(hasDescendant(withText(title))));
+
+        onView(withId(R.id.main_recycler_fact))
+                .perform(RecyclerViewActions.actionOnItemAtPosition(0, swipeLeft()));
+
+        onView(allOf(
+                withId(android.support.design.R.id.snackbar_text),
+                withText(context.getString(R.string.main_deleted, title))))
+                .check(matches(isDisplayed()));
+    }
+
+    @Test
+    public void createAndDeletingAndUndo() {
+
+        Context context = InstrumentationRegistry.getTargetContext();
+        String title = "Lorem";
+
+        createSuccess();
+
+        onView(withId(R.id.main_recycler_fact))
+                .check(matches(hasDescendant(withText(title))));
+
+        onView(withId(R.id.main_recycler_fact))
                 .perform(RecyclerViewActions.actionOnItemAtPosition(0, swipeLeft()));
 
         onView(allOf(
@@ -118,5 +143,12 @@ public class FactFlow {
                 withText(context.getString(R.string.main_deleted, title))))
                 .check(matches(isDisplayed()));
 
+        onView(allOf(
+                withId(android.support.design.R.id.snackbar_action),
+                withText(context.getString(R.string.main_deleted_undo))))
+                .perform(click());
+
+        onView(withId(R.id.main_recycler_fact))
+                .check(matches(hasDescendant(withText(title))));
     }
 }
