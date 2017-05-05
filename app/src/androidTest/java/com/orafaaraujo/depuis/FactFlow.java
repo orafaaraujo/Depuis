@@ -3,18 +3,24 @@ package com.orafaaraujo.depuis;
 import static android.support.test.espresso.Espresso.onView;
 import static android.support.test.espresso.action.ViewActions.click;
 import static android.support.test.espresso.action.ViewActions.closeSoftKeyboard;
+import static android.support.test.espresso.action.ViewActions.swipeLeft;
 import static android.support.test.espresso.action.ViewActions.typeText;
 import static android.support.test.espresso.assertion.ViewAssertions.matches;
 import static android.support.test.espresso.matcher.ViewMatchers.hasDescendant;
 import static android.support.test.espresso.matcher.ViewMatchers.isClickable;
 import static android.support.test.espresso.matcher.ViewMatchers.isCompletelyDisplayed;
+import static android.support.test.espresso.matcher.ViewMatchers.isDisplayed;
 import static android.support.test.espresso.matcher.ViewMatchers.isEnabled;
 import static android.support.test.espresso.matcher.ViewMatchers.withId;
 import static android.support.test.espresso.matcher.ViewMatchers.withText;
 
+import static org.hamcrest.Matchers.allOf;
 import static org.hamcrest.Matchers.is;
 import static org.hamcrest.Matchers.not;
 
+import android.content.Context;
+import android.support.test.InstrumentationRegistry;
+import android.support.test.espresso.contrib.RecyclerViewActions;
 import android.support.test.filters.LargeTest;
 import android.support.test.filters.SdkSuppress;
 import android.support.test.rule.ActivityTestRule;
@@ -50,7 +56,7 @@ public class FactFlow {
     }
 
     @Test
-    public void createFactSuccess() {
+    public void createSuccess() {
 
         String title = "Lorem";
 
@@ -74,7 +80,7 @@ public class FactFlow {
     }
 
     @Test
-    public void createFactNotSaving() {
+    public void createButNotSaving() {
 
         onView(withId(R.id.main_fab_new_fact))
                 .perform(click());
@@ -93,6 +99,24 @@ public class FactFlow {
 
         onView(withId(R.id.main_recycler_fact))
                 .check(matches(not(hasDescendant(withText("Lorem")))));
+
+    }
+
+    @Test
+    public void createAndDeleting() {
+
+        Context context = InstrumentationRegistry.getTargetContext();
+        String title = "Lorem";
+
+        createSuccess();
+
+        onView(withId(R.id.main_recycler_fact))
+                .perform(RecyclerViewActions.actionOnItemAtPosition(0, swipeLeft()));
+
+        onView(allOf(
+                withId(android.support.design.R.id.snackbar_text),
+                withText(context.getString(R.string.main_deleted, title))))
+                .check(matches(isDisplayed()));
 
     }
 }
