@@ -9,7 +9,7 @@ import org.junit.runners.Suite;
 @RunWith(Suite.class)
 @Suite.SuiteClasses({
         MainActivityViewTest.class,
-        NewFactActivityViewsTest.class,
+        NewFactActivityViewsTest.class
 })
 public class ActivitiesViewsTestSuit {
 }

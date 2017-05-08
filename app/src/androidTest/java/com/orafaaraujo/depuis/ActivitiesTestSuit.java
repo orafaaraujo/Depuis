@@ -10,6 +10,7 @@ import org.junit.runners.Suite;
 @Suite.SuiteClasses({
         MainActivityTest.class,
         NewFactActivityTest.class,
+        FactFlow.class
 })
 public class ActivitiesTestSuit {
 }
