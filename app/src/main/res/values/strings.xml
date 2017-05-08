@@ -2,6 +2,7 @@
     <string name="app_name">Depuis</string>
     <string name="action_settings">Settings</string>
 
+    <string name="main_stop">Stop</string>
     <string name="main_button_share">Share</string>
     <string name="fact_share_message">Share your memory</string>
     <string name="fact_share_fact" formatted="false">Has been %1s that %2s (Depuis application by Android)</string>

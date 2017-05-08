@@ -3,7 +3,7 @@ package com.orafaaraujo.depuis.dagger.module;
 import android.content.Context;
 
 import com.orafaaraujo.depuis.repository.database.FactDatabase;
-import com.orafaaraujo.depuis.repository.database.SQLiteDatabase;
+import com.orafaaraujo.depuis.repository.database.MockDatabase;
 
 import javax.inject.Singleton;
 
@@ -19,8 +19,8 @@ public class DatabaseModule {
     @Provides
     @Singleton
     FactDatabase provideDatabase(Context context) {
-//        return new MockDatabase();
-        return new SQLiteDatabase(context);
+        return new MockDatabase(true);
+//        return new SQLiteDatabase(context);
     }
 
 }
