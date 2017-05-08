@@ -125,7 +125,7 @@ public class DatabaseTest {
                 .setStartTime(mCalendar.getTimeInMillis())
                 .setTitle("new fact")
                 .setComment("A longe time ago...")
-                .setCount(true)
+                .setEndTime(0)
                 .build();
     }
 }

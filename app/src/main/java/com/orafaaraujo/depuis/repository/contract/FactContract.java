@@ -17,7 +17,7 @@ public final class FactContract {
         public static final String COLUMN_NAME_START_TIME = "startTime";
         public static final String COLUMN_NAME_TITLE = "title";
         public static final String COLUMN_NAME_COMMENT = "comment";
-        public static final String COLUMN_NAME_COUNT = "count";
+        public static final String COLUMN_NAME_END_TIME = "endTime";
 
         public static final String SQL_CREATE_ENTRIES =
                 "CREATE TABLE " + FactEntry.TABLE_NAME + " (" +
@@ -25,7 +25,7 @@ public final class FactContract {
                         FactEntry.COLUMN_NAME_START_TIME + " INTEGER," +
                         FactEntry.COLUMN_NAME_TITLE + " TEXT," +
                         FactEntry.COLUMN_NAME_COMMENT + " TEXT," +
-                        FactEntry.COLUMN_NAME_COUNT + " INTEGER)";
+                        FactEntry.COLUMN_NAME_END_TIME + " INTEGER)";
 
 
         public static final String SQL_DELETE_ENTRIES =

@@ -44,7 +44,7 @@ public class SQLiteDatabase extends SQLiteOpenHelper implements FactDatabase {
         values.put(FactContract.FactEntry.COLUMN_NAME_START_TIME, fact.startTime());
         values.put(FactContract.FactEntry.COLUMN_NAME_TITLE, fact.title());
         values.put(FactContract.FactEntry.COLUMN_NAME_COMMENT, fact.comment());
-        values.put(FactContract.FactEntry.COLUMN_NAME_COUNT, fact.count() ? 1 : 0);
+        values.put(FactContract.FactEntry.COLUMN_NAME_END_TIME, fact.endTime());
 
         getWritableDatabase().insert(FactContract.FactEntry.TABLE_NAME, null, values);
     }
@@ -66,7 +66,7 @@ public class SQLiteDatabase extends SQLiteOpenHelper implements FactDatabase {
                     .setStartTime(cursor.getLong(1))
                     .setTitle(cursor.getString(2))
                     .setComment(cursor.getString(3))
-                    .setCount(cursor.getInt(4) == 1)
+                    .setEndTime(cursor.getInt(4))
                     .build();
         }
         cursor.close();
@@ -88,7 +88,7 @@ public class SQLiteDatabase extends SQLiteOpenHelper implements FactDatabase {
                             .setStartTime(cursor.getLong(1))
                             .setTitle(cursor.getString(2))
                             .setComment(cursor.getString(3))
-                            .setCount(cursor.getInt(4) == 1)
+                            .setEndTime(cursor.getInt(4))
                             .build());
         }
         cursor.close();
