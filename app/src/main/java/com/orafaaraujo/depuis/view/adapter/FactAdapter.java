@@ -68,6 +68,8 @@ public class FactAdapter extends RecyclerView.Adapter<BindingHolder> {
     public void updateFacts(List<Fact> facts) {
         mFacts.clear();
         mFacts.addAll(facts);
+        // TODO If has a new Fact update a list with the current position!!!
+        notifyDataSetChanged();
     }
 
     public void insertFact(FactTO factTO) {
