@@ -10,6 +10,9 @@
     <string name="main_deleted">Removing %s?</string>
     <string name="main_deleted_undo">Undo</string>
 
+    <string name="fact_close_title">Close this fact</string>
+    <string name="fact_close_message">Stop counting the time, not delete it.</string>
+
     <string name="new_fact_layout_title">Save a memory that you would like to calculate the time from now</string>
     <string name="new_fact_layout_subtitle">Depuis will do it for you</string>
     <string name="new_fact_button_start">Start</string>

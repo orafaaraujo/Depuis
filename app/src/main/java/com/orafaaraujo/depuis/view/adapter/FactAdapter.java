@@ -88,6 +88,8 @@ public class FactAdapter extends RecyclerView.Adapter<BindingHolder> {
                 FactTO.builder()
                         .setFact(mFacts.get(position))
                         .setPosition(position)
+                        .setDelete(true)
+                        .setClose(false)
                         .build());
     }
 

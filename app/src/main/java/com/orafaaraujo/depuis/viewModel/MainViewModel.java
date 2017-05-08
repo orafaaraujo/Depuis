@@ -107,4 +107,7 @@ public class MainViewModel extends BaseObservable {
         mAdapter.insertFact(factTO);
         mLayoutManager.scrollToPosition(factTO.position());
     }
+
+    public void closeFact(Fact fact) {}
+
 }

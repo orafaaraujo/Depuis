@@ -6,7 +6,9 @@ import android.view.View;
 
 import com.orafaaraujo.depuis.helper.DateTimeHelper;
 import com.orafaaraujo.depuis.helper.ElapsedDateTimeHelper;
+import com.orafaaraujo.depuis.helper.RxBus;
 import com.orafaaraujo.depuis.helper.ShareContentHelper;
+import com.orafaaraujo.depuis.helper.buses.FactTO;
 import com.orafaaraujo.depuis.model.Fact;
 
 import javax.inject.Inject;
@@ -30,6 +32,9 @@ public class FactViewModel extends BaseObservable {
 
     @Inject
     Lazy<ShareContentHelper> mShareContentHelper;
+
+    @Inject
+    RxBus mRxBus;
 
     private Fact mFact;
 
@@ -59,6 +64,17 @@ public class FactViewModel extends BaseObservable {
 
     public View.OnClickListener onClickShare() {
         return v -> mShareContentHelper.get().share(mFact);
+    }
+
+    public View.OnClickListener onCloseFact() {
+        return v ->
+                mRxBus.sendEvent(
+                        FactTO.builder()
+                                .setFact(mFact)
+                                .setPosition(0)
+                                .setDelete(false)
+                                .setClose(true)
+                                .build());
     }
 
 }
