@@ -1,5 +1,6 @@
 package com.orafaaraujo.depuis.view.activity;
 
+import android.app.AlertDialog;
 import android.databinding.DataBindingUtil;
 import android.os.Bundle;
 import android.support.design.widget.BaseTransientBottomBar;
@@ -36,13 +37,35 @@ public class MainActivity extends AppCompatActivity {
         binding.setViewModel(mMainViewModel);
         setSupportActionBar(binding.toolbar);
 
-        mRxBus.getFactEvents()
-                .subscribe(this::handlerRemoveFact, Timber::e);
+        mRxBus.getFactEventsToDelete()
+                .subscribe(this::handlerDeleteFact, Timber::e);
+
+        mRxBus.getFactEventsToClose()
+                .subscribe(this::handlerCloseFact, Timber::e);
     }
 
-    private void handlerRemoveFact(FactTO factTO) {
+    private void handlerDeleteFact(FactTO factTO) {
         mMainViewModel.setFactTO(factTO);
         showSnackBar(factTO.fact());
+    }
+
+    private void handlerCloseFact(FactTO factTO) {
+        if (factTO.fact().endTime() == -1) {
+            showDialog(factTO);
+        } else {
+            Snackbar.make(findViewById(R.id.main_recycler_fact),
+                    R.string.fact_close_snack_bar_message, Snackbar.LENGTH_SHORT).show();
+        }
+    }
+
+    private void showDialog(FactTO factTO) {
+        AlertDialog.Builder builder = new AlertDialog.Builder(this, R.style.MyAlertDialogStyle);
+        builder.setTitle(R.string.fact_close_title);
+        builder.setMessage(R.string.fact_close_message);
+        builder.setPositiveButton(android.R.string.yes,
+                (dialog, which) -> mMainViewModel.closeFact(factTO));
+        builder.setNegativeButton(android.R.string.no, (dialog, which) -> dialog.dismiss());
+        builder.show();
     }
 
     private void showSnackBar(Fact fact) {

@@ -31,4 +31,7 @@
         <item name="colorControlNormal">@color/main_primary_dark</item>
     </style>
 
+    <style name="MyAlertDialogStyle" parent="Theme.AppCompat.Light.Dialog.Alert">
+        <item name="colorAccent">@color/main_close_fact</item>
+    </style>
 </resources>

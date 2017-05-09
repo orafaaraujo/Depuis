@@ -40,13 +40,29 @@ public class SQLiteDatabase extends SQLiteOpenHelper implements FactDatabase {
 
     @Override
     public void saveFact(Fact fact) {
-        ContentValues values = new ContentValues();
+        final ContentValues values = new ContentValues();
         values.put(FactContract.FactEntry.COLUMN_NAME_START_TIME, fact.startTime());
         values.put(FactContract.FactEntry.COLUMN_NAME_TITLE, fact.title());
         values.put(FactContract.FactEntry.COLUMN_NAME_COMMENT, fact.comment());
-        values.put(FactContract.FactEntry.COLUMN_NAME_COUNT, fact.count() ? 1 : 0);
+        values.put(FactContract.FactEntry.COLUMN_NAME_END_TIME, fact.endTime());
 
         getWritableDatabase().insert(FactContract.FactEntry.TABLE_NAME, null, values);
+    }
+
+    @Override
+    public void updateFact(Fact fact) {
+
+        final ContentValues values = new ContentValues();
+        values.put(FactContract.FactEntry.COLUMN_NAME_START_TIME, fact.startTime());
+        values.put(FactContract.FactEntry.COLUMN_NAME_TITLE, fact.title());
+        values.put(FactContract.FactEntry.COLUMN_NAME_COMMENT, fact.comment());
+        values.put(FactContract.FactEntry.COLUMN_NAME_END_TIME, fact.endTime());
+
+        final String where = FactContract.FactEntry._ID + " = ?";
+        final String[] whereArgs = {String.valueOf(fact.id())};
+
+        getWritableDatabase().update(FactContract.FactEntry.TABLE_NAME, values, where, whereArgs);
+
     }
 
     @Nullable
@@ -55,9 +71,9 @@ public class SQLiteDatabase extends SQLiteOpenHelper implements FactDatabase {
 
         Fact returnFact = null;
 
-        String where = FactContract.FactEntry._ID + " = ?";
-        String[] whereArgs = {String.valueOf(fact.id())};
-        Cursor cursor = getReadableDatabase()
+        final String where = FactContract.FactEntry._ID + " = ?";
+        final String[] whereArgs = {String.valueOf(fact.id())};
+        final Cursor cursor = getReadableDatabase()
                 .query(FactContract.FactEntry.TABLE_NAME, null, where, whereArgs, null, null, null);
         while (cursor.moveToNext()) {
 
@@ -66,7 +82,7 @@ public class SQLiteDatabase extends SQLiteOpenHelper implements FactDatabase {
                     .setStartTime(cursor.getLong(1))
                     .setTitle(cursor.getString(2))
                     .setComment(cursor.getString(3))
-                    .setCount(cursor.getInt(4) == 1)
+                    .setEndTime(cursor.getLong(4))
                     .build();
         }
         cursor.close();
@@ -88,7 +104,7 @@ public class SQLiteDatabase extends SQLiteOpenHelper implements FactDatabase {
                             .setStartTime(cursor.getLong(1))
                             .setTitle(cursor.getString(2))
                             .setComment(cursor.getString(3))
-                            .setCount(cursor.getInt(4) == 1)
+                            .setEndTime(cursor.getLong(4))
                             .build());
         }
         cursor.close();
@@ -97,8 +113,8 @@ public class SQLiteDatabase extends SQLiteOpenHelper implements FactDatabase {
 
     @Override
     public void deleteFact(Fact fact) {
-        String selection = FactContract.FactEntry._ID + " = ?";
-        String[] selectionArgs = {String.valueOf(fact.id())};
+        final String selection = FactContract.FactEntry._ID + " = ?";
+        final String[] selectionArgs = {String.valueOf(fact.id())};
         getWritableDatabase().delete(FactContract.FactEntry.TABLE_NAME, selection, selectionArgs);
     }
 

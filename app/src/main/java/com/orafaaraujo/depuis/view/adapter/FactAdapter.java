@@ -57,6 +57,7 @@ public class FactAdapter extends RecyclerView.Adapter<BindingHolder> {
         ItemFactBinding binding = holder.getBinding();
         final FactViewModel factViewModel = mFactViewModelProvider.get();
         binding.setViewModel(factViewModel);
+        factViewModel.setPosition(position);
         factViewModel.setFact(mFacts.get(position));
     }
 
@@ -88,6 +89,8 @@ public class FactAdapter extends RecyclerView.Adapter<BindingHolder> {
                 FactTO.builder()
                         .setFact(mFacts.get(position))
                         .setPosition(position)
+                        .setDelete(true)
+                        .setClose(false)
                         .build());
     }
 
@@ -95,5 +98,11 @@ public class FactAdapter extends RecyclerView.Adapter<BindingHolder> {
         mFacts.remove(position);
         notifyItemRemoved(position);
         notifyItemRangeChanged(position, mFacts.size());
+    }
+
+    public void notifyClosedFact(int position, Fact fact) {
+        mFacts.remove(position);
+        mFacts.add(position, fact);
+        notifyItemChanged(position);
     }
 }

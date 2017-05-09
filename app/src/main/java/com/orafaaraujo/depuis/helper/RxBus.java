@@ -33,7 +33,7 @@ public class RxBus {
 
     /**
      * Method that return a {@link Observable} to implement a {@link io.reactivex.subjects.Subject}
-     * to receive the @{@link DatetimeTO} events.
+     * to receive the {@link DatetimeTO} events.
      */
     public Observable<DatetimeTO> getDatetimeEvents() {
         return subject
@@ -43,7 +43,7 @@ public class RxBus {
 
     /**
      * Method that return a {@link Observable} to implement a {@link io.reactivex.subjects.Subject}
-     * to receive the @{@link NewFactFeedbackTO} events.
+     * to receive the {@link NewFactFeedbackTO} events.
      */
     public Observable<NewFactFeedbackTO> getNewFactFeedbackEvents() {
         return subject
@@ -53,12 +53,24 @@ public class RxBus {
 
     /**
      * Method that return a {@link Observable} to implement a {@link io.reactivex.subjects.Subject}
-     * to receive the @{@link FactTO} events.
+     * to receive the {@link FactTO} delete events.
      */
-    public Observable<FactTO> getFactEvents() {
+    public Observable<FactTO> getFactEventsToDelete() {
         return subject
                 .filter(o -> o instanceof FactTO)
-                .map(o -> (FactTO) o);
+                .map(o -> (FactTO) o)
+                .filter(FactTO::delete);
+    }
+
+    /**
+     * Method that return a {@link Observable} to implement a {@link io.reactivex.subjects.Subject}
+     * to receive the @{@link FactTO} close events.
+     */
+    public Observable<FactTO> getFactEventsToClose() {
+        return subject
+                .filter(o -> o instanceof FactTO)
+                .map(o -> (FactTO) o)
+                .filter(FactTO::close);
     }
 
 }

@@ -36,16 +36,22 @@ public class ElapsedDateTimeHelper {
     /**
      * Method that return the formatted String of elapsed date and time.
      *
-     * @param timestamp The elapsed time in milliseconds
+     * @param startTime The start time in milliseconds
+     * @param endTime   The end time in milliseconds
      * @return The string formatted by the maximo time passed. For example, if was 15 minutes will
      * return "15m", but if is 20 days will return "20 days" and go on.
      */
-    public String getTime(long timestamp) {
+    public String getTime(long startTime, long endTime) {
 
-        final LocalDateTime beginDateTime = LocalDateTime.ofInstant(
-                Instant.ofEpochMilli(timestamp), ZoneId.systemDefault());
+        final LocalDateTime beginDateTime = LocalDateTime
+                .ofInstant(Instant.ofEpochMilli(startTime), ZoneId.systemDefault());
 
-        return calculate(beginDateTime, LocalDateTime.now());
+        // if the endtime is -1 that means that theres no end time, so count from now.
+        final LocalDateTime endDateTime = endTime == -1 ?
+                LocalDateTime.now() :
+                LocalDateTime.ofInstant(Instant.ofEpochMilli(endTime), ZoneId.systemDefault());
+
+        return calculate(beginDateTime, endDateTime);
     }
 
     private String calculate(LocalDateTime beginDateTime, LocalDateTime endDateTime) {

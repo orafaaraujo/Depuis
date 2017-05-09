@@ -10,6 +10,10 @@ public abstract class FactTO {
 
     public abstract int position();
 
+    public abstract boolean delete();
+
+    public abstract boolean close();
+
     public static FactTO.Builder builder() {
         return new AutoValue_FactTO.Builder();
     }
@@ -20,6 +24,10 @@ public abstract class FactTO {
         public abstract Builder setFact(Fact fact);
 
         public abstract Builder setPosition(int position);
+
+        public abstract Builder setDelete(boolean delete);
+
+        public abstract Builder setClose(boolean close);
 
         public abstract FactTO build();
     }

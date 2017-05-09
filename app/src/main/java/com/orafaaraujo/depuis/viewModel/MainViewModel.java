@@ -16,6 +16,7 @@ import com.orafaaraujo.depuis.view.activity.NewFactActivity;
 import com.orafaaraujo.depuis.view.adapter.FactAdapter;
 import com.orafaaraujo.depuis.view.helper.SimpleItemTouchHelperCallback;
 
+import java.util.Date;
 import java.util.LinkedList;
 import java.util.List;
 
@@ -107,4 +108,24 @@ public class MainViewModel extends BaseObservable {
         mAdapter.insertFact(factTO);
         mLayoutManager.scrollToPosition(factTO.position());
     }
+
+    /**
+     * Update on database a endtime of a Fact.
+     *
+     * @param factTO Fact to be copied to a new one (because is immutable) and save on database.
+     */
+    public void closeFact(FactTO factTO) {
+
+        Fact closedFact = Fact.builder()
+                .setId(factTO.fact().id())
+                .setStartTime(factTO.fact().startTime())
+                .setTitle(factTO.fact().title())
+                .setComment(factTO.fact().title())
+                .setEndTime(new Date().getTime())
+                .build();
+
+        mDatabase.updateFact(closedFact);
+        mAdapter.notifyClosedFact(factTO.position(), closedFact);
+    }
+
 }

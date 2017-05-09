@@ -16,7 +16,7 @@ public abstract class Fact  {
 
     public abstract String comment();
 
-    public abstract boolean count();
+    public abstract long endTime();
 
     public static Builder builder() {
         return new AutoValue_Fact.Builder();
@@ -27,13 +27,13 @@ public abstract class Fact  {
 
         public abstract Builder setId(int id);
 
-        public abstract Builder setStartTime(long timestamp);
+        public abstract Builder setStartTime(long startTime);
 
         public abstract Builder setTitle(String title);
 
         public abstract Builder setComment(String comment);
 
-        public abstract Builder setCount(boolean count);
+        public abstract Builder setEndTime(long endTime);
 
         public abstract Fact build();
     }
