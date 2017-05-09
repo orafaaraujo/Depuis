@@ -48,7 +48,8 @@ public class DatabaseTest {
     @Test
     public void save() throws Exception {
 
-        mDatabase.saveFact(provideFact());
+        long factId = mDatabase.saveFact(provideFact());
+        assertTrue(factId > -1);
 
         final List<Fact> facts = mDatabase.fetchAll();
 
@@ -61,9 +62,9 @@ public class DatabaseTest {
     public void update() {
 
         Fact fact = provideFact();
-        mDatabase.saveFact(fact);
+        long factId = mDatabase.saveFact(fact);
 
-        Fact savedFact = mDatabase.findFact(fact);
+        Fact savedFact = mDatabase.findFact(factId);
         assertNotNull(savedFact);
 
         Fact changeFact = Fact.builder()
@@ -75,7 +76,7 @@ public class DatabaseTest {
                 .build();
         mDatabase.updateFact(changeFact);
 
-        Fact updateFact = mDatabase.findFact(changeFact);
+        Fact updateFact = mDatabase.findFact(changeFact.id());
         assertNotNull(updateFact);
 
         assertFalse(updateFact.startTime() == savedFact.startTime());
@@ -94,9 +95,9 @@ public class DatabaseTest {
 
         Fact fact = provideFact();
 
-        mDatabase.saveFact(fact);
+        long factId = mDatabase.saveFact(fact);
 
-        Fact savedFact = mDatabase.findFact(fact);
+        Fact savedFact = mDatabase.findFact(factId);
         assertNotNull(savedFact);
         assertEquals(fact, savedFact);
     }
@@ -119,13 +120,13 @@ public class DatabaseTest {
     public void delete() throws Exception {
 
         Fact fact = provideFact();
-        mDatabase.saveFact(fact);
+        long factId = mDatabase.saveFact(fact);
 
-        Fact savedFact = mDatabase.findFact(fact);
+        Fact savedFact = mDatabase.findFact(factId);
         assertNotNull(savedFact);
 
         mDatabase.deleteFact(savedFact);
-        Fact deletedFact = mDatabase.findFact(fact);
+        Fact deletedFact = mDatabase.findFact(factId);
         assertNull(deletedFact);
     }
 
