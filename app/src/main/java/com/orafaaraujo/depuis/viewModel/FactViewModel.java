@@ -59,7 +59,7 @@ public class FactViewModel extends BaseObservable {
     }
 
     public String getFactCurrentTime() {
-        return mElapsedDateTimeHelper.getTime(mFact.startTime());
+        return mElapsedDateTimeHelper.getTime(mFact.startTime(), mFact.endTime());
     }
 
     public View.OnClickListener onClickShare() {

@@ -83,7 +83,7 @@ public class NewFactViewModel extends BaseObservable {
                 .setId(0) // Will be replaced by Database.
                 .setTitle(titleFact.get())
                 .setComment(commentFact.get())
-                .setEndTime(0)
+                .setEndTime(-1)
                 .setStartTime(mMilliseconds)
                 .build();
     }

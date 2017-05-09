@@ -52,7 +52,7 @@ public class MockDatabase implements FactDatabase {
                 .setStartTime(new Date().getTime())
                 .setTitle(String.format(Locale.getDefault(), "%d %s", i, LOREM_TITLE))
                 .setComment(LOREM_COMMENT)
-                .setEndTime(0)
+                .setEndTime(-1)
                 .build();
     }
 
