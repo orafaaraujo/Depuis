@@ -9,6 +9,7 @@ import static android.support.test.espresso.matcher.ViewMatchers.isClickable;
 import static android.support.test.espresso.matcher.ViewMatchers.isCompletelyDisplayed;
 import static android.support.test.espresso.matcher.ViewMatchers.isDisplayed;
 import static android.support.test.espresso.matcher.ViewMatchers.isEnabled;
+import static android.support.test.espresso.matcher.ViewMatchers.withClassName;
 import static android.support.test.espresso.matcher.ViewMatchers.withId;
 import static android.support.test.espresso.matcher.ViewMatchers.withText;
 
@@ -17,14 +18,18 @@ import static org.hamcrest.Matchers.is;
 
 import android.content.Context;
 import android.support.test.InstrumentationRegistry;
+import android.support.test.espresso.contrib.PickerActions;
 import android.support.test.filters.LargeTest;
 import android.support.test.filters.SdkSuppress;
 import android.support.test.rule.ActivityTestRule;
 import android.support.test.runner.AndroidJUnit4;
+import android.widget.DatePicker;
+import android.widget.TimePicker;
 
 import com.orafaaraujo.depuis.R;
 import com.orafaaraujo.depuis.view.activity.NewFactActivity;
 
+import org.hamcrest.Matchers;
 import org.junit.Rule;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -131,6 +136,86 @@ public class NewFactActivityTest {
 
         onView(withId(R.id.new_fact_start_button))
                 .perform(click());
+    }
+
+    @Test
+    public void createFactWithDate() {
+
+        onView(withId(R.id.new_fact_text_edittext_title))
+                .perform(typeText("Lorem"), closeSoftKeyboard())
+                .check(matches(withText("Lorem")));
+
+        onView(withId(R.id.new_fact_text_edittext_comment))
+                .perform(typeText("Lorem"), closeSoftKeyboard())
+                .check(matches(withText("Lorem")));
+
+        int year = 1987;
+        int month = 2;
+        int day = 29;
+
+        onView(withId(R.id.new_fact_text_date)).perform(click());
+        onView(withClassName(Matchers
+                .equalTo(DatePicker.class.getName())))
+                .perform(PickerActions.setDate(year, month, day));
+        onView(withId(android.R.id.button1)).perform(click());
+
+        onView(withId(R.id.new_fact_start_button)).perform(click());
+    }
+
+    @Test
+    public void createFactWithTime() {
+
+        onView(withId(R.id.new_fact_text_edittext_title))
+                .perform(typeText("Lorem"), closeSoftKeyboard())
+                .check(matches(withText("Lorem")));
+
+        onView(withId(R.id.new_fact_text_edittext_comment))
+                .perform(typeText("Lorem"), closeSoftKeyboard())
+                .check(matches(withText("Lorem")));
+
+        int hour = 9;
+        int minutes = 15;
+
+        onView(withId(R.id.new_fact_text_time)).perform(click());
+        onView(withClassName(Matchers
+                .equalTo(TimePicker.class.getName())))
+                .perform(PickerActions.setTime(hour, minutes));
+        onView(withId(android.R.id.button1)).perform(click());
+
+        onView(withId(R.id.new_fact_start_button)).perform(click());
+    }
+
+    @Test
+    public void createFactWithDateAndTime() {
+
+        onView(withId(R.id.new_fact_text_edittext_title))
+                .perform(typeText("Lorem"), closeSoftKeyboard())
+                .check(matches(withText("Lorem")));
+
+        onView(withId(R.id.new_fact_text_edittext_comment))
+                .perform(typeText("Lorem"), closeSoftKeyboard())
+                .check(matches(withText("Lorem")));
+
+        int year = 1987;
+        int month = 2;
+        int day = 29;
+
+        onView(withId(R.id.new_fact_text_date)).perform(click());
+        onView(withClassName(Matchers
+                .equalTo(DatePicker.class.getName())))
+                .perform(PickerActions.setDate(year, month, day));
+        onView(withId(android.R.id.button1)).perform(click());
+
+        int hour = 9;
+        int minutes = 15;
+
+        onView(withId(R.id.new_fact_text_time)).perform(click());
+        onView(withClassName(Matchers
+                .equalTo(TimePicker.class.getName())))
+                .perform(PickerActions.setTime(hour, minutes));
+        onView(withId(android.R.id.button1)).perform(click());
+
+        onView(withId(R.id.new_fact_start_button)).perform(click());
     }
 
     @Test
