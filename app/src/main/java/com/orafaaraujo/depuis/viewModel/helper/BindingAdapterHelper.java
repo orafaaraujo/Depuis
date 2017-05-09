@@ -54,7 +54,7 @@ public class BindingAdapterHelper {
 
     @BindingAdapter({"bind:background"})
     public static void setViewGroupBackground(ViewGroup viewGroup, int resource) {
-        viewGroup.setBackgroundResource(resource);
+        viewGroup.setBackgroundColor(resource);
     }
 
     @BindingAdapter({"bind:source"})
