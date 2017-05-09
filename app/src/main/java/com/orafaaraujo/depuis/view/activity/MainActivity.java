@@ -51,19 +51,19 @@ public class MainActivity extends AppCompatActivity {
 
     private void handlerCloseFact(FactTO factTO) {
         if (factTO.fact().endTime() == -1) {
-            showDialog(factTO.fact());
+            showDialog(factTO);
         } else {
             Snackbar.make(findViewById(R.id.main_recycler_fact),
                     R.string.fact_close_snack_bar_message, Snackbar.LENGTH_SHORT).show();
         }
     }
 
-    private void showDialog(Fact fact) {
+    private void showDialog(FactTO factTO) {
         AlertDialog.Builder builder = new AlertDialog.Builder(this, R.style.MyAlertDialogStyle);
         builder.setTitle(R.string.fact_close_title);
         builder.setMessage(R.string.fact_close_message);
         builder.setPositiveButton(android.R.string.yes,
-                (dialog, which) -> mMainViewModel.closeFact(fact));
+                (dialog, which) -> mMainViewModel.closeFact(factTO));
         builder.setNegativeButton(android.R.string.no, (dialog, which) -> dialog.dismiss());
         builder.show();
     }

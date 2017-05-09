@@ -112,19 +112,20 @@ public class MainViewModel extends BaseObservable {
     /**
      * Update on database a endtime of a Fact.
      *
-     * @param fact Fact to be copied to a new one (because is immutable) and save on database.
+     * @param factTO Fact to be copied to a new one (because is immutable) and save on database.
      */
-    public void closeFact(Fact fact) {
+    public void closeFact(FactTO factTO) {
 
         Fact closedFact = Fact.builder()
-                .setId(fact.id())
-                .setStartTime(fact.startTime())
-                .setTitle(fact.title())
-                .setComment(fact.title())
+                .setId(factTO.fact().id())
+                .setStartTime(factTO.fact().startTime())
+                .setTitle(factTO.fact().title())
+                .setComment(factTO.fact().title())
                 .setEndTime(new Date().getTime())
                 .build();
 
         mDatabase.updateFact(closedFact);
+        mAdapter.notifyClosedFact(factTO.position(), closedFact);
     }
 
 }

@@ -37,6 +37,8 @@ public class FactViewModel extends BaseObservable {
     @Inject
     RxBus mRxBus;
 
+    private int mPosition;
+
     private Fact mFact;
 
     @Inject
@@ -45,6 +47,10 @@ public class FactViewModel extends BaseObservable {
 
     public void setFact(Fact fact) {
         mFact = fact;
+    }
+
+    public void setPosition(int position) {
+        mPosition = position;
     }
 
     public String getFactTitle() {
@@ -72,7 +78,7 @@ public class FactViewModel extends BaseObservable {
                 mRxBus.sendEvent(
                         FactTO.builder()
                                 .setFact(mFact)
-                                .setPosition(0)
+                                .setPosition(mPosition)
                                 .setDelete(false)
                                 .setClose(true)
                                 .build());
