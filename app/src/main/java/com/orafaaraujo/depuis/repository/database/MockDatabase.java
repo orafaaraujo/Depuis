@@ -12,6 +12,7 @@ import java.util.Locale;
 import java.util.Optional;
 
 import io.reactivex.Observable;
+import io.reactivex.Single;
 
 /**
  * Created by rafael on 20/01/17.
@@ -60,6 +61,28 @@ public class MockDatabase implements FactDatabase {
         mFacts.add(fact);
     }
 
+    @Override
+    public void updateFact(Fact fact) {
+
+        Single<Integer> integerSingle = Observable
+                .range(0, mFacts.size())
+                .filter(i -> mFacts.get(i).id() == fact.id())
+                .firstOrError();
+
+        integerSingle.blockingGet();
+
+        int index = 0;
+        for (int i = 0; i < mFacts.size(); i++) {
+            if (mFacts.get(i).id() == fact.id()) {
+                index = i;
+                break;
+            }
+        }
+
+        mFacts.remove(index);
+        mFacts.add(index, fact);
+    }
+
     @Nullable
     @Override
     public Fact findFact(Fact fact) {
@@ -72,7 +95,7 @@ public class MockDatabase implements FactDatabase {
         if (first.isPresent()) {
             return first.get();
         } else {
-            return  null;
+            return null;
         }
     }
 

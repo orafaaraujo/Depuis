@@ -20,6 +20,11 @@ public interface FactDatabase {
     void saveFact(Fact fact);
 
     /**
+     * Fact that need to be update.
+     */
+    void updateFact(Fact fact);
+
+    /**
      * Get the fact in parameter (using the _ID).
      * * @return Fact founded in Database. Otherwise, return a null object.
      */
