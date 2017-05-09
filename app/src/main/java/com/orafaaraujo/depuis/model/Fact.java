@@ -27,7 +27,7 @@ public abstract class Fact  {
 
         public abstract Builder setId(int id);
 
-        public abstract Builder setStartTime(long timestamp);
+        public abstract Builder setStartTime(long startTime);
 
         public abstract Builder setTitle(String title);
 
