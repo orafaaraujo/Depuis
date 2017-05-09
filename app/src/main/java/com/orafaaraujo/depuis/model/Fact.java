@@ -6,9 +6,9 @@ import com.google.auto.value.AutoValue;
  * Created by rafael on 18/01/17.
  */
 @AutoValue
-public abstract class Fact  {
+public abstract class Fact {
 
-    public abstract int id();
+    public abstract long id();
 
     public abstract long startTime();
 
@@ -24,8 +24,7 @@ public abstract class Fact  {
 
     @AutoValue.Builder
     public abstract static class Builder {
-
-        public abstract Builder setId(int id);
+        public abstract Builder setId(long id);
 
         public abstract Builder setStartTime(long startTime);
 

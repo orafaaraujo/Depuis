@@ -11,6 +11,7 @@ import android.view.View;
 import com.orafaaraujo.depuis.R;
 import com.orafaaraujo.depuis.helper.DateTimeHelper;
 import com.orafaaraujo.depuis.helper.RxBus;
+import com.orafaaraujo.depuis.helper.buses.FactTO;
 import com.orafaaraujo.depuis.helper.buses.NewFactFeedbackTO;
 import com.orafaaraujo.depuis.model.Fact;
 import com.orafaaraujo.depuis.repository.database.FactDatabase;
@@ -72,36 +73,56 @@ public class NewFactViewModel extends BaseObservable {
 
     private void saveNewFact() {
         if (mTextIsFilled) {
-            mDatabase.saveFact(createFact());
+            long factId = mDatabase.saveFact(createFact());
+            newFaceSuccessFeedback(factId);
+        } else {
+            newFaceFailureFeedback();
         }
-        validateFact();
     }
 
     private Fact createFact() {
 
         return Fact.builder()
-                .setId(0) // Will be replaced by Database.
+                .setId(-1) // Will be replaced by Database.
+                .setStartTime(mMilliseconds)
                 .setTitle(titleFact.get())
                 .setComment(commentFact.get())
                 .setEndTime(-1)
-                .setStartTime(mMilliseconds)
                 .build();
     }
 
-    private void validateFact() {
-        if (mTextIsFilled) {
-            Timber.i("Fact complete");
-            mRxBus.sendEvent(NewFactFeedbackTO.builder()
-                    .setSuccess(true)
-                    .setMessage(mContext.getString(R.string.new_fact_success))
-                    .build());
-        } else {
-            Timber.i("Title not filled");
-            mRxBus.sendEvent(NewFactFeedbackTO.builder()
-                    .setSuccess(false)
-                    .setMessage(mContext.getString(R.string.new_fact_failure_title))
-                    .build());
-        }
+    private void newFaceSuccessFeedback(long factId) {
+
+        Timber.i("Fact complete");
+
+        mRxBus.sendEvent(NewFactFeedbackTO.builder()
+                .setSuccess(true)
+                .setMessage(mContext.getString(R.string.new_fact_success))
+                .build());
+
+        Fact savedFact = Fact.builder()
+                .setId(factId)
+                .setStartTime(0) // Ignored field
+                .setTitle("") // Ignored field
+                .setComment("") // Ignored field
+                .setEndTime(0) // Ignored field
+                .build();
+
+        mRxBus.sendEvent(FactTO.builder()
+                .setFact(savedFact)
+                .setNewFact(true)
+                .setDelete(false)
+                .setClose(false)
+                .setPosition(0)
+                .build());
+    }
+
+    private void newFaceFailureFeedback() {
+        Timber.i("Title not filled");
+        mRxBus.sendEvent(NewFactFeedbackTO.builder()
+                .setSuccess(false)
+                .setMessage(mContext.getString(R.string.new_fact_failure_title))
+                .build());
     }
 
     public TextWatcher getWatcher() {

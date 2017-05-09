@@ -57,8 +57,9 @@ public class MockDatabase implements FactDatabase {
     }
 
     @Override
-    public void saveFact(Fact fact) {
+    public long saveFact(Fact fact) {
         mFacts.add(fact);
+        return mFacts.size() - 1;
     }
 
     @Override
@@ -85,11 +86,11 @@ public class MockDatabase implements FactDatabase {
 
     @Nullable
     @Override
-    public Fact findFact(Fact fact) {
+    public Fact findFact(long factId) {
 
         Optional<Fact> first = mFacts
                 .stream()
-                .filter(fact1 -> fact1.id() == fact.id())
+                .filter(fact -> fact.id() == factId)
                 .findFirst();
 
         if (first.isPresent()) {

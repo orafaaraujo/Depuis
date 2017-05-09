@@ -3,6 +3,7 @@ package com.orafaaraujo.depuis.viewModel.helper;
 import android.databinding.BindingAdapter;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.TextInputEditText;
+import android.support.v4.content.ContextCompat;
 import android.support.v7.widget.DividerItemDecoration;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.helper.ItemTouchHelper;
@@ -54,7 +55,7 @@ public class BindingAdapterHelper {
 
     @BindingAdapter({"bind:background"})
     public static void setViewGroupBackground(ViewGroup viewGroup, int resource) {
-        viewGroup.setBackgroundResource(resource);
+        viewGroup.setBackgroundColor(ContextCompat.getColor(viewGroup.getContext(), resource));
     }
 
     @BindingAdapter({"bind:source"})

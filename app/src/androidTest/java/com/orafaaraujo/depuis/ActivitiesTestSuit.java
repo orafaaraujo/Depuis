@@ -2,6 +2,7 @@ package com.orafaaraujo.depuis;
 
 import com.orafaaraujo.depuis.activities.MainActivityTest;
 import com.orafaaraujo.depuis.activities.NewFactActivityTest;
+import com.orafaaraujo.depuis.flows.FactFlowTest;
 
 import org.junit.runner.RunWith;
 import org.junit.runners.Suite;
@@ -10,7 +11,7 @@ import org.junit.runners.Suite;
 @Suite.SuiteClasses({
         MainActivityTest.class,
         NewFactActivityTest.class,
-        FactFlow.class
+        FactFlowTest.class
 })
 public class ActivitiesTestSuit {
 }

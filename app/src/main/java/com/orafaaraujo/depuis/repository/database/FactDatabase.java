@@ -16,8 +16,10 @@ public interface FactDatabase {
 
     /**
      * Fact that need to be saved.
+     *
+     * @return The id of fact inserted.
      */
-    void saveFact(Fact fact);
+    long saveFact(Fact fact);
 
     /**
      * Fact that need to be update.
@@ -29,7 +31,7 @@ public interface FactDatabase {
      * * @return Fact founded in Database. Otherwise, return a null object.
      */
     @Nullable
-    Fact findFact(Fact fact);
+    Fact findFact(long FactId);
 
     /**
      * Get all Facts in Database. Must return a empty List if there's no records.

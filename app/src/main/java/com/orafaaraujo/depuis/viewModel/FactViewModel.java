@@ -79,8 +79,9 @@ public class FactViewModel extends BaseObservable {
                         FactTO.builder()
                                 .setFact(mFact)
                                 .setPosition(mPosition)
-                                .setDelete(false)
                                 .setClose(true)
+                                .setNewFact(false)
+                                .setDelete(false)
                                 .build());
     }
 
