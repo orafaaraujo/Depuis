@@ -6,4 +6,5 @@
 
     <color name="main_delete_undo">#59ACF7</color>
     <color name="main_close_fact">#8F98A6</color>
+    <color name="main_close_fact_background">#F7F6F6</color>
 </resources>

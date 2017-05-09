@@ -7,6 +7,8 @@ import android.support.v7.widget.DividerItemDecoration;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.helper.ItemTouchHelper;
 import android.text.TextWatcher;
+import android.view.ViewGroup;
+import android.widget.ImageButton;
 
 public class BindingAdapterHelper {
 
@@ -48,6 +50,16 @@ public class BindingAdapterHelper {
         } else {
             fab.hide();
         }
+    }
+
+    @BindingAdapter({"bind:background"})
+    public static void setViewGroupBackground(ViewGroup viewGroup, int resource) {
+        viewGroup.setBackgroundResource(resource);
+    }
+
+    @BindingAdapter({"bind:source"})
+    public static void setImateButtonSource(ImageButton imageButton, int resource) {
+        imageButton.setImageResource(resource);
     }
 
 }

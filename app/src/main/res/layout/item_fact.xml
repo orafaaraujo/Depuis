@@ -17,7 +17,7 @@
         android:id="@+id/item_fact_layout"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:background="@android:color/white"
+        tools:background="@{viewModel.cardClosedBackground}"
         android:padding="16dp">
 
         <TextView
@@ -47,7 +47,7 @@
             android:gravity="center"
             android:padding="4dp"
             android:onClick="@{viewModel.onCloseFact}"
-            app:srcCompat="@drawable/ic_close_22dp"
+            tools:source="@{viewModel.cardClosedIcon}"
             tools:targetApi="lollipop" />
 
         <TextView
@@ -101,7 +101,7 @@
             android:paddingLeft="4dp"
             android:paddingRight="4dp"
             android:text="@string/main_button_share"
-            android:textColor="@color/main_primary_dark"
+            android:textColor="@color/main_primary"
             android:textSize="12sp" />
 
     </RelativeLayout>

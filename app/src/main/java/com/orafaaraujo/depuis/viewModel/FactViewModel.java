@@ -4,6 +4,7 @@ import android.content.Context;
 import android.databinding.BaseObservable;
 import android.view.View;
 
+import com.orafaaraujo.depuis.R;
 import com.orafaaraujo.depuis.helper.DateTimeHelper;
 import com.orafaaraujo.depuis.helper.ElapsedDateTimeHelper;
 import com.orafaaraujo.depuis.helper.RxBus;
@@ -76,5 +77,23 @@ public class FactViewModel extends BaseObservable {
                                 .setClose(true)
                                 .build());
     }
+
+    public boolean alreadyClosed() {
+        return mFact.endTime() == -1;
+    }
+
+    public int getCardClosedBackground() {
+        return alreadyClosed() ?
+                android.R.color.white :
+                R.color.main_close_fact_background;
+    }
+
+    public int getCardClosedIcon() {
+        return alreadyClosed() ?
+                R.drawable.ic_close_22dp :
+                R.drawable.ic_lock_22dp;
+    }
+
+
 
 }
