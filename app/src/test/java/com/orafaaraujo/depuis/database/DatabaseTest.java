@@ -6,6 +6,8 @@ import static org.junit.Assert.assertNotNull;
 import static org.junit.Assert.assertNull;
 import static org.junit.Assert.assertTrue;
 
+import android.text.TextUtils;
+
 import com.orafaaraujo.depuis.BuildConfig;
 import com.orafaaraujo.depuis.model.Fact;
 import com.orafaaraujo.depuis.repository.database.FactDatabase;
@@ -56,6 +58,38 @@ public class DatabaseTest {
     }
 
     @Test
+    public void update() {
+
+        Fact fact = provideFact();
+        mDatabase.saveFact(fact);
+
+        Fact savedFact = mDatabase.findFact(fact);
+        assertNotNull(savedFact);
+
+        Fact changeFact = Fact.builder()
+                .setId(savedFact.id())
+                .setStartTime(savedFact.startTime() + 1000)
+                .setTitle("Updated!")
+                .setComment("Updated!")
+                .setEndTime(savedFact.endTime() + 1000)
+                .build();
+        mDatabase.updateFact(changeFact);
+
+        Fact updateFact = mDatabase.findFact(changeFact);
+        assertNotNull(updateFact);
+
+        assertFalse(updateFact.startTime() == savedFact.startTime());
+        assertFalse(TextUtils.equals(updateFact.title(), savedFact.title()));
+        assertFalse(TextUtils.equals(updateFact.comment(), savedFact.comment()));
+        assertFalse(updateFact.endTime() == savedFact.endTime());
+
+        assertTrue(updateFact.startTime() == changeFact.startTime());
+        assertTrue(TextUtils.equals(updateFact.title(), changeFact.title()));
+        assertTrue(TextUtils.equals(updateFact.comment(), changeFact.comment()));
+        assertTrue(updateFact.endTime() == changeFact.endTime());
+    }
+
+    @Test
     public void findOne() throws Exception {
 
         Fact fact = provideFact();
@@ -63,10 +97,8 @@ public class DatabaseTest {
         mDatabase.saveFact(fact);
 
         Fact savedFact = mDatabase.findFact(fact);
-
         assertNotNull(savedFact);
         assertEquals(fact, savedFact);
-
     }
 
     @Test
@@ -120,12 +152,15 @@ public class DatabaseTest {
     }
 
     private Fact provideFact() {
+        long startTime = mCalendar.getTimeInMillis();
+        long endTime = startTime + 1000;
+
         return Fact.builder()
                 .setId(1)
-                .setStartTime(mCalendar.getTimeInMillis())
+                .setStartTime(startTime)
                 .setTitle("new fact")
                 .setComment("A longe time ago...")
-                .setEndTime(0)
+                .setEndTime(endTime)
                 .build();
     }
 }
