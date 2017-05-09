@@ -37,11 +37,18 @@ public class MainActivity extends AppCompatActivity {
         binding.setViewModel(mMainViewModel);
         setSupportActionBar(binding.toolbar);
 
-        mRxBus.getFactEventsToDelete()
+        mRxBus.getNewFactEvents()
+                .subscribe(this::handleNewFactAdded);
+
+        mRxBus.getDeletedFactEvents()
                 .subscribe(this::handlerDeleteFact, Timber::e);
 
-        mRxBus.getFactEventsToClose()
+        mRxBus.getClosedFactEvents()
                 .subscribe(this::handlerCloseFact, Timber::e);
+    }
+
+    private void handleNewFactAdded(FactTO factTO) {
+        mMainViewModel.newFactAdded(factTO);
     }
 
     private void handlerDeleteFact(FactTO factTO) {

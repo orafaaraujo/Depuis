@@ -105,7 +105,7 @@ public class MainViewModel extends BaseObservable {
     public void undoDeleteFact() {
         final FactTO factTO = mDeleteFacts.peek();
         mUndoDelete.add(factTO);
-        mAdapter.insertFact(factTO);
+        mAdapter.insertFact(factTO.position(), factTO.fact());
         mLayoutManager.scrollToPosition(factTO.position());
     }
 
@@ -126,6 +126,12 @@ public class MainViewModel extends BaseObservable {
 
         mDatabase.updateFact(closedFact);
         mAdapter.notifyClosedFact(factTO.position(), closedFact);
+    }
+
+    public void newFactAdded(FactTO factTO) {
+        Fact foundFact = mDatabase.findFact(factTO.fact().id());
+        mAdapter.insertFact(0, foundFact);
+
     }
 
 }

@@ -73,10 +73,10 @@ public class FactAdapter extends RecyclerView.Adapter<BindingHolder> {
         notifyDataSetChanged();
     }
 
-    public void insertFact(FactTO factTO) {
-        mFacts.add(factTO.position(), factTO.fact());
-        notifyItemInserted(factTO.position());
-        notifyItemRangeChanged(factTO.position(), mFacts.size());
+    public void insertFact(int position, Fact fact) {
+        mFacts.add(position, fact);
+        notifyItemInserted(position);
+        notifyItemRangeChanged(position, mFacts.size());
     }
 
     public void onItemDismiss(int position) {
@@ -90,6 +90,7 @@ public class FactAdapter extends RecyclerView.Adapter<BindingHolder> {
                         .setFact(mFacts.get(position))
                         .setPosition(position)
                         .setDelete(true)
+                        .setNewFact(false)
                         .setClose(false)
                         .build());
     }
