@@ -120,7 +120,7 @@ public class MainViewModel extends BaseObservable {
                 .setId(factTO.fact().id())
                 .setStartTime(factTO.fact().startTime())
                 .setTitle(factTO.fact().title())
-                .setComment(factTO.fact().title())
+                .setComment(factTO.fact().comment())
                 .setEndTime(new Date().getTime())
                 .build();
 
@@ -131,6 +131,7 @@ public class MainViewModel extends BaseObservable {
     public void newFactAdded(FactTO factTO) {
         Fact foundFact = mDatabase.findFact(factTO.fact().id());
         mAdapter.insertFact(0, foundFact);
+        mLayoutManager.scrollToPosition(0);
 
     }
 
