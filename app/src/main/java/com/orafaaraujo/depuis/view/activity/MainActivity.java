@@ -38,13 +38,15 @@ public class MainActivity extends AppCompatActivity {
         setSupportActionBar(binding.toolbar);
 
         mRxBus.getNewFactEvents()
-                .subscribe(this::handleNewFactAdded);
+                .subscribe(this::handleNewFactAdded, Timber::e);
 
         mRxBus.getDeletedFactEvents()
                 .subscribe(this::handlerDeleteFact, Timber::e);
 
         mRxBus.getClosedFactEvents()
                 .subscribe(this::handlerCloseFact, Timber::e);
+
+        mMainViewModel.fetchFacts();
     }
 
     private void handleNewFactAdded(FactTO factTO) {
@@ -89,9 +91,4 @@ public class MainActivity extends AppCompatActivity {
         snackbar.show();
     }
 
-    @Override
-    protected void onResume() {
-        super.onResume();
-        mMainViewModel.fetchFacts();
-    }
 }
