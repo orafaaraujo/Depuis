@@ -1,6 +1,8 @@
 package com.orafaaraujo.depuis.matchers;
 
 import android.graphics.drawable.ColorDrawable;
+import android.os.Build;
+import android.support.annotation.RequiresApi;
 import android.support.test.espresso.matcher.BoundedMatcher;
 import android.support.test.internal.util.Checks;
 import android.view.View;
@@ -25,10 +27,11 @@ public class ViewMatchers {
 
         return new BoundedMatcher<View, View>(View.class) {
 
+            @RequiresApi(api = Build.VERSION_CODES.M)
             @Override
             public boolean matchesSafely(View target) {
-                ColorDrawable background = (ColorDrawable) target.getBackground();
-                return resource == background.getColor();
+                int color = ((ColorDrawable) target.getBackground().getCurrent()).getColor();
+                return color == target.getResources().getColor(resource, null);
             }
 
             @Override
