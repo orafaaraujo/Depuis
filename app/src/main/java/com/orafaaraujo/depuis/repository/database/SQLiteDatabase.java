@@ -39,14 +39,14 @@ public class SQLiteDatabase extends SQLiteOpenHelper implements FactDatabase {
     }
 
     @Override
-    public void saveFact(Fact fact) {
+    public long saveFact(Fact fact) {
         final ContentValues values = new ContentValues();
         values.put(FactContract.FactEntry.COLUMN_NAME_START_TIME, fact.startTime());
         values.put(FactContract.FactEntry.COLUMN_NAME_TITLE, fact.title());
         values.put(FactContract.FactEntry.COLUMN_NAME_COMMENT, fact.comment());
         values.put(FactContract.FactEntry.COLUMN_NAME_END_TIME, fact.endTime());
 
-        getWritableDatabase().insert(FactContract.FactEntry.TABLE_NAME, null, values);
+        return getWritableDatabase().insert(FactContract.FactEntry.TABLE_NAME, null, values);
     }
 
     @Override
@@ -67,15 +67,16 @@ public class SQLiteDatabase extends SQLiteOpenHelper implements FactDatabase {
 
     @Nullable
     @Override
-    public Fact findFact(Fact fact) {
+    public Fact findFact(long factId) {
 
         Fact returnFact = null;
 
         final String where = FactContract.FactEntry._ID + " = ?";
-        final String[] whereArgs = {String.valueOf(fact.id())};
+        final String[] whereArgs = {String.valueOf(factId)};
         final Cursor cursor = getReadableDatabase()
                 .query(FactContract.FactEntry.TABLE_NAME, null, where, whereArgs, null, null, null);
         while (cursor.moveToNext()) {
+
 
             returnFact = Fact.builder()
                     .setId(cursor.getInt(0))
