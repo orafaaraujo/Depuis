@@ -10,6 +10,8 @@ public abstract class FactTO {
 
     public abstract int position();
 
+    public abstract boolean newFact();
+
     public abstract boolean delete();
 
     public abstract boolean close();
@@ -24,6 +26,8 @@ public abstract class FactTO {
         public abstract Builder setFact(Fact fact);
 
         public abstract Builder setPosition(int position);
+
+        public abstract Builder setNewFact(boolean newFact);
 
         public abstract Builder setDelete(boolean delete);
 
