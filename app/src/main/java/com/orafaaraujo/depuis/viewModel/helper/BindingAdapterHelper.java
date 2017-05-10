@@ -54,13 +54,12 @@ public class BindingAdapterHelper {
     }
 
     @BindingAdapter({"bind:background"})
-    public static void setViewGroupBackground(ViewGroup viewGroup, int resource) {
+    public static void setViewGroupBackground(final ViewGroup viewGroup, final int resource) {
         viewGroup.setBackgroundColor(ContextCompat.getColor(viewGroup.getContext(), resource));
     }
 
     @BindingAdapter({"bind:source"})
-    public static void setImateButtonSource(ImageButton imageButton, int resource) {
+    public static void setImageButtonSource(final ImageButton imageButton, final int resource) {
         imageButton.setImageResource(resource);
     }
-
 }
