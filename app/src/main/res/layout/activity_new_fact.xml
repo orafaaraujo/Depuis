@@ -64,6 +64,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:hint="@string/new_fact_title"
+                    android:inputType="textAutoCorrect|textCapSentences|textAutoComplete"
                     android:maxLines="2"
                     android:text="@={viewModel.titleFact}"
                     tools:watcher="@{viewModel.watcher}" />
@@ -81,6 +82,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:hint="@string/new_fact_comment"
+                    android:inputType="textAutoCorrect|textCapSentences|textLongMessage"
                     android:maxLines="3"
                     android:text="@={viewModel.commentFact}" />
 
