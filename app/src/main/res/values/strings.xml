@@ -7,6 +7,10 @@
     <string name="fact_share_message">Share your memory</string>
     <string name="fact_share_fact" formatted="false">Has been %1s that %2s (Depuis application by Android)</string>
 
+    <string name="main_empty_list_title">No fact saved</string>
+    <string name="main_empty_list_subtitle">Start one fact right now</string>
+    <string name="main_empty_list_new_button">Start new fact</string>
+
     <string name="main_deleted">Removing %s?</string>
     <string name="main_deleted_undo">Undo</string>
 

@@ -54,7 +54,7 @@ public class MainActivity extends AppCompatActivity {
     }
 
     private void handlerDeleteFact(FactTO factTO) {
-        mMainViewModel.setFactTO(factTO);
+        mMainViewModel.setFactToDelete(factTO);
         showSnackBar(factTO.fact());
     }
 
@@ -91,4 +91,9 @@ public class MainActivity extends AppCompatActivity {
         snackbar.show();
     }
 
+    @Override
+    protected void onResume() {
+        super.onResume();
+        mMainViewModel.updateFields();
+    }
 }

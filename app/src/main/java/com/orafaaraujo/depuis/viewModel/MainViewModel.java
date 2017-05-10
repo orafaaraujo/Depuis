@@ -44,6 +44,10 @@ public class MainViewModel extends BaseObservable {
 
     public ObservableField<Boolean> mShow = new ObservableField<>(true);
 
+    public ObservableField<Boolean> mListVisibility = new ObservableField<>(true);
+
+    public ObservableField<Boolean> mEmptyVisibility = new ObservableField<>(true);
+
     private LinkedList<FactTO> mDeleteFacts = new LinkedList<>();
 
     private LinkedList<FactTO> mUndoDelete = new LinkedList<>();
@@ -87,7 +91,7 @@ public class MainViewModel extends BaseObservable {
         return v -> mContext.startActivity(new Intent(mContext, NewFactActivity.class));
     }
 
-    public void setFactTO(FactTO factTO) {
+    public void setFactToDelete(FactTO factTO) {
         mDeleteFacts.add(factTO);
     }
 
@@ -98,6 +102,7 @@ public class MainViewModel extends BaseObservable {
         } else {
             if (factTO != null) {
                 mDatabase.deleteFact(factTO.fact());
+                updateFields();
             }
         }
     }
@@ -132,7 +137,11 @@ public class MainViewModel extends BaseObservable {
         Fact foundFact = mDatabase.findFact(factTO.fact().id());
         mAdapter.insertFact(0, foundFact);
         mLayoutManager.scrollToPosition(0);
-
     }
 
+    public void updateFields() {
+        mShow.set(mAdapter.getItemCount() > 0);
+        mListVisibility.set(mAdapter.getItemCount() > 0);
+        mEmptyVisibility.set(mAdapter.getItemCount() <= 0);
+    }
 }

@@ -5,6 +5,8 @@
 
     <data>
 
+        <import type="android.view.View" />
+
         <variable
             name="viewModel"
             type="com.orafaaraujo.depuis.viewModel.MainViewModel" />
@@ -34,6 +36,7 @@
             android:id="@+id/main_recycler_fact"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
+            android:visibility="@{viewModel.mListVisibility ? View.VISIBLE : View.INVISIBLE}"
             application:layout_behavior="@string/appbar_scrolling_view_behavior"
             tools:adapter="@{viewModel.adapter}"
             tools:divider_item="@{viewModel.dividerItemDecoration}"
@@ -41,6 +44,11 @@
             tools:layout_manager="@{viewModel.layoutManager}"
             tools:on_scroll_listener="@{viewModel.scrollListener}" />
 
+        <include
+            android:id="@+id/main_empty_list_layout"
+            layout="@layout/activity_main_empty_list"
+            android:visibility="@{viewModel.mEmptyVisibility ? View.VISIBLE : View.INVISIBLE}"
+            tools:click="@{viewModel.fabClick}" />
 
         <android.support.design.widget.FloatingActionButton
             android:id="@+id/main_fab_new_fact"
