@@ -43,6 +43,7 @@
             android:elevation="8dp"
             android:onClick="@{click}"
             android:text="@string/main_empty_list_new_button"
+            android:textColor="@color/main_accent"
             tools:targetApi="lollipop" />
 
     </LinearLayout>
