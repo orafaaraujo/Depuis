@@ -101,6 +101,12 @@ public class FactViewModel extends BaseObservable {
                 R.drawable.ic_lock_22dp;
     }
 
+    public int getBeginIcon() {
+        return R.drawable.ic_access_time_22dp;
+    }
 
+    public int getShareIcon() {
+        return R.drawable.ic_share_18dp;
+    }
 
 }

@@ -16,8 +16,8 @@
         android:id="@+id/item_fact_layout"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        tools:background="@{viewModel.cardClosedBackground}"
-        android:padding="16dp">
+        android:padding="16dp"
+        tools:background="@{viewModel.cardClosedBackground}">
 
         <TextView
             android:id="@+id/item_fact_begin"
@@ -26,13 +26,12 @@
             android:layout_alignParentLeft="true"
             android:layout_alignParentStart="true"
             android:layout_alignParentTop="true"
-            android:drawableLeft="@drawable/ic_access_time_22dp"
             android:drawablePadding="4dp"
-            android:drawableStart="@drawable/ic_access_time_22dp"
             android:gravity="center"
             android:text="@{viewModel.factBegin}"
             android:textSize="12sp"
-            tools:text="12/12/2017 - 20:20" />
+            tools:text="12/12/2017 - 20:20"
+            tools:text_icon="@{viewModel.beginIcon}" />
 
         <ImageButton
             android:id="@+id/item_fact_close"
@@ -41,11 +40,11 @@
             android:layout_alignParentEnd="true"
             android:layout_alignParentRight="true"
             android:layout_alignParentTop="true"
-            android:background="?android:selectableItemBackgroundBorderless"
+            android:background="@drawable/white_button"
             android:contentDescription="@string/main_stop"
             android:gravity="center"
-            android:padding="4dp"
             android:onClick="@{viewModel.onCloseFact}"
+            android:padding="4dp"
             tools:source="@{viewModel.cardClosedIcon}"
             tools:targetApi="lollipop" />
 
@@ -93,15 +92,14 @@
             android:layout_alignParentRight="true"
             android:layout_below="@id/item_fact_comment"
             android:background="?android:selectableItemBackground"
-            android:drawableLeft="@drawable/ic_share_18dp"
-            android:drawableStart="@drawable/ic_share_18dp"
             android:gravity="center"
-            android:onClick="@{viewModel.onClickShare}"
+            android:onClick="@{viewModel.onClickShare()}"
             android:paddingLeft="4dp"
             android:paddingRight="4dp"
             android:text="@string/main_button_share"
             android:textColor="@color/main_primary"
-            android:textSize="12sp" />
+            android:textSize="12sp"
+            tools:text_icon="@{viewModel.shareIcon}" />
 
     </RelativeLayout>
 </layout>

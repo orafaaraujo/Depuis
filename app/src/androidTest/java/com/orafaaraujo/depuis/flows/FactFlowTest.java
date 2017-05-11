@@ -9,7 +9,6 @@ import static android.support.test.espresso.assertion.ViewAssertions.matches;
 import static android.support.test.espresso.matcher.RootMatchers.isDialog;
 import static android.support.test.espresso.matcher.ViewMatchers.hasDescendant;
 import static android.support.test.espresso.matcher.ViewMatchers.isClickable;
-import static android.support.test.espresso.matcher.ViewMatchers.isCompletelyDisplayed;
 import static android.support.test.espresso.matcher.ViewMatchers.isDisplayed;
 import static android.support.test.espresso.matcher.ViewMatchers.isEnabled;
 import static android.support.test.espresso.matcher.ViewMatchers.withEffectiveVisibility;
@@ -18,11 +17,10 @@ import static android.support.test.espresso.matcher.ViewMatchers.withText;
 
 import static com.orafaaraujo.depuis.matchers.ViewMatchers.withBackgroundColor;
 
-import static org.hamcrest.Matchers.allOf;
 import static org.hamcrest.Matchers.is;
-import static org.hamcrest.Matchers.not;
 
 import android.content.Context;
+import android.os.Build;
 import android.support.test.InstrumentationRegistry;
 import android.support.test.espresso.contrib.RecyclerViewActions;
 import android.support.test.espresso.matcher.ViewMatchers;
@@ -80,7 +78,7 @@ public class FactFlowTest {
 
         String title = "Lorem";
 
-        onView(ViewMatchers.withId(R.id.main_fab_new_fact))
+        onView(ViewMatchers.withId(R.id.activity_main_empty_list_button))
                 .perform(click());
 
         onView(withId(R.id.new_fact_text_edittext_title))
@@ -92,7 +90,29 @@ public class FactFlowTest {
 
         onView(withId(R.id.main_fab_new_fact))
                 .check(matches(isClickable()))
-                .check(matches(isCompletelyDisplayed()))
+                .check(matches(isDisplayed()))
+                .check(matches(is(isEnabled())));
+
+        onView(withId(R.id.main_recycler_fact))
+                .check(matches(hasDescendant(withText(title))));
+    }
+
+    private void create() {
+        String title = "Lorem";
+
+        onView(ViewMatchers.withId(R.id.activity_main_empty_list_button))
+                .perform(click());
+
+        onView(withId(R.id.new_fact_text_edittext_title))
+                .perform(typeText(title), closeSoftKeyboard())
+                .check(matches(withText(title)));
+
+        onView(withId(R.id.new_fact_start_button))
+                .perform(click());
+
+        onView(withId(R.id.main_fab_new_fact))
+                .check(matches(isClickable()))
+                .check(matches(isDisplayed()))
                 .check(matches(is(isEnabled())));
 
         onView(withId(R.id.main_recycler_fact))
@@ -104,7 +124,7 @@ public class FactFlowTest {
 
         String title = "Lorem";
 
-        onView(withId(R.id.main_fab_new_fact))
+        onView(withId(R.id.activity_main_empty_list_button))
                 .perform(click());
 
         onView(withId(R.id.new_fact_text_edittext_title))
@@ -114,13 +134,18 @@ public class FactFlowTest {
         onView(withId(R.id.new_fact_button_back))
                 .perform(click());
 
-        onView(withId(R.id.main_fab_new_fact))
-                .check(matches(isClickable()))
-                .check(matches(isCompletelyDisplayed()))
+        onView(withId(R.id.activity_main_empty_list_title))
+                .check(matches(isDisplayed()))
                 .check(matches(is(isEnabled())));
 
-        onView(withId(R.id.main_recycler_fact))
-                .check(matches(not(hasDescendant(withText(title)))));
+        onView(withId(R.id.activity_main_empty_list_subtitle))
+                .check(matches(isDisplayed()))
+                .check(matches(is(isEnabled())));
+
+        onView(withId(R.id.activity_main_empty_list_button))
+                .check(matches(isClickable()))
+                .check(matches(isDisplayed()))
+                .check(matches(is(isEnabled())));
 
     }
 
@@ -130,7 +155,7 @@ public class FactFlowTest {
         Context context = InstrumentationRegistry.getTargetContext();
         String title = "Lorem";
 
-        createSuccess();
+        create();
 
         onView(withId(R.id.main_recycler_fact))
                 .check(matches(hasDescendant(withText(title))));
@@ -138,10 +163,8 @@ public class FactFlowTest {
         onView(withId(R.id.main_recycler_fact))
                 .perform(RecyclerViewActions.actionOnItemAtPosition(0, swipeLeft()));
 
-        onView(allOf(
-                withId(android.support.design.R.id.snackbar_text),
-                withText(context.getString(R.string.main_deleted, title))))
-                .check(matches(isDisplayed()));
+        onView(withText(context.getString(R.string.main_deleted, title)))
+                .check(matches(withEffectiveVisibility(ViewMatchers.Visibility.VISIBLE)));
     }
 
     @Test
@@ -150,7 +173,7 @@ public class FactFlowTest {
         Context context = InstrumentationRegistry.getTargetContext();
         String title = "Lorem";
 
-        createSuccess();
+        create();
 
         onView(withId(R.id.main_recycler_fact))
                 .check(matches(hasDescendant(withText(title))));
@@ -158,14 +181,11 @@ public class FactFlowTest {
         onView(withId(R.id.main_recycler_fact))
                 .perform(RecyclerViewActions.actionOnItemAtPosition(0, swipeLeft()));
 
-        onView(allOf(
-                withId(android.support.design.R.id.snackbar_text),
-                withText(context.getString(R.string.main_deleted, title))))
-                .check(matches(isDisplayed()));
+        onView(withText(context.getString(R.string.main_deleted, title)))
+                .check(matches(withEffectiveVisibility(ViewMatchers.Visibility.VISIBLE)));
 
-        onView(allOf(
-                withId(android.support.design.R.id.snackbar_action),
-                withText(context.getString(R.string.main_deleted_undo))))
+        onView(withText(R.string.main_deleted_undo))
+                .check(matches(withEffectiveVisibility(ViewMatchers.Visibility.VISIBLE)))
                 .perform(click());
 
         onView(withId(R.id.main_recycler_fact))
@@ -175,11 +195,13 @@ public class FactFlowTest {
     @Test
     public void createAndCloseFactSuccess() {
 
-        createSuccess();
+        create();
 
-        onView(RecyclerViewMatcher.withRecyclerView(R.id.main_recycler_fact)
-                .atPosition(0))
-                .check(matches(withBackgroundColor(android.R.color.white)));
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
+            onView(RecyclerViewMatcher.withRecyclerView(R.id.main_recycler_fact)
+                    .atPosition(0))
+                    .check(matches(withBackgroundColor(android.R.color.white)));
+        }
 
         onView(withId(R.id.main_recycler_fact))
                 .perform(RecyclerViewActions
@@ -203,19 +225,23 @@ public class FactFlowTest {
                 .check(matches(isDisplayed()))
                 .perform(click());
 
-        onView(RecyclerViewMatcher.withRecyclerView(R.id.main_recycler_fact)
-                .atPosition(0))
-                .check(matches(withBackgroundColor(R.color.main_close_fact_background)));
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
+            onView(RecyclerViewMatcher.withRecyclerView(R.id.main_recycler_fact)
+                    .atPosition(0))
+                    .check(matches(withBackgroundColor(R.color.main_close_fact_background)));
+        }
     }
 
     @Test
     public void createAndCloseFactFailure() {
 
-        createSuccess();
+        create();
 
-        onView(RecyclerViewMatcher.withRecyclerView(R.id.main_recycler_fact)
-                .atPosition(0))
-                .check(matches(withBackgroundColor(android.R.color.white)));
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
+            onView(RecyclerViewMatcher.withRecyclerView(R.id.main_recycler_fact)
+                    .atPosition(0))
+                    .check(matches(withBackgroundColor(android.R.color.white)));
+        }
 
         onView(withId(R.id.main_recycler_fact)).perform(
                 RecyclerViewActions.actionOnItemAtPosition(0, com.orafaaraujo.depuis.matchers
@@ -238,9 +264,11 @@ public class FactFlowTest {
                 .check(matches(isDisplayed()))
                 .perform(click());
 
-        onView(RecyclerViewMatcher.withRecyclerView(R.id.main_recycler_fact)
-                .atPosition(0))
-                .check(matches(withBackgroundColor(android.R.color.white)));
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
+            onView(RecyclerViewMatcher.withRecyclerView(R.id.main_recycler_fact)
+                    .atPosition(0))
+                    .check(matches(withBackgroundColor(android.R.color.white)));
+        }
     }
 
     @Test
@@ -248,13 +276,16 @@ public class FactFlowTest {
 
         createAndCloseFactSuccess();
 
-        onView(RecyclerViewMatcher.withRecyclerView(R.id.main_recycler_fact)
-                .atPosition(0))
-                .check(matches(withBackgroundColor(R.color.main_close_fact_background)));
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
+            onView(RecyclerViewMatcher.withRecyclerView(R.id.main_recycler_fact)
+                    .atPosition(0))
+                    .check(matches(withBackgroundColor(R.color.main_close_fact_background)));
+        }
 
-        onView(withId(R.id.main_recycler_fact)).perform(
-                RecyclerViewActions.actionOnItemAtPosition(0, com.orafaaraujo.depuis.matchers
-                        .ViewMatchers.clickChildViewWithId(R.id.item_fact_close)));
+        onView(withId(R.id.main_recycler_fact))
+                .perform(RecyclerViewActions
+                        .actionOnItemAtPosition(0, com.orafaaraujo.depuis.matchers
+                                .ViewMatchers.clickChildViewWithId(R.id.item_fact_close)));
 
         onView(withText(R.string.fact_close_snack_bar_message))
                 .check(matches(withEffectiveVisibility(ViewMatchers.Visibility.VISIBLE)));

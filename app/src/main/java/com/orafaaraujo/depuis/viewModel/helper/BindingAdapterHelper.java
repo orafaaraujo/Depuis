@@ -2,6 +2,8 @@ package com.orafaaraujo.depuis.viewModel.helper;
 
 import android.databinding.BindingAdapter;
 import android.graphics.drawable.Drawable;
+import android.support.annotation.ColorRes;
+import android.support.annotation.DrawableRes;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.TextInputEditText;
 import android.support.v4.content.ContextCompat;
@@ -57,17 +59,19 @@ public class BindingAdapterHelper {
     }
 
     @BindingAdapter({"bind:background"})
-    public static void setViewGroupBackground(final ViewGroup viewGroup, final int resource) {
+    public static void setViewGroupBackground(final ViewGroup viewGroup,
+            @ColorRes final int resource) {
         viewGroup.setBackgroundColor(ContextCompat.getColor(viewGroup.getContext(), resource));
     }
 
     @BindingAdapter({"bind:source"})
-    public static void setImageButtonSource(final ImageButton imageButton, final int resource) {
+    public static void setImageButtonSource(final ImageButton imageButton,
+            @DrawableRes final int resource) {
         imageButton.setImageResource(resource);
     }
 
     @BindingAdapter({"bind:text_icon"})
-    public static void setSvgTextView(final TextView textView, final int resource) {
+    public static void setSvgTextView(final TextView textView, @DrawableRes final int resource) {
         Drawable drawableLeft = AppCompatResources.getDrawable(textView.getContext(), resource);
         textView.setCompoundDrawablesWithIntrinsicBounds(drawableLeft, null, null, null);
     }
