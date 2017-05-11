@@ -13,7 +13,7 @@
     <color name="blue_button_text">#FFFFFF</color>
 
     <color name="white_button">#FFFFFF</color>
-    <color name="white_button_pressed">#BFBDBD</color>
+    <color name="white_button_pressed">#F79A93</color>
     <color name="red_border">#EF4135</color>
 
     <color name="button_text_color">#686565</color>
