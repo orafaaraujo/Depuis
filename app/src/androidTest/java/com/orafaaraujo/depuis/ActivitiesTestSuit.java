@@ -9,9 +9,9 @@ import org.junit.runners.Suite;
 
 @RunWith(Suite.class)
 @Suite.SuiteClasses({
+        FactFlowTest.class,
         MainActivityTest.class,
-        NewFactActivityTest.class,
-        FactFlowTest.class
+        NewFactActivityTest.class
 })
 public class ActivitiesTestSuit {
 }

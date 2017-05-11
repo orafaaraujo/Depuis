@@ -7,18 +7,18 @@ import static android.support.test.espresso.action.ViewActions.typeText;
 import static android.support.test.espresso.assertion.ViewAssertions.matches;
 import static android.support.test.espresso.matcher.ViewMatchers.isClickable;
 import static android.support.test.espresso.matcher.ViewMatchers.isCompletelyDisplayed;
-import static android.support.test.espresso.matcher.ViewMatchers.isDisplayed;
 import static android.support.test.espresso.matcher.ViewMatchers.isEnabled;
 import static android.support.test.espresso.matcher.ViewMatchers.withClassName;
+import static android.support.test.espresso.matcher.ViewMatchers.withEffectiveVisibility;
 import static android.support.test.espresso.matcher.ViewMatchers.withId;
 import static android.support.test.espresso.matcher.ViewMatchers.withText;
 
-import static org.hamcrest.Matchers.allOf;
 import static org.hamcrest.Matchers.is;
 
 import android.content.Context;
 import android.support.test.InstrumentationRegistry;
 import android.support.test.espresso.contrib.PickerActions;
+import android.support.test.espresso.matcher.ViewMatchers;
 import android.support.test.filters.LargeTest;
 import android.support.test.filters.SdkSuppress;
 import android.support.test.rule.ActivityTestRule;
@@ -230,9 +230,7 @@ public class NewFactActivityTest {
         onView(withId(R.id.new_fact_start_button))
                 .perform(click());
 
-        onView(allOf(
-                withId(android.support.design.R.id.snackbar_text),
-                withText(context.getString(R.string.new_fact_failure_title))))
-                .check(matches(isDisplayed()));
+        onView(withText(R.string.new_fact_failure_title))
+                .check(matches(withEffectiveVisibility(ViewMatchers.Visibility.VISIBLE)));
     }
 }
