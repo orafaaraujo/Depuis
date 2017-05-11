@@ -143,4 +143,13 @@ public class NewFactViewModel extends BaseObservable {
             }
         };
     }
+
+    public int getDateIcon() {
+        return R.drawable.ic_today_22dp;
+    }
+
+    public int getTimeIcon() {
+        return R.drawable.ic_access_time_22dp;
+    }
+
 }

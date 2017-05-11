@@ -1,15 +1,18 @@
 package com.orafaaraujo.depuis.viewModel.helper;
 
 import android.databinding.BindingAdapter;
+import android.graphics.drawable.Drawable;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.TextInputEditText;
 import android.support.v4.content.ContextCompat;
+import android.support.v7.content.res.AppCompatResources;
 import android.support.v7.widget.DividerItemDecoration;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.helper.ItemTouchHelper;
 import android.text.TextWatcher;
 import android.view.ViewGroup;
 import android.widget.ImageButton;
+import android.widget.TextView;
 
 public class BindingAdapterHelper {
 
@@ -61,5 +64,11 @@ public class BindingAdapterHelper {
     @BindingAdapter({"bind:source"})
     public static void setImageButtonSource(final ImageButton imageButton, final int resource) {
         imageButton.setImageResource(resource);
+    }
+
+    @BindingAdapter({"bind:text_icon"})
+    public static void setSvgTextView(final TextView textView, final int resource) {
+        Drawable drawableLeft = AppCompatResources.getDrawable(textView.getContext(), resource);
+        textView.setCompoundDrawablesWithIntrinsicBounds(drawableLeft, null, null, null);
     }
 }

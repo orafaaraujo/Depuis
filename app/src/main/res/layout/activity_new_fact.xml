@@ -27,7 +27,7 @@
                 android:layout_alignParentLeft="true"
                 android:layout_alignParentStart="true"
                 android:layout_alignParentTop="true"
-                android:background="?android:selectableItemBackgroundBorderless"
+                android:background="@drawable/white_button"
                 android:contentDescription="@string/new_fact_back"
                 android:onClick="onBackButton"
                 application:srcCompat="@drawable/ic_arrow_back_24dp"
@@ -108,21 +108,19 @@
                         android:id="@+id/new_fact_text_date"
                         style="@style/new_fact_date_time"
                         android:layout_weight="1"
-                        android:drawableLeft="@drawable/ic_today_22dp"
-                        android:drawableStart="@drawable/ic_today_22dp"
                         android:onClick="onDateClick"
                         android:text="@{viewModel.date}"
-                        tools:text="23/01/17" />
+                        tools:text="23/01/17"
+                        tools:text_icon="@{viewModel.dateIcon}" />
 
                     <TextView
                         android:id="@+id/new_fact_text_time"
                         style="@style/new_fact_date_time"
                         android:layout_weight="1"
-                        android:drawableLeft="@drawable/ic_access_time_22dp"
-                        android:drawableStart="@drawable/ic_access_time_22dp"
                         android:onClick="onTimeClick"
                         android:text="@{viewModel.time}"
-                        tools:text="20h05" />
+                        tools:text="20h05"
+                        tools:text_icon="@{viewModel.timeIcon}" />
                 </LinearLayout>
 
                 <Button
