@@ -35,16 +35,23 @@ public class MainActivityTest  {
     public ActivityTestRule<MainActivity> rule = new ActivityTestRule<>(MainActivity.class);
 
     @Test
-    public void ensureNewFactButtonIsOk() {
-        onView(withId(R.id.main_fab_new_fact))
-                .check(matches(isClickable()))
+    public void ensureEmptyTitleIsOk() {
+        onView(withId(R.id.activity_main_empty_list_title))
                 .check(matches(isCompletelyDisplayed()))
                 .check(matches(is(isEnabled())));
     }
 
     @Test
-    public void ensureRecyclerViewIsOk() {
-        onView(withId(R.id.main_recycler_fact))
+    public void ensureEmptySubTitleIsOk() {
+        onView(withId(R.id.activity_main_empty_list_subtitle))
+                .check(matches(isCompletelyDisplayed()))
+                .check(matches(is(isEnabled())));
+    }
+
+    @Test
+    public void ensureEmptyButtonIsOk() {
+        onView(withId(R.id.activity_main_empty_list_button))
+                .check(matches(isClickable()))
                 .check(matches(isCompletelyDisplayed()))
                 .check(matches(is(isEnabled())));
     }
