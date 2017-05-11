@@ -8,8 +8,9 @@
         <item name="android:navigationBarColor">@color/main_primary_dark</item>
     </style>
 
-    <style name="NewFactTheme" parent="AppTheme.NoActionBar">
-        <item name="android:statusBarColor">@android:color/white</item>
+    <style name="NewFactTheme" parent="Theme.AppCompat.Light.NoActionBar">
         <item name="android:windowLightStatusBar">true</item>
+        <item name="android:statusBarColor">@android:color/white</item>
+        <item name="android:navigationBarColor">@color/main_primary_dark</item>
     </style>
 </resources>

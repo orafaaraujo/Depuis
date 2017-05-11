@@ -88,7 +88,9 @@ public class MainViewModel extends BaseObservable {
     }
 
     public View.OnClickListener getFabClick() {
-        return v -> mContext.startActivity(new Intent(mContext, NewFactActivity.class));
+        Intent intent = new Intent(mContext, NewFactActivity.class);
+        intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+        return v -> mContext.startActivity(intent);
     }
 
     public void setFactToDelete(FactTO factTO) {
