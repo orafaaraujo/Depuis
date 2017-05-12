@@ -1,4 +1,4 @@
-package com.orafaaraujo.depuis.viewModel.helper;
+package com.orafaaraujo.depuis.view.bindingadapter;
 
 import android.databinding.BindingAdapter;
 import android.graphics.drawable.Drawable;
@@ -12,45 +12,51 @@ import android.support.v7.widget.DividerItemDecoration;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.helper.ItemTouchHelper;
 import android.text.TextWatcher;
+import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageButton;
 import android.widget.TextView;
 
 public class BindingAdapterHelper {
 
+    FontCache mFontCache;
+
+    public BindingAdapterHelper(FontCache fontCache) {
+        mFontCache = fontCache;
+    }
+
     @BindingAdapter({"bind:watcher"})
-    public static void setWatcher(final TextInputEditText text, final TextWatcher watcher) {
+    public void setWatcher(final TextInputEditText text, final TextWatcher watcher) {
         text.addTextChangedListener(watcher);
     }
 
     @BindingAdapter({"bind:adapter"})
-    public static void setAdapter(final RecyclerView view, final RecyclerView.Adapter adapter) {
+    public void setAdapter(final RecyclerView view, final RecyclerView.Adapter adapter) {
         view.setAdapter(adapter);
     }
 
     @BindingAdapter({"bind:layout_manager"})
-    public static void setLayoutManager(final RecyclerView rv,
-            final RecyclerView.LayoutManager lm) {
+    public void setLayoutManager(final RecyclerView rv, final RecyclerView.LayoutManager lm) {
         rv.setLayoutManager(lm);
     }
 
     @BindingAdapter({"bind:divider_item"})
-    public static void setDividerItem(final RecyclerView view, final DividerItemDecoration id) {
+    public void setDividerItem(final RecyclerView view, final DividerItemDecoration id) {
         view.addItemDecoration(id);
     }
 
     @BindingAdapter({"bind:on_scroll_listener"})
-    public static void setScrollListener(final RecyclerView view, RecyclerView.OnScrollListener l) {
+    public void setScrollListener(final RecyclerView view, RecyclerView.OnScrollListener l) {
         view.addOnScrollListener(l);
     }
 
     @BindingAdapter({"bind:item_touch"})
-    public static void setItemTouchHelper(final RecyclerView view, final ItemTouchHelper ith) {
+    public void setItemTouchHelper(final RecyclerView view, final ItemTouchHelper ith) {
         ith.attachToRecyclerView(view);
     }
 
     @BindingAdapter({"bind:fab_animation"})
-    public static void setFabAnimation(final FloatingActionButton fab, final boolean show) {
+    public void setFabAnimation(final FloatingActionButton fab, final boolean show) {
         if (show) {
             fab.show();
         } else {
@@ -59,20 +65,27 @@ public class BindingAdapterHelper {
     }
 
     @BindingAdapter({"bind:background"})
-    public static void setViewGroupBackground(final ViewGroup viewGroup,
-            @ColorRes final int resource) {
+    public void setViewGroupBackground(final ViewGroup viewGroup, @ColorRes final int resource) {
         viewGroup.setBackgroundColor(ContextCompat.getColor(viewGroup.getContext(), resource));
     }
 
     @BindingAdapter({"bind:source"})
-    public static void setImageButtonSource(final ImageButton imageButton,
+    public void setImageButtonSource(final ImageButton imageButton,
             @DrawableRes final int resource) {
         imageButton.setImageResource(resource);
     }
 
     @BindingAdapter({"bind:text_icon"})
-    public static void setSvgTextView(final TextView textView, @DrawableRes final int resource) {
+    public void setSvgTextView(final TextView textView, @DrawableRes final int resource) {
         Drawable drawableLeft = AppCompatResources.getDrawable(textView.getContext(), resource);
         textView.setCompoundDrawablesWithIntrinsicBounds(drawableLeft, null, null, null);
+    }
+
+    @BindingAdapter({"bind:text_font"})
+    public void setFont(final View view, final String fontName) {
+        // TODO Set on another objects types!
+        if (view instanceof TextView) {
+            ((TextView) view).setTypeface(mFontCache.get(fontName));
+        }
     }
 }

@@ -8,6 +8,11 @@ import android.support.v7.widget.RecyclerView;
 import dagger.Module;
 import dagger.Provides;
 
+/**
+ * Module to handle with Views and their components.
+ *
+ * Created by rafael on 22/01/17.
+ */
 @Module
 public class ViewModule {
 

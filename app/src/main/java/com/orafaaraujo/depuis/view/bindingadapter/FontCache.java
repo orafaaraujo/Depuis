@@ -1,4 +1,4 @@
-package com.orafaaraujo.depuis.helper.bindingadapter;
+package com.orafaaraujo.depuis.view.bindingadapter;
 
 import android.content.Context;
 import android.content.res.AssetManager;
@@ -7,9 +7,6 @@ import android.graphics.Typeface;
 import java.io.IOException;
 import java.util.HashMap;
 import java.util.Map;
-
-import javax.inject.Inject;
-import javax.inject.Singleton;
 
 import timber.log.Timber;
 
@@ -22,7 +19,6 @@ import timber.log.Timber;
  *
  * To set custom names for fonts other than their filenames, call addFont().
  */
-@Singleton
 public class FontCache {
 
     private static final String FONT_DIR = "fonts";
@@ -33,7 +29,6 @@ public class FontCache {
 
     Context mContext;
 
-    @Inject
     public FontCache(Context context) {
         mContext = context;
         AssetManager am = mContext.getResources().getAssets();

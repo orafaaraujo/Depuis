@@ -12,7 +12,7 @@ import com.orafaaraujo.depuis.R;
 import com.orafaaraujo.depuis.dagger.Injector;
 import com.orafaaraujo.depuis.databinding.ActivityMainBinding;
 import com.orafaaraujo.depuis.helper.RxBus;
-import com.orafaaraujo.depuis.helper.bindingadapter.DepuisDataBindingComponent;
+import com.orafaaraujo.depuis.view.bindingadapter.DepuisDataBindingComponent;
 import com.orafaaraujo.depuis.helper.buses.FactTO;
 import com.orafaaraujo.depuis.model.Fact;
 import com.orafaaraujo.depuis.viewModel.MainViewModel;

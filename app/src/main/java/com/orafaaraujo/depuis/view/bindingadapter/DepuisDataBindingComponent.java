@@ -1,20 +1,15 @@
-package com.orafaaraujo.depuis.helper.bindingadapter;
+package com.orafaaraujo.depuis.view.bindingadapter;
 
-
-import javax.inject.Inject;
-import javax.inject.Singleton;
 
 /**
  * Created by Rafael Araujo on 12/05/17.
  */
-@Singleton
 public class DepuisDataBindingComponent implements android.databinding.DataBindingComponent {
 
-    @Inject
     BindingAdapterHelper mBindingAdapterHelper;
 
-    @Inject
-    DepuisDataBindingComponent() {
+    public DepuisDataBindingComponent(BindingAdapterHelper bindingAdapterHelper) {
+        mBindingAdapterHelper = bindingAdapterHelper;
     }
 
     @Override
