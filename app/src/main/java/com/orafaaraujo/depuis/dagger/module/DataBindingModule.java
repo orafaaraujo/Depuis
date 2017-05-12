@@ -10,6 +10,7 @@ import javax.inject.Singleton;
 
 import dagger.Module;
 import dagger.Provides;
+import dagger.Reusable;
 
 /**
  * Module to hold DataBindingAdapter and their components.
@@ -32,7 +33,7 @@ public class DataBindingModule {
     }
 
     @Provides
-    @Singleton
+    @Reusable
     DepuisDataBindingComponent provideDataBindingComponent(BindingAdapterHelper adapter) {
         return new DepuisDataBindingComponent(adapter);
     }
