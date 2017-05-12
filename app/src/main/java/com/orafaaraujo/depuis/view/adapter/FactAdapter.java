@@ -12,6 +12,7 @@ import com.orafaaraujo.depuis.helper.RxBus;
 import com.orafaaraujo.depuis.helper.buses.FactTO;
 import com.orafaaraujo.depuis.model.Fact;
 import com.orafaaraujo.depuis.view.adapter.viewholder.BindingHolder;
+import com.orafaaraujo.depuis.view.bindingadapter.DepuisDataBindingComponent;
 import com.orafaaraujo.depuis.viewModel.FactViewModel;
 
 import java.util.ArrayList;
@@ -28,6 +29,9 @@ public class FactAdapter extends RecyclerView.Adapter<BindingHolder> {
 
     @Inject
     Context mContext;
+
+    @Inject
+    DepuisDataBindingComponent mBindingComponent;
 
     @Inject
     Provider<FactViewModel> mFactViewModelProvider;
@@ -48,7 +52,8 @@ public class FactAdapter extends RecyclerView.Adapter<BindingHolder> {
                 .inflate(LayoutInflater.from(parent.getContext()),
                         R.layout.item_fact,
                         parent,
-                        false);
+                        false,
+                        mBindingComponent);
         return new BindingHolder(viewDataBinding);
     }
 

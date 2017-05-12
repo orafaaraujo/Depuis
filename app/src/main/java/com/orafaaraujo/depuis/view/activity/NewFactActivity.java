@@ -15,6 +15,7 @@ import com.orafaaraujo.depuis.helper.DateTimeHelper;
 import com.orafaaraujo.depuis.helper.RxBus;
 import com.orafaaraujo.depuis.helper.buses.DatetimeTO;
 import com.orafaaraujo.depuis.helper.buses.NewFactFeedbackTO;
+import com.orafaaraujo.depuis.view.bindingadapter.DepuisDataBindingComponent;
 import com.orafaaraujo.depuis.view.fragments.DatePickerFragment;
 import com.orafaaraujo.depuis.view.fragments.TimePickerFragment;
 import com.orafaaraujo.depuis.viewModel.NewFactViewModel;
@@ -27,6 +28,9 @@ public class NewFactActivity extends AppCompatActivity {
 
     @Inject
     NewFactViewModel mNewFactViewModel;
+
+    @Inject
+    DepuisDataBindingComponent mBindingComponent;
 
     @Inject
     DateTimeHelper mDateTimeHelper;
@@ -48,7 +52,7 @@ public class NewFactActivity extends AppCompatActivity {
         Injector.getApplicationComponent().inject(this);
 
         final ActivityNewFactBinding newFactBinding = DataBindingUtil
-                .setContentView(this, R.layout.activity_new_fact);
+                .setContentView(this, R.layout.activity_new_fact, mBindingComponent);
         newFactBinding.setViewModel(mNewFactViewModel);
 
         newFactBinding.newFactTextEdittextTitle.setOnFocusChangeListener(
