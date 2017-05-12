@@ -5,6 +5,11 @@ import android.support.annotation.Nullable;
 
 import com.orafaaraujo.depuis.model.Fact;
 
+import org.threeten.bp.LocalDate;
+import org.threeten.bp.LocalDateTime;
+import org.threeten.bp.LocalTime;
+import org.threeten.bp.ZoneId;
+
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
@@ -41,15 +46,22 @@ public class MockDatabase implements FactDatabase {
     }
 
     private void fetchFacts() {
+
+        LocalDate localDate = LocalDate.of(1987, 3, 20);
+        LocalTime localTime = LocalTime.of(15, 5, 5);
+        LocalDateTime of = LocalDateTime.of(localDate, localTime);
+        long time = of.atZone(ZoneId.systemDefault()).toInstant().toEpochMilli();
+
         Observable
-                .just(3)
-                .forEach(i -> mFacts.add(makeFact(i)));
+                .range(0, 3)
+                .forEach(i -> mFacts.add(makeFact(i, time)));
     }
 
-    private static Fact makeFact(int i) {
+    private static Fact makeFact(int i, long time) {
+
         return Fact.builder()
                 .setId((int) new Date().getTime())
-                .setStartTime(new Date().getTime())
+                .setStartTime(time)
                 .setTitle(String.format(Locale.getDefault(), "%d %s", i, LOREM_TITLE))
                 .setComment(LOREM_COMMENT)
                 .setEndTime(-1)

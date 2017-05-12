@@ -2,6 +2,7 @@ package com.orafaaraujo.depuis.dagger;
 
 import com.orafaaraujo.depuis.DepuisApplication;
 import com.orafaaraujo.depuis.dagger.module.ApplicationModule;
+import com.orafaaraujo.depuis.dagger.module.DataBindingModule;
 import com.orafaaraujo.depuis.dagger.module.DatabaseModule;
 import com.orafaaraujo.depuis.dagger.module.ViewModule;
 import com.orafaaraujo.depuis.view.activity.MainActivity;
@@ -16,7 +17,8 @@ import dagger.Component;
  */
 
 @Singleton
-@Component(modules = {ApplicationModule.class, ViewModule.class, DatabaseModule.class})
+@Component(modules = {ApplicationModule.class, ViewModule.class, DatabaseModule.class,
+        DataBindingModule.class})
 public interface ApplicationComponent {
 
     void inject(DepuisApplication depuisApplication);

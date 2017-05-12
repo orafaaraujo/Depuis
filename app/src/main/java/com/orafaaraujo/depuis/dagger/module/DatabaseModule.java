@@ -11,6 +11,8 @@ import dagger.Module;
 import dagger.Provides;
 
 /**
+ * Module to hold Database and their components.
+ *
  * Created by rafael on 22/01/17.
  */
 @Module
@@ -19,7 +21,7 @@ public class DatabaseModule {
     @Provides
     @Singleton
     FactDatabase provideDatabase(Context context) {
-//        return new MockDatabase(false);
+//        return new MockDatabase(true);
         return new SQLiteDatabase(context);
     }
 

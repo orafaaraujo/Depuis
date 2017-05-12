@@ -97,7 +97,7 @@ public class FactViewModel extends BaseObservable {
 
     public int getCardClosedIcon() {
         return alreadyClosed() ?
-                R.drawable.ic_close_22dp :
+                R.drawable.ic_lock_open_black_24dp :
                 R.drawable.ic_lock_22dp;
     }
 

@@ -7,23 +7,23 @@
     <string name="fact_share_message">Share your memory</string>
     <string name="fact_share_fact" formatted="false">Has been %1s that %2s (Depuis application by Android)</string>
 
-    <string name="main_empty_list_title">No fact saved</string>
-    <string name="main_empty_list_subtitle">Start one fact right now</string>
+    <string name="main_empty_list_title">no fact saved</string>
+    <string name="main_empty_list_subtitle">start one fact right now</string>
     <string name="main_empty_list_new_button">Start new fact</string>
 
     <string name="main_deleted">Removing %s?</string>
     <string name="main_deleted_undo">Undo</string>
 
-    <string name="fact_close_title">Close this fact</string>
-    <string name="fact_close_message">Stop counting the time, not delete it.</string>
+    <string name="fact_close_title">Stop counting</string>
+    <string name="fact_close_message">Stop counting the time, not delete it. Can not undo it!</string>
     <string name="fact_close_snack_bar_message">Fact closed. Depuis will not count the time of this fact.</string>
 
     <string name="new_fact_layout_title">Save a memory that you would like to calculate the time from now</string>
     <string name="new_fact_layout_subtitle">Depuis will do it for you</string>
     <string name="new_fact_button_start">Start</string>
 
-    <string name="new_fact_title">Title</string>
-    <string name="new_fact_comment">Comment (optional)</string>
+    <string name="new_fact_title">title</string>
+    <string name="new_fact_comment">comment (optional)</string>
     <string name="new_fact_begin">Begin at</string>
     <string name="new_fact_back">Back</string>
     <string name="new_fact_title_empty">Title cannot be empty</string>

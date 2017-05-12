@@ -12,6 +12,7 @@ import com.orafaaraujo.depuis.R;
 import com.orafaaraujo.depuis.dagger.Injector;
 import com.orafaaraujo.depuis.databinding.ActivityMainBinding;
 import com.orafaaraujo.depuis.helper.RxBus;
+import com.orafaaraujo.depuis.view.bindingadapter.DepuisDataBindingComponent;
 import com.orafaaraujo.depuis.helper.buses.FactTO;
 import com.orafaaraujo.depuis.model.Fact;
 import com.orafaaraujo.depuis.viewModel.MainViewModel;
@@ -23,7 +24,10 @@ import timber.log.Timber;
 public class MainActivity extends AppCompatActivity {
 
     @Inject
-    public MainViewModel mMainViewModel;
+    MainViewModel mMainViewModel;
+
+    @Inject
+    DepuisDataBindingComponent mBindingComponent;
 
     @Inject
     RxBus mRxBus;
@@ -33,7 +37,8 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         Injector.getApplicationComponent().inject(this);
 
-        ActivityMainBinding binding = DataBindingUtil.setContentView(this, R.layout.activity_main);
+        ActivityMainBinding binding = DataBindingUtil
+                .setContentView(this, R.layout.activity_main, mBindingComponent);
         binding.setViewModel(mMainViewModel);
         setSupportActionBar(binding.toolbar);
 

@@ -10,6 +10,8 @@ import dagger.Module;
 import dagger.Provides;
 
 /**
+ * Module to hold Application and their components.
+ *
  * Created by rafael on 22/01/17.
  */
 @Module

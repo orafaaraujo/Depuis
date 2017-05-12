@@ -4,6 +4,7 @@ import android.os.Build;
 
 import com.orafaaraujo.depuis.DepuisApplication;
 import com.orafaaraujo.depuis.dagger.module.ApplicationModule;
+import com.orafaaraujo.depuis.dagger.module.DataBindingModule;
 import com.orafaaraujo.depuis.dagger.module.DatabaseModule;
 import com.orafaaraujo.depuis.dagger.module.ViewModule;
 
@@ -25,6 +26,7 @@ public class Injector {
                 .applicationModule(new ApplicationModule(application))
                 .viewModule(new ViewModule())
                 .databaseModule(new DatabaseModule())
+                .dataBindingModule(new DataBindingModule())
                 .build();
     }
 
