@@ -14,6 +14,8 @@ import java.util.ArrayList;
 import java.util.List;
 
 /**
+ * Database using SQLite.
+ *
  * Created by rafael on 02/05/17.
  */
 public class SQLiteDatabase extends SQLiteOpenHelper implements FactDatabase {
