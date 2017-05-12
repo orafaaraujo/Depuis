@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <layout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:application="http://schemas.android.com/apk/res-auto"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools">
 
     <data>
@@ -19,25 +19,29 @@
 
         <android.support.design.widget.AppBarLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            android:layout_height="144dp"
             android:theme="@style/AppTheme.AppBarOverlay">
 
-            <android.support.v7.widget.Toolbar
-                android:id="@+id/toolbar"
+            <android.support.design.widget.CollapsingToolbarLayout
                 android:layout_width="match_parent"
-                android:layout_height="?android:attr/actionBarSize"
-                android:background="@color/main_primary"
-                application:popupTheme="@style/AppTheme.PopupOverlay"
-                tools:ignore="NewApi" />
+                android:layout_height="match_parent"
+                app:layout_scrollFlags="scroll|exitUntilCollapsed">
+
+                <android.support.v7.widget.Toolbar
+                    android:id="@+id/toolbar"
+                    android:layout_width="match_parent"
+                    android:layout_height="?android:attr/actionBarSize"
+                    android:background="@color/main_primary" />
+            </android.support.design.widget.CollapsingToolbarLayout>
 
         </android.support.design.widget.AppBarLayout>
 
         <android.support.v7.widget.RecyclerView
             android:id="@+id/main_recycler_fact"
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
+            android:layout_height="wrap_content"
             android:visibility="@{viewModel.mListVisibility ? View.VISIBLE : View.INVISIBLE}"
-            application:layout_behavior="@string/appbar_scrolling_view_behavior"
+            app:layout_behavior="@string/appbar_scrolling_view_behavior"
             tools:adapter="@{viewModel.adapter}"
             tools:divider_item="@{viewModel.dividerItemDecoration}"
             tools:item_touch="@{viewModel.ItemTouch}"
@@ -57,7 +61,7 @@
             android:layout_gravity="bottom|end"
             android:layout_margin="@dimen/fab_margin"
             android:onClick="@{viewModel.fabClick}"
-            application:srcCompat="@drawable/ic_plus_one_24dp"
+            app:srcCompat="@drawable/ic_plus_one_24dp"
             tools:fab_animation="@{viewModel.mShow}" />
 
     </android.support.design.widget.CoordinatorLayout>
