@@ -4,6 +4,7 @@ import android.databinding.BindingAdapter;
 import android.graphics.drawable.Drawable;
 import android.support.annotation.ColorRes;
 import android.support.annotation.DrawableRes;
+import android.support.design.widget.CollapsingToolbarLayout;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.TextInputEditText;
 import android.support.design.widget.TextInputLayout;
@@ -96,7 +97,10 @@ public class BindingAdapterHelper {
         }
         if (view instanceof TextInputLayout) {
             ((TextInputLayout) view).setTypeface(mFontCache.get(fontName));
-
+        }
+        if (view instanceof CollapsingToolbarLayout) {
+            ((CollapsingToolbarLayout) view).setExpandedTitleTypeface(mFontCache.get(fontName));
+            ((CollapsingToolbarLayout) view).setCollapsedTitleTypeface(mFontCache.get(fontName));
         }
     }
 }
