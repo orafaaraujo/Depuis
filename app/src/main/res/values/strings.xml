@@ -14,7 +14,7 @@
     <string name="main_deleted">Removing %s?</string>
     <string name="main_deleted_undo">Undo</string>
 
-    <string name="fact_close_title">Close this fact</string>
+    <string name="fact_close_title">Stop counting</string>
     <string name="fact_close_message">Stop counting the time, not delete it. Can not undo it!</string>
     <string name="fact_close_snack_bar_message">Fact closed. Depuis will not count the time of this fact.</string>
 
