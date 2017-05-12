@@ -24,7 +24,8 @@
             android:gravity="center"
             android:text="@string/main_empty_list_title"
             android:textSize="20sp"
-            android:textStyle="bold" />
+            android:textStyle="bold"
+            tools:text_font="@{`raleway-regular`}" />
 
         <TextView
             android:id="@+id/activity_main_empty_list_subtitle"
