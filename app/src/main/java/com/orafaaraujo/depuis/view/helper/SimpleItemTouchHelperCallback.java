@@ -15,17 +15,17 @@ import android.view.View;
 import com.orafaaraujo.depuis.R;
 import com.orafaaraujo.depuis.view.adapter.FactAdapter;
 
-import javax.inject.Inject;
-
+/***
+ * Callback of slide Card to left.
+ */
 public class SimpleItemTouchHelperCallback extends ItemTouchHelper.Callback {
 
     private FactAdapter mAdapter;
 
-    @Inject
-    Context mContext;
+    private Context mContext;
 
-    @Inject
-    SimpleItemTouchHelperCallback() {
+    public SimpleItemTouchHelperCallback(Context context) {
+        mContext = context;
     }
 
     public void setAdapter(FactAdapter adapter) {
