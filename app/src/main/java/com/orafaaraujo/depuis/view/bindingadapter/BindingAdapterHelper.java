@@ -6,6 +6,7 @@ import android.support.annotation.ColorRes;
 import android.support.annotation.DrawableRes;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.TextInputEditText;
+import android.support.design.widget.TextInputLayout;
 import android.support.v4.content.ContextCompat;
 import android.support.v7.content.res.AppCompatResources;
 import android.support.v7.widget.DividerItemDecoration;
@@ -14,6 +15,7 @@ import android.support.v7.widget.helper.ItemTouchHelper;
 import android.text.TextWatcher;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.ImageButton;
 import android.widget.TextView;
 
@@ -83,9 +85,18 @@ public class BindingAdapterHelper {
 
     @BindingAdapter({"bind:text_font"})
     public void setFont(final View view, final String fontName) {
-        // TODO Set on another objects types!
         if (view instanceof TextView) {
             ((TextView) view).setTypeface(mFontCache.get(fontName));
+        }
+        if (view instanceof Button) {
+            ((Button) view).setTypeface(mFontCache.get(fontName));
+        }
+        if (view instanceof TextView) {
+            ((TextView) view).setTypeface(mFontCache.get(fontName));
+        }
+        if (view instanceof TextInputLayout) {
+            ((TextInputLayout) view).setTypeface(mFontCache.get(fontName));
+
         }
     }
 }
