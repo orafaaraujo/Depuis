@@ -10,8 +10,8 @@ notifications:
 env:
     matrix:
         # - ANDROID_TARGET=android-17 ANDROID_ABI=armeabi-v7a
-        - ANDROID_TARGET=android-22 ANDROID_ABI=armeabi-v7a
-        # - ANDROID_TARGET=android-25 ANDROID_ABI=armeabi-v7a
+        # - ANDROID_TARGET=android-22 ANDROID_ABI=armeabi-v7a
+         - ANDROID_TARGET=android-25 ANDROID_ABI=armeabi-v7a
     global:
         - ADB_INSTALL_TIMEOUT=10    # Time out to 10 mins
 
@@ -28,8 +28,8 @@ android:
     update_sdk: true
     components:
         - tools
-        - platform-tools
         - tools
+        - platform-tools
         - build-tools-25.0.2
         - $ANDROID_TARGET
 
