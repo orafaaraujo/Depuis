@@ -26,9 +26,10 @@ cache:
 android:
     update_sdk: true
     components:
+        - tools
         - platform-tools
         - tools
-        - build-tools-25.0.2
+        - build-tools-25.0.0
         - $ANDROID_TARGET
 
         # Additional components
