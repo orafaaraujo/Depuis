@@ -1,8 +1,5 @@
 language: android
 jdk: oraclejdk8
-sudo: false
-os:
-  - linux
 
 notifications:
     email:
@@ -13,16 +10,7 @@ env:
         # - ANDROID_TARGET=android-22 ANDROID_ABI=armeabi-v7a
          - ANDROID_TARGET=android-25 ANDROID_ABI=armeabi-v7a
     global:
-        - ADB_INSTALL_TIMEOUT=10    # Time out to 10 mins
-
-before_cache:
-    - rm -f $HOME/.gradle/caches/modules-2/modules-2.lock
-
-cache:
-  directories:      # Cache all dirs under .gradle folder
-    - $HOME/.gradle/daemon      # Cache daemon logs
-    - $HOME/.gradle/native      # Cache library downloaded from the gradle dependency
-    - $HOME/.gradle/wrapper     # Cache the gradle
+        - ADB_INSTALL_TIMEOUT=5    # Time out to 10 mins
 
 android:
     update_sdk: true
