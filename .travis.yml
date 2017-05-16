@@ -2,16 +2,19 @@ language: android
 jdk: oraclejdk8
 sudo: false
 
+os:
+  - linux
+
 notifications:
     email:
         - orafaaraujo@gmail.com
 
 env:
     matrix:
-        - ANDROID_TARGET=android-17 ANDROID_ABI=armeabi-v7a
+        # - ANDROID_TARGET=android-17 ANDROID_ABI=armeabi-v7a
         - ANDROID_TARGET=android-25 ANDROID_ABI=armeabi-v7a
     global:
-        - ADB_INSTALL_TIMEOUT=10    #Time out to 10 mins
+        - ADB_INSTALL_TIMEOUT=5    #Time out to 10 mins
 
 before_cache:
     - rm -f $HOME/.gradle/caches/modules-2/modules-2.lock
@@ -26,10 +29,13 @@ android:
     update_sdk: true
     components:
         - tools
-        - platform-tools
-        - tools
-
         - build-tools-25.0.1
+        - platform-tools
+
+        # The SDK version used to compile your project
+        - android-16
+        - android-21
+        - android-22
         - android-25
 
         # Additional components
@@ -38,7 +44,10 @@ android:
         - extra-android-m2repository
 
         #system images
-        - sys-img-armeabi-v7a-android-17
+        # - sys-img-armeabi-v7a-android-17
+        - sys-img-armeabi-v7a-android-16
+        - sys-img-armeabi-v7a-android-21
+        - sys-img-armeabi-v7a-android-22
         - sys-img-armeabi-v7a-android-25
 
 licenses:
@@ -59,11 +68,5 @@ script:
     - adb devices   #Display list of devices
     - adb shell input keyevent 82 &
     - ./gradlew connectedCheck -PdisablePreDex --stacktrace
-
-before_install:
-    - pip install --user codecov    #Install codecov
-
-after_success:
-    - codecov                       #Run codecov
 
 after_failure: "cat $TRAVIS_BUILD_DIR/app/build/outputs/lint-results-debug.xml"
