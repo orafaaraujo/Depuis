@@ -5,7 +5,6 @@ sudo: false
 notifications:
     email:
         - orafaaraujo@gmail.com
-
 env:
     matrix:
         - ANDROID_TARGET=android-19 ANDROID_ABI=armeabi-v7a
