@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="com.orafaaraujo.depuis">
+          package="com.orafaaraujo.depuis">
 
     <application
         android:name=".DepuisApplication"
@@ -16,14 +16,14 @@
             android:screenOrientation="portrait"
             android:theme="@style/AppTheme.NoActionBar">
             <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
+                <action android:name="android.intent.action.MAIN"/>
 
-                <category android:name="android.intent.category.LAUNCHER" />
+                <category android:name="android.intent.category.LAUNCHER"/>
             </intent-filter>
 
             <meta-data
                 android:name="android.app.shortcuts"
-                android:resource="@xml/shortcuts" />
+                android:resource="@xml/shortcuts"/>
         </activity>
         <activity
             android:name=".view.activity.NewFactActivity"
@@ -31,7 +31,12 @@
             android:parentActivityName=".view.activity.MainActivity"
             android:screenOrientation="portrait"
             android:theme="@style/NewFactTheme"
-            android:windowSoftInputMode="adjustResize" />
+            android:windowSoftInputMode="adjustResize"/>
+        <activity
+            android:name=".view.activity.AboutActivity"
+            android:configChanges="orientation"
+            android:parentActivityName=".view.activity.MainActivity"
+            android:screenOrientation="portrait"/>
     </application>
 
 </manifest>
