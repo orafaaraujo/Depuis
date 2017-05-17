@@ -54,7 +54,7 @@ licenses:
 before_script:
     # Create and start emulator
     - echo no | android create avd --force -n test -t "android-"$ANDROID_API_LEVEL --abi $ANDROID_ABI --skin WXGA720
-    - emulator -avd test -no-window &
+    - emulator -avd test &
     - android-wait-for-emulator
 
 script:
