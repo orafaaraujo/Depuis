@@ -21,7 +21,6 @@ import dagger.Provides;
 public class ViewModule {
 
     @Provides
-    @Singleton
     RecyclerView.LayoutManager provideLayoutManager(Context context) {
         return new LinearLayoutManager(context);
     }

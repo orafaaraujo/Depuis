@@ -22,6 +22,8 @@ import java.util.List;
 
 import javax.inject.Inject;
 
+import dagger.Lazy;
+
 public class MainViewModel extends BaseObservable {
 
     @Inject
@@ -31,7 +33,7 @@ public class MainViewModel extends BaseObservable {
     FactAdapter mAdapter;
 
     @Inject
-    RecyclerView.LayoutManager mLayoutManager;
+    Lazy<RecyclerView.LayoutManager> mLayoutManagerProvider;
 
     @Inject
     DividerItemDecoration mDividerItemDecoration;
@@ -61,7 +63,7 @@ public class MainViewModel extends BaseObservable {
     }
 
     public RecyclerView.LayoutManager getLayoutManager() {
-        return mLayoutManager;
+        return mLayoutManagerProvider.get();
     }
 
     public DividerItemDecoration getDividerItemDecoration() {
@@ -113,7 +115,7 @@ public class MainViewModel extends BaseObservable {
         final FactTO factTO = mDeleteFacts.peek();
         mUndoDelete.add(factTO);
         mAdapter.insertFact(factTO.position(), factTO.fact());
-        mLayoutManager.scrollToPosition(factTO.position());
+        mLayoutManagerProvider.get().scrollToPosition(factTO.position());
     }
 
     /**
@@ -138,7 +140,7 @@ public class MainViewModel extends BaseObservable {
     public void newFactAdded(FactTO factTO) {
         Fact foundFact = mDatabase.findFact(factTO.fact().id());
         mAdapter.insertFact(0, foundFact);
-        mLayoutManager.scrollToPosition(0);
+        mLayoutManagerProvider.get().scrollToPosition(0);
     }
 
     public void updateFields() {
