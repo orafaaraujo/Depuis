@@ -36,4 +36,8 @@
     <string name="elapsed_hours" formatted="false">%dh</string>
     <string name="elapsed_minutes" formatted="false">%dm</string>
     <string name="elapsed_seconds" formatted="false">%ds</string>
+
+    <string name="about_app">Depuis is an simple application to help you count the time of an
+        important (or not so much) fact of your life. And help me to study a little more Android
+    technologies.</string>
 </resources>
