@@ -12,34 +12,25 @@ cache:
     - ${TRAVIS_BUILD_DIR}/gradle/wrapper/dists/
 
 env:
-    matrix:
-        # - ANDROID_TARGET=android-17 ANDROID_ABI=armeabi-v7a
-        # - ANDROID_TARGET=android-22 ANDROID_ABI=armeabi-v7a
-        # - ANDROID_TARGET=android-25
-
-        # - EMULATOR_API_LEVEL=17
-        # - EMULATOR_API_LEVEL=22
-        - EMULATOR_API_LEVEL=24
     global:
-        - ADB_INSTALL_TIMEOUT=5    # Time out to 10 mins
-        - ANDROID_API_LEVEL=25
+        - ADB_INSTALL_TIMEOUT=10 # Time out to 10 mins
+        - ANDROID_API_LEVEL=24  # 25 Error: Invalid --abi armeabi-v7a for the selected target
         - ANDROID_BUILD_TOOLS_VERSION=25.0.2
         - ANDROID_ABI=armeabi-v7a
-        - ANDROID_TAG=google_apis
 
 android:
     update_sdk: true
     components:
         - tools
-        - tools
         - platform-tools
+        - tools
         - build-tools-$ANDROID_BUILD_TOOLS_VERSION
         - android-$ANDROID_API_LEVEL
-        - android-$EMULATOR_API_LEVEL
+        - android-25
 
         # Additional components
         # For Google APIs
-        - addon-google_apis-google-$EMULATOR_API_LEVEL
+        - addon-google_apis-google-$ANDROID_API_LEVEL
         # Google Play Services
         - extra-google-google_play_services
         # Support library
@@ -49,7 +40,7 @@ android:
         - extra-android-m2repository
 
         # Specify at least one system image
-        - sys-img-armeabi-v7a-google_apis-$EMULATOR_API_LEVEL
+        - sys-img-armeabi-v7a-android-$ANDROID_API_LEVEL
 
 licenses:
     - 'android-sdk-preview-license-52d11cd2'
@@ -58,8 +49,8 @@ licenses:
 
 before_script:
     # Create and start emulator
-    - echo no | android create avd --force -n test -t "android-"$EMULATOR_API_LEVEL --abi $ANDROID_ABI --tag $ANDROID_TAG
-    - emulator -avd test -no-skin -no-window &
+    - echo no | android create avd --force -n test -t "android-"$EMULATOR_API_LEVEL --abi $ANDROID_ABI
+    - emulator -avd test -no-window &
     - android-wait-for-emulator
 
 script:
