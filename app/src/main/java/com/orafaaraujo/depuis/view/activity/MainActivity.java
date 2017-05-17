@@ -1,7 +1,6 @@
 package com.orafaaraujo.depuis.view.activity;
 
 import android.app.AlertDialog;
-import android.content.Intent;
 import android.databinding.DataBindingUtil;
 import android.os.Bundle;
 import android.support.design.widget.BaseTransientBottomBar;
@@ -118,7 +117,7 @@ public class MainActivity extends AppCompatActivity {
         // Handle item selection
         switch (item.getItemId()) {
             case R.id.main_menu_setting:
-                startActivity(new Intent(this, AboutActivity.class));
+                mMainViewModel.openSettingView();
                 return true;
             default:
                 return super.onOptionsItemSelected(item);

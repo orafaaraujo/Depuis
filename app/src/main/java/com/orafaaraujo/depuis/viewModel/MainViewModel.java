@@ -12,6 +12,7 @@ import android.view.View;
 import com.orafaaraujo.depuis.helper.buses.FactTO;
 import com.orafaaraujo.depuis.model.Fact;
 import com.orafaaraujo.depuis.repository.database.FactDatabase;
+import com.orafaaraujo.depuis.view.activity.AboutActivity;
 import com.orafaaraujo.depuis.view.activity.NewFactActivity;
 import com.orafaaraujo.depuis.view.adapter.FactAdapter;
 import com.orafaaraujo.depuis.view.helper.SimpleItemTouchHelperCallback;
@@ -94,6 +95,13 @@ public class MainViewModel extends BaseObservable {
         intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
         return v -> mContext.startActivity(intent);
     }
+
+    public void openSettingView() {
+        Intent intent = new Intent(mContext, AboutActivity.class);
+        intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+        mContext.startActivity(intent);
+    }
+
 
     public void setFactToDelete(FactTO factTO) {
         mDeleteFacts.add(factTO);
