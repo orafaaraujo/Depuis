@@ -40,7 +40,7 @@ public class BindingAdapterHelper {
 
     @BindingAdapter({"bind:layout_manager"})
     public void setLayoutManager(final RecyclerView rv, final RecyclerView.LayoutManager lm) {
-        if (rv.getLayoutManager() != null) {
+        if (rv.getLayoutManager() == null) {
             rv.setLayoutManager(lm);
         }
     }
