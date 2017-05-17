@@ -139,7 +139,7 @@ public class NewFactViewModel extends BaseObservable {
 
             @Override
             public void afterTextChanged(Editable s) {
-                mTextIsFilled = !TextUtils.isEmpty(s.toString());
+                mTextIsFilled = !TextUtils.isEmpty(s.toString().trim());
             }
         };
     }
