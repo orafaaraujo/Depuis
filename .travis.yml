@@ -49,7 +49,7 @@ licenses:
 
 before_script:
     # Create and start emulator
-    - echo no | android create avd --force -n test -t "android-"$EMULATOR_API_LEVEL --abi $ANDROID_ABI
+    - echo no | android create avd --force -n test -t "android-"$ANDROID_API_LEVEL --abi $ANDROID_ABI
     - emulator -avd test -no-window &
     - android-wait-for-emulator
 
