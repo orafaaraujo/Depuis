@@ -36,7 +36,8 @@
             android:name=".view.activity.AboutActivity"
             android:configChanges="orientation"
             android:parentActivityName=".view.activity.MainActivity"
-            android:screenOrientation="portrait"/>
+            android:screenOrientation="portrait"
+            android:theme="@style/AppTheme.NoActionBar"/>
     </application>
 
 </manifest>
