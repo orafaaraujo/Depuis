@@ -18,19 +18,20 @@ cache:
 env:
     global:
         - ADB_INSTALL_TIMEOUT=10 # Time out to 10 mins
-        - ANDROID_API_LEVEL=24  # 25 Error: Invalid --abi armeabi-v7a for the selected target
+        - ANDROID_API_LEVEL=25  # 25 Error: Invalid --abi armeabi-v7a for the selected target
         - ANDROID_BUILD_TOOLS_VERSION=25.0.2
+        - EMULATOR_API_LEVEL=22  # API 22 is the lastest supported.
         - ANDROID_ABI=armeabi-v7a
 
 android:
     update_sdk: true
     components:
         - tools
-        - platform-tools
         - tools
+        - platform-tools
         - build-tools-$ANDROID_BUILD_TOOLS_VERSION
         - android-$ANDROID_API_LEVEL
-        - android-25
+        - android-$EMULATOR_API_LEVEL
 
         # Additional components
         # For Google APIs
@@ -44,7 +45,7 @@ android:
         - extra-android-m2repository
 
         # Specify at least one system image
-        - sys-img-armeabi-v7a-android-$ANDROID_API_LEVEL
+        - sys-img-armeabi-v7a-android-$EMULATOR_API_LEVEL
 
 licenses:
     - 'android-sdk-preview-license-52d11cd2'
@@ -53,7 +54,7 @@ licenses:
 
 before_script:
     # Create and start emulator
-    - echo no | android create avd --force -n test -t android-22 --abi armeabi-v7a # API 22 is the lastest supported.
+    - echo no | android create avd --force -n test -t android-android-$EMULATOR_API_LEVEL --abi armeabi-v7a
     - emulator -avd test -no-skin -no-audio -no-window &
     - android-wait-for-emulator
     - adb shell input keyevent 82 &
