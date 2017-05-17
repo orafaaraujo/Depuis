@@ -53,11 +53,12 @@ licenses:
 
 before_script:
     # Create and start emulator
-    - echo no | android create avd --force -n test -t "android-"$ANDROID_API_LEVEL --abi $ANDROID_ABI --skin WXGA720
-    - emulator -avd test &
+    - echo no | android create avd --force -n test -t android-22 --abi armeabi-v7a # API 22 is the lastest supported.
+    - emulator -avd test -no-skin -no-audio -no-window &
     - android-wait-for-emulator
+    - adb shell input keyevent 82 &
 
 script:
-    - ./gradlew clean connectedCheck --stacktrace
+    - ./gradlew clean connectedAndroidTest --info
 
 after_failure: "cat $TRAVIS_BUILD_DIR/app/build/outputs/lint-results-debug.xml"
