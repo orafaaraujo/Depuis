@@ -1,4 +1,4 @@
-package com.orafaaraujo.depuis.activities;
+package com.orafaaraujo.depuis.tests.activities;
 
 import static android.support.test.espresso.Espresso.onView;
 import static android.support.test.espresso.action.ViewActions.click;
@@ -15,8 +15,6 @@ import static android.support.test.espresso.matcher.ViewMatchers.withText;
 
 import static org.hamcrest.Matchers.is;
 
-import android.content.Context;
-import android.support.test.InstrumentationRegistry;
 import android.support.test.espresso.contrib.PickerActions;
 import android.support.test.espresso.matcher.ViewMatchers;
 import android.support.test.filters.LargeTest;
@@ -27,9 +25,13 @@ import android.widget.DatePicker;
 import android.widget.TimePicker;
 
 import com.orafaaraujo.depuis.R;
+import com.orafaaraujo.depuis.repository.database.FactDatabase;
+import com.orafaaraujo.depuis.repository.database.SQLiteDatabase;
 import com.orafaaraujo.depuis.view.activity.NewFactActivity;
 
 import org.hamcrest.Matchers;
+import org.junit.After;
+import org.junit.Before;
 import org.junit.Rule;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -46,6 +48,24 @@ public class NewFactActivityTest {
 
     @Rule
     public ActivityTestRule<NewFactActivity> rule = new ActivityTestRule<>(NewFactActivity.class);
+
+    private FactDatabase mDatabase;
+
+    @Before
+    public void setup() {
+        if (mDatabase == null) {
+            mDatabase = new SQLiteDatabase(rule.getActivity());
+        }
+        mDatabase.deleteTable();
+    }
+
+    @After
+    public void after() {
+        if (mDatabase == null) {
+            mDatabase = new SQLiteDatabase(rule.getActivity());
+        }
+        mDatabase.deleteTable();
+    }
 
     @Test
     public void ensureBackButtonIsOk() {
@@ -126,13 +146,15 @@ public class NewFactActivityTest {
     @Test
     public void createFact() {
 
+        String title = "createFact";
+
         onView(withId(R.id.new_fact_text_edittext_title))
-                .perform(typeText("Lorem"), closeSoftKeyboard())
-                .check(matches(withText("Lorem")));
+                .perform(typeText(title), closeSoftKeyboard())
+                .check(matches(withText(title)));
 
         onView(withId(R.id.new_fact_text_edittext_comment))
-                .perform(typeText("Lorem"), closeSoftKeyboard())
-                .check(matches(withText("Lorem")));
+                .perform(typeText(title), closeSoftKeyboard())
+                .check(matches(withText(title)));
 
         onView(withId(R.id.new_fact_start_button))
                 .perform(click());
@@ -142,12 +164,12 @@ public class NewFactActivityTest {
     public void createFactWithDate() {
 
         onView(withId(R.id.new_fact_text_edittext_title))
-                .perform(typeText("Lorem"), closeSoftKeyboard())
-                .check(matches(withText("Lorem")));
+                .perform(typeText("createFactWithDate"), closeSoftKeyboard())
+                .check(matches(withText("createFactWithDate")));
 
         onView(withId(R.id.new_fact_text_edittext_comment))
-                .perform(typeText("Lorem"), closeSoftKeyboard())
-                .check(matches(withText("Lorem")));
+                .perform(typeText("createFactWithDate"), closeSoftKeyboard())
+                .check(matches(withText("createFactWithDate")));
 
         int year = 1987;
         int month = 2;
@@ -166,12 +188,12 @@ public class NewFactActivityTest {
     public void createFactWithTime() {
 
         onView(withId(R.id.new_fact_text_edittext_title))
-                .perform(typeText("Lorem"), closeSoftKeyboard())
-                .check(matches(withText("Lorem")));
+                .perform(typeText("createFactWithTime"), closeSoftKeyboard())
+                .check(matches(withText("createFactWithTime")));
 
         onView(withId(R.id.new_fact_text_edittext_comment))
-                .perform(typeText("Lorem"), closeSoftKeyboard())
-                .check(matches(withText("Lorem")));
+                .perform(typeText("createFactWithTime"), closeSoftKeyboard())
+                .check(matches(withText("createFactWithTime")));
 
         int hour = 9;
         int minutes = 15;
@@ -189,12 +211,12 @@ public class NewFactActivityTest {
     public void createFactWithDateAndTime() {
 
         onView(withId(R.id.new_fact_text_edittext_title))
-                .perform(typeText("Lorem"), closeSoftKeyboard())
-                .check(matches(withText("Lorem")));
+                .perform(typeText("createFactWithDateAndTime"), closeSoftKeyboard())
+                .check(matches(withText("createFactWithDateAndTime")));
 
         onView(withId(R.id.new_fact_text_edittext_comment))
-                .perform(typeText("Lorem"), closeSoftKeyboard())
-                .check(matches(withText("Lorem")));
+                .perform(typeText("createFactWithDateAndTime"), closeSoftKeyboard())
+                .check(matches(withText("createFactWithDateAndTime")));
 
         int year = 1987;
         int month = 2;
@@ -221,11 +243,9 @@ public class NewFactActivityTest {
     @Test
     public void createFactMissingTitle() {
 
-        Context context = InstrumentationRegistry.getTargetContext();
-
         onView(withId(R.id.new_fact_text_edittext_comment))
-                .perform(typeText("A"), closeSoftKeyboard())
-                .check(matches(withText("A")));
+                .perform(typeText("createFactMissingTitle"), closeSoftKeyboard())
+                .check(matches(withText("createFactMissingTitle")));
 
         onView(withId(R.id.new_fact_start_button))
                 .perform(click());

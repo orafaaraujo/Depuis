@@ -1,4 +1,4 @@
-package com.orafaaraujo.depuis.flows;
+package com.orafaaraujo.depuis.tests.flows;
 
 import static android.support.test.espresso.Espresso.onView;
 import static android.support.test.espresso.action.ViewActions.click;
@@ -15,7 +15,7 @@ import static android.support.test.espresso.matcher.ViewMatchers.withEffectiveVi
 import static android.support.test.espresso.matcher.ViewMatchers.withId;
 import static android.support.test.espresso.matcher.ViewMatchers.withText;
 
-import static com.orafaaraujo.depuis.matchers.ViewMatchers.withBackgroundColor;
+import static com.orafaaraujo.depuis.helpers.matchers.ViewMatchers.withBackgroundColor;
 
 import static org.hamcrest.Matchers.is;
 
@@ -30,7 +30,7 @@ import android.support.test.rule.ActivityTestRule;
 import android.support.test.runner.AndroidJUnit4;
 
 import com.orafaaraujo.depuis.R;
-import com.orafaaraujo.depuis.matchers.RecyclerViewMatcher;
+import com.orafaaraujo.depuis.helpers.matchers.RecyclerViewMatcher;
 import com.orafaaraujo.depuis.repository.database.FactDatabase;
 import com.orafaaraujo.depuis.repository.database.SQLiteDatabase;
 import com.orafaaraujo.depuis.view.activity.MainActivity;
@@ -76,29 +76,7 @@ public class FactFlowTest {
     @Test
     public void createSuccess() {
 
-        String title = "Lorem";
-
-        onView(ViewMatchers.withId(R.id.activity_main_empty_list_button))
-                .perform(click());
-
-        onView(withId(R.id.new_fact_text_edittext_title))
-                .perform(typeText(title), closeSoftKeyboard())
-                .check(matches(withText(title)));
-
-        onView(withId(R.id.new_fact_start_button))
-                .perform(click());
-
-        onView(withId(R.id.main_fab_new_fact))
-                .check(matches(isClickable()))
-                .check(matches(isDisplayed()))
-                .check(matches(is(isEnabled())));
-
-        onView(withId(R.id.main_recycler_fact))
-                .check(matches(hasDescendant(withText(title))));
-    }
-
-    private void create() {
-        String title = "Lorem";
+        String title = "createSuccess";
 
         onView(ViewMatchers.withId(R.id.activity_main_empty_list_button))
                 .perform(click());
@@ -122,7 +100,7 @@ public class FactFlowTest {
     @Test
     public void createButNotSaving() {
 
-        String title = "Lorem";
+        String title = "createButNotSaving";
 
         onView(withId(R.id.activity_main_empty_list_button))
                 .perform(click());
@@ -153,9 +131,25 @@ public class FactFlowTest {
     public void createAndDeleting() {
 
         Context context = InstrumentationRegistry.getTargetContext();
-        String title = "Lorem";
+        String title = "createAndDeleting";
 
-        create();
+        onView(ViewMatchers.withId(R.id.activity_main_empty_list_button))
+                .perform(click());
+
+        onView(withId(R.id.new_fact_text_edittext_title))
+                .perform(typeText(title), closeSoftKeyboard())
+                .check(matches(withText(title)));
+
+        onView(withId(R.id.new_fact_start_button))
+                .perform(click());
+
+        onView(withId(R.id.main_fab_new_fact))
+                .check(matches(isClickable()))
+                .check(matches(isDisplayed()))
+                .check(matches(is(isEnabled())));
+
+        onView(withId(R.id.main_recycler_fact))
+                .check(matches(hasDescendant(withText(title))));
 
         onView(withId(R.id.main_recycler_fact))
                 .check(matches(hasDescendant(withText(title))));
@@ -171,9 +165,25 @@ public class FactFlowTest {
     public void createAndDeletingAndUndo() {
 
         Context context = InstrumentationRegistry.getTargetContext();
-        String title = "Lorem";
+        String title = "createAndDeletingAndUndo";
 
-        create();
+        onView(ViewMatchers.withId(R.id.activity_main_empty_list_button))
+                .perform(click());
+
+        onView(withId(R.id.new_fact_text_edittext_title))
+                .perform(typeText(title), closeSoftKeyboard())
+                .check(matches(withText(title)));
+
+        onView(withId(R.id.new_fact_start_button))
+                .perform(click());
+
+        onView(withId(R.id.main_fab_new_fact))
+                .check(matches(isClickable()))
+                .check(matches(isDisplayed()))
+                .check(matches(is(isEnabled())));
+
+        onView(withId(R.id.main_recycler_fact))
+                .check(matches(hasDescendant(withText(title))));
 
         onView(withId(R.id.main_recycler_fact))
                 .check(matches(hasDescendant(withText(title))));
@@ -195,7 +205,28 @@ public class FactFlowTest {
     @Test
     public void createAndCloseFactSuccess() {
 
-        create();
+        String title = "createAndCloseFactSuccess";
+
+        onView(ViewMatchers.withId(R.id.activity_main_empty_list_button))
+                .check(matches(isClickable()))
+                .check(matches(isDisplayed()))
+                .check(matches(is(isEnabled())))
+                .perform(click());
+
+        onView(withId(R.id.new_fact_text_edittext_title))
+                .perform(typeText(title), closeSoftKeyboard())
+                .check(matches(withText(title)));
+
+        onView(withId(R.id.new_fact_start_button))
+                .perform(click());
+
+        onView(withId(R.id.main_fab_new_fact))
+                .check(matches(isClickable()))
+                .check(matches(isDisplayed()))
+                .check(matches(is(isEnabled())));
+
+        onView(withId(R.id.main_recycler_fact))
+                .check(matches(hasDescendant(withText(title))));
 
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
             onView(RecyclerViewMatcher.withRecyclerView(R.id.main_recycler_fact)
@@ -205,7 +236,7 @@ public class FactFlowTest {
 
         onView(withId(R.id.main_recycler_fact))
                 .perform(RecyclerViewActions
-                        .actionOnItemAtPosition(0, com.orafaaraujo.depuis.matchers
+                        .actionOnItemAtPosition(0, com.orafaaraujo.depuis.helpers.matchers
                                 .ViewMatchers.clickChildViewWithId(R.id.item_fact_close)));
 
         onView(withText(R.string.fact_close_title))
@@ -235,7 +266,25 @@ public class FactFlowTest {
     @Test
     public void createAndCloseFactFailure() {
 
-        create();
+        String title = "createAndCloseFactFailure";
+
+        onView(ViewMatchers.withId(R.id.activity_main_empty_list_button))
+                .perform(click());
+
+        onView(withId(R.id.new_fact_text_edittext_title))
+                .perform(typeText(title), closeSoftKeyboard())
+                .check(matches(withText(title)));
+
+        onView(withId(R.id.new_fact_start_button))
+                .perform(click());
+
+        onView(withId(R.id.main_fab_new_fact))
+                .check(matches(isClickable()))
+                .check(matches(isDisplayed()))
+                .check(matches(is(isEnabled())));
+
+        onView(withId(R.id.main_recycler_fact))
+                .check(matches(hasDescendant(withText(title))));
 
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
             onView(RecyclerViewMatcher.withRecyclerView(R.id.main_recycler_fact)
@@ -244,7 +293,8 @@ public class FactFlowTest {
         }
 
         onView(withId(R.id.main_recycler_fact)).perform(
-                RecyclerViewActions.actionOnItemAtPosition(0, com.orafaaraujo.depuis.matchers
+                RecyclerViewActions.actionOnItemAtPosition(0, com.orafaaraujo.depuis.helpers
+                        .matchers
                         .ViewMatchers.clickChildViewWithId(R.id.item_fact_close)));
 
         onView(withText(R.string.fact_close_title))
@@ -284,7 +334,7 @@ public class FactFlowTest {
 
         onView(withId(R.id.main_recycler_fact))
                 .perform(RecyclerViewActions
-                        .actionOnItemAtPosition(0, com.orafaaraujo.depuis.matchers
+                        .actionOnItemAtPosition(0, com.orafaaraujo.depuis.helpers.matchers
                                 .ViewMatchers.clickChildViewWithId(R.id.item_fact_close)));
 
         onView(withText(R.string.fact_close_snack_bar_message))

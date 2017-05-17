@@ -1,8 +1,8 @@
-package com.orafaaraujo.depuis;
+package com.orafaaraujo.depuis.tests;
 
-import com.orafaaraujo.depuis.activities.MainActivityTest;
-import com.orafaaraujo.depuis.activities.NewFactActivityTest;
-import com.orafaaraujo.depuis.flows.FactFlowTest;
+import com.orafaaraujo.depuis.tests.activities.MainActivityTest;
+import com.orafaaraujo.depuis.tests.activities.NewFactActivityTest;
+import com.orafaaraujo.depuis.tests.flows.FactFlowTest;
 
 import org.junit.runner.RunWith;
 import org.junit.runners.Suite;

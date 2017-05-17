@@ -1,4 +1,4 @@
-package com.orafaaraujo.depuis.interfaces;
+package com.orafaaraujo.depuis.helpers.interfaces;
 
 /**
  * Inteface to force to implement this tests in all Activities.

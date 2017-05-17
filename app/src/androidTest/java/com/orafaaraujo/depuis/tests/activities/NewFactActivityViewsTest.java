@@ -1,4 +1,4 @@
-package com.orafaaraujo.depuis.activities;
+package com.orafaaraujo.depuis.tests.activities;
 
 import static android.support.test.espresso.matcher.ViewMatchers.assertThat;
 
@@ -17,9 +17,13 @@ import android.widget.ImageButton;
 import android.widget.TextView;
 
 import com.orafaaraujo.depuis.R;
-import com.orafaaraujo.depuis.interfaces.ViewsInterfaceTests;
+import com.orafaaraujo.depuis.helpers.interfaces.ViewsInterfaceTests;
+import com.orafaaraujo.depuis.repository.database.FactDatabase;
+import com.orafaaraujo.depuis.repository.database.SQLiteDatabase;
 import com.orafaaraujo.depuis.view.activity.NewFactActivity;
 
+import org.junit.After;
+import org.junit.Before;
 import org.junit.Rule;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -36,6 +40,24 @@ public class NewFactActivityViewsTest implements ViewsInterfaceTests {
 
     @Rule
     public ActivityTestRule<NewFactActivity> rule = new ActivityTestRule<>(NewFactActivity.class);
+
+    private FactDatabase mDatabase;
+
+    @Before
+    public void setup() {
+        if (mDatabase == null) {
+            mDatabase = new SQLiteDatabase(rule.getActivity());
+        }
+        mDatabase.deleteTable();
+    }
+
+    @After
+    public void after() {
+        if (mDatabase == null) {
+            mDatabase = new SQLiteDatabase(rule.getActivity());
+        }
+        mDatabase.deleteTable();
+    }
 
     @Test
     public void ensureViewsArePresent() throws Exception {

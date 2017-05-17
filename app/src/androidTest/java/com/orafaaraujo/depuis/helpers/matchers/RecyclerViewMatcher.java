@@ -1,4 +1,4 @@
-package com.orafaaraujo.depuis.matchers;
+package com.orafaaraujo.depuis.helpers.matchers;
 
 import android.content.res.Resources;
 import android.support.v7.widget.RecyclerView;

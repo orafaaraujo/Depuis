@@ -1,4 +1,4 @@
-package com.orafaaraujo.depuis.matchers;
+package com.orafaaraujo.depuis.helpers.matchers;
 
 import android.graphics.drawable.ColorDrawable;
 import android.os.Build;
