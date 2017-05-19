@@ -90,15 +90,11 @@ public class FactViewModel extends BaseObservable {
     }
 
     public int getCardClosedBackground() {
-        return alreadyClosed() ?
-                android.R.color.white :
-                R.color.main_close_fact_background;
+        return alreadyClosed() ? android.R.color.white : R.color.main_close_fact_background;
     }
 
     public int getCardClosedIcon() {
-        return alreadyClosed() ?
-                R.drawable.ic_lock_open_black_24dp :
-                R.drawable.ic_lock_22dp;
+        return alreadyClosed() ? R.drawable.ic_lock_open_black_24dp : R.drawable.ic_lock_22dp;
     }
 
     public int getBeginIcon() {

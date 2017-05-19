@@ -47,9 +47,9 @@ public class ElapsedDateTimeHelper {
                 .ofInstant(Instant.ofEpochMilli(startTime), ZoneId.systemDefault());
 
         // if the endtime is -1 that means that theres no end time, so count from now.
-        final LocalDateTime endDateTime = endTime == -1 ?
-                LocalDateTime.now() :
-                LocalDateTime.ofInstant(Instant.ofEpochMilli(endTime), ZoneId.systemDefault());
+        final LocalDateTime endDateTime = endTime == -1
+                ? LocalDateTime.now()
+                : LocalDateTime.ofInstant(Instant.ofEpochMilli(endTime), ZoneId.systemDefault());
 
         return calculate(beginDateTime, endDateTime);
     }

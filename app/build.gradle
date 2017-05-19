@@ -1,7 +1,7 @@
 apply plugin: 'com.android.application'
 apply plugin: 'me.tatarka.retrolambda'
 apply plugin: 'project-report'
-apply plugin: 'checkstyle'
+apply from: '../config/quality.gradle'
 
 android {
     compileSdkVersion 25
@@ -30,9 +30,6 @@ android {
     }
     defaultConfig {
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
-    }
-    lintOptions {
-        abortOnError false
     }
     packagingOptions {
         exclude 'META-INF/DEPENDENCIES'

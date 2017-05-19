@@ -174,12 +174,12 @@ public class FormattedElapsedTimeTest extends Application {
     private String calculeDate(LocalDate dateBegin, LocalDate dateEnd) {
         Period p = Period.between(dateBegin, dateEnd);
         if (p.getYears() > 0) {
-            return String.format(Locale.getDefault(),FORMAT_YEARS, p.getYears(), p.getMonths(),
+            return String.format(Locale.getDefault(), FORMAT_YEARS, p.getYears(), p.getMonths(),
                     p.getDays());
         } else if (p.getMonths() > 0) {
-            return String.format(Locale.getDefault(),FORMAT_MONTH, p.getMonths(), p.getDays());
+            return String.format(Locale.getDefault(), FORMAT_MONTH, p.getMonths(), p.getDays());
         } else if (p.getDays() > 0) {
-            return String.format(Locale.getDefault(),FORMAT_DAYS, p.getDays());
+            return String.format(Locale.getDefault(), FORMAT_DAYS, p.getDays());
         } else {
             return null;
         }
@@ -188,11 +188,11 @@ public class FormattedElapsedTimeTest extends Application {
     private String calculeTime(LocalTime timeBegin, LocalTime timeEnd) {
         Duration d = Duration.between(timeBegin, timeEnd);
         if (d.toHours() > 0) {
-            return String.format(Locale.getDefault(),FORMAT_HOURS, d.toHours());
+            return String.format(Locale.getDefault(), FORMAT_HOURS, d.toHours());
         } else if (d.toMinutes() > 0) {
-            return String.format(Locale.getDefault(),FORMAT_MINUTES, d.toMinutes());
+            return String.format(Locale.getDefault(), FORMAT_MINUTES, d.toMinutes());
         } else {
-            return String.format(Locale.getDefault(),FORMAT_SECONDS, d.getSeconds());
+            return String.format(Locale.getDefault(), FORMAT_SECONDS, d.getSeconds());
         }
     }
 }

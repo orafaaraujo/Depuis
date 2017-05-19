@@ -31,7 +31,7 @@ public interface FactDatabase {
      * * @return Fact founded in Database. Otherwise, return a null object.
      */
     @Nullable
-    Fact findFact(long FactId);
+    Fact findFact(long factId);
 
     /**
      * Get all Facts in Database. Must return a empty List if there's no records.
