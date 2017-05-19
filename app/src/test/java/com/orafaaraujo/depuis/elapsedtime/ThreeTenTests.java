@@ -1,4 +1,4 @@
-package com.orafaaraujo.depuis.elapsedTime;
+package com.orafaaraujo.depuis.elapsedtime;
 
 import static org.junit.Assert.assertEquals;
 

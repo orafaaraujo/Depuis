@@ -3,7 +3,7 @@ package com.orafaaraujo.depuis.repository.database;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 
-import com.orafaaraujo.depuis.model.Fact;
+import com.orafaaraujo.depuis.model.FactModel;
 
 import org.threeten.bp.LocalDate;
 import org.threeten.bp.LocalDateTime;
@@ -24,7 +24,7 @@ import io.reactivex.Single;
  */
 public class MockDatabase implements FactDatabase {
 
-    List<Fact> mFacts = new ArrayList<>();
+    List<FactModel> mFactModels = new ArrayList<>();
 
     private static final String LOREM_TITLE = "Lorem ipsum dolor sit amet";
 
@@ -54,12 +54,12 @@ public class MockDatabase implements FactDatabase {
 
         Observable
                 .range(0, 3)
-                .forEach(i -> mFacts.add(makeFact(i, time)));
+                .forEach(i -> mFactModels.add(makeFact(i, time)));
     }
 
-    private static Fact makeFact(int i, long time) {
+    private static FactModel makeFact(int i, long time) {
 
-        return Fact.builder()
+        return FactModel.builder()
                 .setId((int) new Date().getTime())
                 .setStartTime(time)
                 .setTitle(String.format(Locale.getDefault(), "%d %s", i, LOREM_TITLE))
@@ -69,38 +69,38 @@ public class MockDatabase implements FactDatabase {
     }
 
     @Override
-    public long saveFact(Fact fact) {
-        mFacts.add(fact);
-        return mFacts.size() - 1;
+    public long saveFact(FactModel factModel) {
+        mFactModels.add(factModel);
+        return mFactModels.size() - 1;
     }
 
     @Override
-    public void updateFact(Fact fact) {
+    public void updateFact(FactModel factModel) {
 
         Single<Integer> integerSingle = Observable
-                .range(0, mFacts.size())
-                .filter(i -> mFacts.get(i).id() == fact.id())
+                .range(0, mFactModels.size())
+                .filter(i -> mFactModels.get(i).id() == factModel.id())
                 .firstOrError();
 
         integerSingle.blockingGet();
 
         int index = 0;
-        for (int i = 0; i < mFacts.size(); i++) {
-            if (mFacts.get(i).id() == fact.id()) {
+        for (int i = 0; i < mFactModels.size(); i++) {
+            if (mFactModels.get(i).id() == factModel.id()) {
                 index = i;
                 break;
             }
         }
 
-        mFacts.remove(index);
-        mFacts.add(index, fact);
+        mFactModels.remove(index);
+        mFactModels.add(index, factModel);
     }
 
     @Nullable
     @Override
-    public Fact findFact(long factId) {
+    public FactModel findFact(long factId) {
 
-        Optional<Fact> first = mFacts
+        Optional<FactModel> first = mFactModels
                 .stream()
                 .filter(fact -> fact.id() == factId)
                 .findFirst();
@@ -114,18 +114,18 @@ public class MockDatabase implements FactDatabase {
 
     @NonNull
     @Override
-    public List<Fact> fetchAll() {
-        return mFacts;
+    public List<FactModel> fetchAll() {
+        return mFactModels;
     }
 
     @Override
-    public void deleteFact(Fact fact) {
-        mFacts.remove(fact);
+    public void deleteFact(FactModel factModel) {
+        mFactModels.remove(factModel);
     }
 
     @Override
     public void deleteTable() {
-        mFacts.clear();
-        mFacts = new ArrayList<>();
+        mFactModels.clear();
+        mFactModels = new ArrayList<>();
     }
 }

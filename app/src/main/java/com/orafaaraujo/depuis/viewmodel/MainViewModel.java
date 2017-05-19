@@ -1,4 +1,4 @@
-package com.orafaaraujo.depuis.viewModel;
+package com.orafaaraujo.depuis.viewmodel;
 
 import android.content.Context;
 import android.content.Intent;
@@ -10,7 +10,7 @@ import android.support.v7.widget.helper.ItemTouchHelper;
 import android.view.View;
 
 import com.orafaaraujo.depuis.helper.buses.FactTO;
-import com.orafaaraujo.depuis.model.Fact;
+import com.orafaaraujo.depuis.model.FactModel;
 import com.orafaaraujo.depuis.repository.database.FactDatabase;
 import com.orafaaraujo.depuis.view.activity.AboutActivity;
 import com.orafaaraujo.depuis.view.activity.NewFactActivity;
@@ -72,8 +72,8 @@ public class MainViewModel extends BaseObservable {
     }
 
     public void fetchFacts() {
-        List<Fact> facts = mDatabase.fetchAll();
-        mAdapter.updateFacts(facts);
+        List<FactModel> factModels = mDatabase.fetchAll();
+        mAdapter.updateFacts(factModels);
     }
 
     public RecyclerView.OnScrollListener getScrollListener() {
@@ -127,13 +127,13 @@ public class MainViewModel extends BaseObservable {
     }
 
     /**
-     * Update on database a endtime of a Fact.
+     * Update on database a endtime of a FactModel.
      *
-     * @param factTO Fact to be copied to a new one (because is immutable) and save on database.
+     * @param factTO FactModel to be copied to a new one (because is immutable) and save on database.
      */
     public void closeFact(FactTO factTO) {
 
-        Fact closedFact = Fact.builder()
+        FactModel closedFactModel = FactModel.builder()
                 .setId(factTO.fact().id())
                 .setStartTime(factTO.fact().startTime())
                 .setTitle(factTO.fact().title())
@@ -141,13 +141,13 @@ public class MainViewModel extends BaseObservable {
                 .setEndTime(new Date().getTime())
                 .build();
 
-        mDatabase.updateFact(closedFact);
-        mAdapter.notifyClosedFact(factTO.position(), closedFact);
+        mDatabase.updateFact(closedFactModel);
+        mAdapter.notifyClosedFact(factTO.position(), closedFactModel);
     }
 
     public void newFactAdded(FactTO factTO) {
-        Fact foundFact = mDatabase.findFact(factTO.fact().id());
-        mAdapter.insertFact(0, foundFact);
+        FactModel foundFactModel = mDatabase.findFact(factTO.fact().id());
+        mAdapter.insertFact(0, foundFactModel);
         mLayoutManagerProvider.get().scrollToPosition(0);
     }
 

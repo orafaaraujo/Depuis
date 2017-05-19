@@ -1,4 +1,4 @@
-package com.orafaaraujo.depuis.elapsedTime;
+package com.orafaaraujo.depuis.elapsedtime;
 
 import static org.junit.Assert.assertEquals;
 
@@ -23,6 +23,8 @@ import org.threeten.bp.ZoneId;
 import java.util.Calendar;
 import java.util.Locale;
 
+import timber.log.Timber;
+
 /**
  * Test with elapsed time formatted to human.
  *
@@ -37,40 +39,42 @@ public class FormattedElapsedTimeTest extends Application {
 
     private LocalDateTime mEndDateTime;
 
-    @SuppressWarnings("FieldCanBeLocal")
+    private final String WARNING = "FieldCanBeLocal";
+
+    @SuppressWarnings(WARNING)
     private final String MAX_SECONDS = "5s";
 
-    @SuppressWarnings("FieldCanBeLocal")
+    @SuppressWarnings(WARNING)
     private final String FORMAT_SECONDS = "%ds";
 
-    @SuppressWarnings("FieldCanBeLocal")
+    @SuppressWarnings(WARNING)
     private final String MAX_MINUTES = "5m";
 
-    @SuppressWarnings("FieldCanBeLocal")
+    @SuppressWarnings(WARNING)
     private final String FORMAT_MINUTES = "%dm";
 
-    @SuppressWarnings("FieldCanBeLocal")
+    @SuppressWarnings(WARNING)
     private final String MAX_HOURS = "5h";
 
-    @SuppressWarnings("FieldCanBeLocal")
+    @SuppressWarnings(WARNING)
     private final String FORMAT_HOURS = "%dh";
 
-    @SuppressWarnings("FieldCanBeLocal")
+    @SuppressWarnings(WARNING)
     private final String MAX_DAYS = "5 days";
 
-    @SuppressWarnings("FieldCanBeLocal")
+    @SuppressWarnings(WARNING)
     private final String FORMAT_DAYS = "%d days";
 
-    @SuppressWarnings("FieldCanBeLocal")
+    @SuppressWarnings(WARNING)
     private final String MAX_MONTHS = "4 months and 5 days";
 
-    @SuppressWarnings("FieldCanBeLocal")
+    @SuppressWarnings(WARNING)
     private final String FORMAT_MONTH = "%d months and %d days";
 
-    @SuppressWarnings("FieldCanBeLocal")
+    @SuppressWarnings(WARNING)
     private final String MAX_YEARS = "3 years and 4 months and 5 days";
 
-    @SuppressWarnings("FieldCanBeLocal")
+    @SuppressWarnings(WARNING)
     private final String FORMAT_YEARS = "%d years and %d months and %d days";
 
     @Before
@@ -159,7 +163,7 @@ public class FormattedElapsedTimeTest extends Application {
 
         final String calculate = calculate(beginDateTime, LocalDateTime.now());
 
-        System.out.printf(calculate);
+        Timber.d(calculate);
 
     }
 

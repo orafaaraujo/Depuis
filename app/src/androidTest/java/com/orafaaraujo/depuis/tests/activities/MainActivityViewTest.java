@@ -17,7 +17,6 @@ import static org.hamcrest.Matchers.notNullValue;
 import static org.junit.Assert.assertThat;
 
 import android.support.design.widget.FloatingActionButton;
-import android.support.test.espresso.matcher.ViewMatchers;
 import android.support.test.filters.MediumTest;
 import android.support.test.filters.SdkSuppress;
 import android.support.test.rule.ActivityTestRule;
@@ -90,7 +89,7 @@ public class MainActivityViewTest implements ViewsInterfaceTests {
         assertThat(emptyButton, instanceOf(Button.class));
         assertThat(emptyButton, isClickable());
 
-        onView(ViewMatchers.withId(R.id.activity_main_empty_list_button))
+        onView(withId(R.id.activity_main_empty_list_button))
                 .check(matches(isCompletelyDisplayed()))
                 .check(matches(is(isEnabled())))
                 .check(matches(isClickable()))

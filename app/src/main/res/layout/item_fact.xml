@@ -9,7 +9,7 @@
 
         <variable
             name="viewModel"
-            type="com.orafaaraujo.depuis.viewModel.FactViewModel" />
+            type="com.orafaaraujo.depuis.viewmodel.FactViewModel" />
     </data>
 
     <RelativeLayout

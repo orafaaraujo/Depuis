@@ -9,7 +9,7 @@
 
         <variable
             name="viewModel"
-            type="com.orafaaraujo.depuis.viewModel.MainViewModel" />
+            type="com.orafaaraujo.depuis.viewmodel.MainViewModel" />
     </data>
 
     <android.support.design.widget.CoordinatorLayout

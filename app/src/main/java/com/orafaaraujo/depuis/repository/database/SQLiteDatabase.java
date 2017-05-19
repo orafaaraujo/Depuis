@@ -7,7 +7,7 @@ import android.database.sqlite.SQLiteOpenHelper;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 
-import com.orafaaraujo.depuis.model.Fact;
+import com.orafaaraujo.depuis.model.FactModel;
 import com.orafaaraujo.depuis.repository.contract.FactContract;
 
 import java.util.ArrayList;
@@ -41,27 +41,27 @@ public class SQLiteDatabase extends SQLiteOpenHelper implements FactDatabase {
     }
 
     @Override
-    public long saveFact(Fact fact) {
+    public long saveFact(FactModel factModel) {
         final ContentValues values = new ContentValues();
-        values.put(FactContract.FactEntry.COLUMN_NAME_START_TIME, fact.startTime());
-        values.put(FactContract.FactEntry.COLUMN_NAME_TITLE, fact.title());
-        values.put(FactContract.FactEntry.COLUMN_NAME_COMMENT, fact.comment());
-        values.put(FactContract.FactEntry.COLUMN_NAME_END_TIME, fact.endTime());
+        values.put(FactContract.FactEntry.COLUMN_NAME_START_TIME, factModel.startTime());
+        values.put(FactContract.FactEntry.COLUMN_NAME_TITLE, factModel.title());
+        values.put(FactContract.FactEntry.COLUMN_NAME_COMMENT, factModel.comment());
+        values.put(FactContract.FactEntry.COLUMN_NAME_END_TIME, factModel.endTime());
 
         return getWritableDatabase().insert(FactContract.FactEntry.TABLE_NAME, null, values);
     }
 
     @Override
-    public void updateFact(Fact fact) {
+    public void updateFact(FactModel factModel) {
 
         final ContentValues values = new ContentValues();
-        values.put(FactContract.FactEntry.COLUMN_NAME_START_TIME, fact.startTime());
-        values.put(FactContract.FactEntry.COLUMN_NAME_TITLE, fact.title());
-        values.put(FactContract.FactEntry.COLUMN_NAME_COMMENT, fact.comment());
-        values.put(FactContract.FactEntry.COLUMN_NAME_END_TIME, fact.endTime());
+        values.put(FactContract.FactEntry.COLUMN_NAME_START_TIME, factModel.startTime());
+        values.put(FactContract.FactEntry.COLUMN_NAME_TITLE, factModel.title());
+        values.put(FactContract.FactEntry.COLUMN_NAME_COMMENT, factModel.comment());
+        values.put(FactContract.FactEntry.COLUMN_NAME_END_TIME, factModel.endTime());
 
         final String where = FactContract.FactEntry._ID + " = ?";
-        final String[] whereArgs = {String.valueOf(fact.id())};
+        final String[] whereArgs = {String.valueOf(factModel.id())};
 
         getWritableDatabase().update(FactContract.FactEntry.TABLE_NAME, values, where, whereArgs);
 
@@ -69,9 +69,9 @@ public class SQLiteDatabase extends SQLiteOpenHelper implements FactDatabase {
 
     @Nullable
     @Override
-    public Fact findFact(long factId) {
+    public FactModel findFact(long factId) {
 
-        Fact returnFact = null;
+        FactModel returnFactModel = null;
 
         final String where = FactContract.FactEntry._ID + " = ?";
         final String[] whereArgs = {String.valueOf(factId)};
@@ -80,7 +80,7 @@ public class SQLiteDatabase extends SQLiteOpenHelper implements FactDatabase {
         while (cursor.moveToNext()) {
 
 
-            returnFact = Fact.builder()
+            returnFactModel = FactModel.builder()
                     .setId(cursor.getInt(0))
                     .setStartTime(cursor.getLong(1))
                     .setTitle(cursor.getString(2))
@@ -89,20 +89,20 @@ public class SQLiteDatabase extends SQLiteOpenHelper implements FactDatabase {
                     .build();
         }
         cursor.close();
-        return returnFact;
+        return returnFactModel;
     }
 
     @NonNull
     @Override
-    public List<Fact> fetchAll() {
+    public List<FactModel> fetchAll() {
         final Cursor cursor = getReadableDatabase()
                 .rawQuery(FactContract.FactEntry.FIND_ALL, null);
 
-        final List<Fact> facts = new ArrayList<>(cursor.getCount());
+        final List<FactModel> factModels = new ArrayList<>(cursor.getCount());
 
         while (cursor.moveToNext()) {
-            facts.add(
-                    Fact.builder()
+            factModels.add(
+                    FactModel.builder()
                             .setId(cursor.getInt(0))
                             .setStartTime(cursor.getLong(1))
                             .setTitle(cursor.getString(2))
@@ -111,13 +111,13 @@ public class SQLiteDatabase extends SQLiteOpenHelper implements FactDatabase {
                             .build());
         }
         cursor.close();
-        return facts;
+        return factModels;
     }
 
     @Override
-    public void deleteFact(Fact fact) {
+    public void deleteFact(FactModel factModel) {
         final String selection = FactContract.FactEntry._ID + " = ?";
-        final String[] selectionArgs = {String.valueOf(fact.id())};
+        final String[] selectionArgs = {String.valueOf(factModel.id())};
         getWritableDatabase().delete(FactContract.FactEntry.TABLE_NAME, selection, selectionArgs);
     }
 

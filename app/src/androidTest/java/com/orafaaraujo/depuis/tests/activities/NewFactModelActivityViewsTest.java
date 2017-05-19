@@ -36,7 +36,7 @@ import org.junit.runner.RunWith;
 @SmallTest
 @SdkSuppress(minSdkVersion = 16)
 @RunWith(AndroidJUnit4.class)
-public class NewFactActivityViewsTest implements ViewsInterfaceTests {
+public class NewFactModelActivityViewsTest implements ViewsInterfaceTests {
 
     @Rule
     public ActivityTestRule<NewFactActivity> rule = new ActivityTestRule<>(NewFactActivity.class);

@@ -18,7 +18,7 @@ import com.orafaaraujo.depuis.helper.buses.NewFactFeedbackTO;
 import com.orafaaraujo.depuis.view.bindingadapter.DepuisDataBindingComponent;
 import com.orafaaraujo.depuis.view.fragments.DatePickerFragment;
 import com.orafaaraujo.depuis.view.fragments.TimePickerFragment;
-import com.orafaaraujo.depuis.viewModel.NewFactViewModel;
+import com.orafaaraujo.depuis.viewmodel.NewFactViewModel;
 
 import javax.inject.Inject;
 

@@ -10,10 +10,10 @@ import com.orafaaraujo.depuis.R;
 import com.orafaaraujo.depuis.databinding.ItemFactBinding;
 import com.orafaaraujo.depuis.helper.RxBus;
 import com.orafaaraujo.depuis.helper.buses.FactTO;
-import com.orafaaraujo.depuis.model.Fact;
+import com.orafaaraujo.depuis.model.FactModel;
 import com.orafaaraujo.depuis.view.adapter.viewholder.BindingHolder;
 import com.orafaaraujo.depuis.view.bindingadapter.DepuisDataBindingComponent;
-import com.orafaaraujo.depuis.viewModel.FactViewModel;
+import com.orafaaraujo.depuis.viewmodel.FactViewModel;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -39,11 +39,11 @@ public class FactAdapter extends RecyclerView.Adapter<BindingHolder> {
     @Inject
     RxBus mRxBus;
 
-    private final List<Fact> mFacts;
+    private final List<FactModel> mFactModels;
 
     @Inject
     FactAdapter() {
-        mFacts = new ArrayList<>(0);
+        mFactModels = new ArrayList<>(0);
     }
 
     @Override
@@ -63,25 +63,25 @@ public class FactAdapter extends RecyclerView.Adapter<BindingHolder> {
         final FactViewModel factViewModel = mFactViewModelProvider.get();
         binding.setViewModel(factViewModel);
         factViewModel.setPosition(position);
-        factViewModel.setFact(mFacts.get(position));
+        factViewModel.setFactModel(mFactModels.get(position));
     }
 
     @Override
     public int getItemCount() {
-        return mFacts.size();
+        return mFactModels.size();
     }
 
-    public void updateFacts(List<Fact> facts) {
-        mFacts.clear();
-        mFacts.addAll(facts);
-        // TODO If has a new Fact update a list with the current position!!!
+    public void updateFacts(List<FactModel> factModels) {
+        mFactModels.clear();
+        mFactModels.addAll(factModels);
+        // TODO If has a new FactModel update a list with the current position!!!
         notifyDataSetChanged();
     }
 
-    public void insertFact(int position, Fact fact) {
-        mFacts.add(position, fact);
+    public void insertFact(int position, FactModel factModel) {
+        mFactModels.add(position, factModel);
         notifyItemInserted(position);
-        notifyItemRangeChanged(position, mFacts.size());
+        notifyItemRangeChanged(position, mFactModels.size());
     }
 
     public void onItemDismiss(int position) {
@@ -92,7 +92,7 @@ public class FactAdapter extends RecyclerView.Adapter<BindingHolder> {
     private void sendRemoveEvent(int position) {
         mRxBus.sendEvent(
                 FactTO.builder()
-                        .setFact(mFacts.get(position))
+                        .setFact(mFactModels.get(position))
                         .setPosition(position)
                         .setDelete(true)
                         .setNewFact(false)
@@ -101,14 +101,14 @@ public class FactAdapter extends RecyclerView.Adapter<BindingHolder> {
     }
 
     private void removerItem(int position) {
-        mFacts.remove(position);
+        mFactModels.remove(position);
         notifyItemRemoved(position);
-        notifyItemRangeChanged(position, mFacts.size());
+        notifyItemRangeChanged(position, mFactModels.size());
     }
 
-    public void notifyClosedFact(int position, Fact fact) {
-        mFacts.remove(position);
-        mFacts.add(position, fact);
+    public void notifyClosedFact(int position, FactModel factModel) {
+        mFactModels.remove(position);
+        mFactModels.add(position, factModel);
         notifyItemChanged(position);
     }
 }

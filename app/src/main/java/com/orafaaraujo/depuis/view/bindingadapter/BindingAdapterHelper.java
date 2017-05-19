@@ -40,9 +40,7 @@ public class BindingAdapterHelper {
 
     @BindingAdapter({"bind:layout_manager"})
     public void setLayoutManager(final RecyclerView rv, final RecyclerView.LayoutManager lm) {
-        if (rv.getLayoutManager() != null) {
-            rv.setLayoutManager(lm);
-        }
+        rv.setLayoutManager(lm);
     }
 
     @BindingAdapter({"bind:divider_item"})
@@ -76,7 +74,7 @@ public class BindingAdapterHelper {
 
     @BindingAdapter({"bind:source"})
     public void setImageButtonSource(final ImageButton imageButton,
-                                     @DrawableRes final int resource) {
+            @DrawableRes final int resource) {
         imageButton.setImageResource(resource);
     }
 

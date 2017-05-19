@@ -4,7 +4,7 @@ import android.content.Context;
 import android.content.Intent;
 
 import com.orafaaraujo.depuis.R;
-import com.orafaaraujo.depuis.model.Fact;
+import com.orafaaraujo.depuis.model.FactModel;
 
 import javax.inject.Inject;
 
@@ -29,24 +29,24 @@ public class ShareContentHelper {
     }
 
     /**
-     * Method to share a fact on social networks.
+     * Method to share a factModel on social networks.
      *
-     * @param fact Fact that user want to share to.
+     * @param factModel FactModel that user want to share to.
      */
-    public void share(Fact fact) {
+    public void share(FactModel factModel) {
         Intent sendIntent = new Intent();
         sendIntent.setAction(Intent.ACTION_SEND);
-        sendIntent.putExtra(Intent.EXTRA_TEXT, makeText(mContext, fact));
+        sendIntent.putExtra(Intent.EXTRA_TEXT, makeText(mContext, factModel));
         sendIntent.setType("text/plain");
         mContext.startActivity(
                 Intent.createChooser(sendIntent, mContext.getString(R.string.fact_share_message)));
     }
 
-    private String makeText(Context context, Fact fact) {
+    private String makeText(Context context, FactModel factModel) {
         return context.getString(
                 R.string.fact_share_fact,
-                mElapsedDateTimeHelper.getTime(fact.startTime(), fact.endTime()),
-                fact.title()
+                mElapsedDateTimeHelper.getTime(factModel.startTime(), factModel.endTime()),
+                factModel.title()
         );
     }
 

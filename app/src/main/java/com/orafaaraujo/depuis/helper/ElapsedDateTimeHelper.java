@@ -4,6 +4,7 @@ import android.content.Context;
 import android.text.TextUtils;
 
 import com.orafaaraujo.depuis.R;
+import com.orafaaraujo.depuis.model.FactModel;
 
 import org.threeten.bp.Duration;
 import org.threeten.bp.Instant;
@@ -18,7 +19,7 @@ import javax.inject.Inject;
 import dagger.Reusable;
 
 /**
- * Class used to calculate the elapsed datetime since the @{@link com.orafaaraujo.depuis.model.Fact}
+ * Class used to calculate the elapsed datetime since the @{@link FactModel}
  * was created.
  *
  * Created by rafael on 21/01/17.
