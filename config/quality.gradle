@@ -1,6 +1,7 @@
 apply plugin: 'checkstyle'
+apply plugin: 'findbugs'
 
-check.dependsOn 'checkstyle'
+check.dependsOn 'checkstyle', 'findbugs'
 
 def configDir = "${project.rootDir}/config/quality"
 def reportsDir = "${project.buildDir}/reports"
@@ -11,6 +12,31 @@ task checkstyle(type: Checkstyle) {
     source 'src'
     include '**/*.java'
     exclude '**/gen/**'
+    classpath = files()
+}
+
+task findbugs(type: FindBugs, dependsOn: "assembleDebug") {
+    ignoreFailures = false
+    effort = "max"
+    reportLevel = "high"
+    excludeFilter = new File("$configDir/findbugs/findbugs-filter.xml")
+    classes = files("${project.rootDir}/app/build/intermediates/classes")
+
+    source 'src'
+    include '**/*.java'
+    exclude '**/gen/**'
+
+    reports {
+        xml.enabled = false
+        html.enabled = true
+        xml {
+            destination "$reportsDir/findbugs/findbugs.xml"
+        }
+        html {
+            destination "$reportsDir/findbugs/findbugs.html"
+        }
+    }
+
     classpath = files()
 }
 
