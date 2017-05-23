@@ -49,8 +49,8 @@ public class BindingAdapterHelper {
     }
 
     @BindingAdapter({"bind:on_scroll_listener"})
-    public void setScrollListener(final RecyclerView view, RecyclerView.OnScrollListener l) {
-        view.addOnScrollListener(l);
+    public void setScrollListener(final RecyclerView view, RecyclerView.OnScrollListener sl) {
+        view.addOnScrollListener(sl);
     }
 
     @BindingAdapter({"bind:item_touch"})

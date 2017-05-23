@@ -26,17 +26,23 @@ import timber.log.Timber;
 
 public class NewFactViewModel extends BaseObservable {
 
-    public final ObservableField<String> titleFact = new ObservableField<>("");
-    public final ObservableField<String> commentFact = new ObservableField<>("");
     @Inject
     RxBus mRxBus;
+
     @Inject
     Context mContext;
+
     @Inject
     DateTimeHelper mDateTimeHelper;
+
     @Inject
     FactDatabase mDatabase;
+
     private long mMilliseconds;
+
+    public final ObservableField<String> titleFact = new ObservableField<>("");
+
+    public final ObservableField<String> commentFact = new ObservableField<>("");
 
     private boolean mTextIsFilled = false;
 
@@ -122,18 +128,18 @@ public class NewFactViewModel extends BaseObservable {
     public TextWatcher getWatcher() {
         return new TextWatcher() {
             @Override
-            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+            public void beforeTextChanged(CharSequence sequences, int start, int count, int after) {
 
             }
 
             @Override
-            public void onTextChanged(CharSequence s, int start, int before, int count) {
+            public void onTextChanged(CharSequence sequence, int start, int before, int count) {
 
             }
 
             @Override
-            public void afterTextChanged(Editable s) {
-                mTextIsFilled = !TextUtils.isEmpty(s.toString().trim());
+            public void afterTextChanged(Editable editable) {
+                mTextIsFilled = !TextUtils.isEmpty(editable.toString().trim());
             }
         };
     }

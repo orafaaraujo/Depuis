@@ -39,8 +39,8 @@ public class ElapsedDateTimeHelper {
      *
      * @param startTime The start time in milliseconds
      * @param endTime   The end time in milliseconds
-     * @return The string formatted by the maximo time passed. For example, if was 15 minutes will
-     * return "15m", but if is 20 days will return "20 days" and go on.
+     * @return The string formatted by the maximo time passed. For example, if was 15 minutes
+     *     will return "15m", but if is 20 days will return "20 days" and go on.
      */
     public String getTime(long startTime, long endTime) {
 
@@ -64,29 +64,29 @@ public class ElapsedDateTimeHelper {
     }
 
     private String calculeDate(LocalDate dateBegin, LocalDate dateEnd) {
-        Period p = Period.between(dateBegin, dateEnd);
-        if (p.getYears() > 0) {
-            return mContext.getResources().getQuantityString(R.plurals.elapsed_years, p.getYears(),
-                    p.getYears(), p.getMonths(), p.getDays());
-        } else if (p.getMonths() > 0) {
+        Period period = Period.between(dateBegin, dateEnd);
+        if (period.getYears() > 0) {
+            return mContext.getResources().getQuantityString(R.plurals.elapsed_years,
+                    period.getYears(), period.getYears(), period.getMonths(), period.getDays());
+        } else if (period.getMonths() > 0) {
             return mContext.getResources().getQuantityString(R.plurals.elapsed_months,
-                    p.getMonths(), p.getMonths(), p.getDays());
-        } else if (p.getDays() > 0) {
-            return mContext.getResources().getQuantityString(R.plurals.elapsed_days, p.getDays(),
-                    p.getDays());
+                    period.getMonths(), period.getMonths(), period.getDays());
+        } else if (period.getDays() > 0) {
+            return mContext.getResources().getQuantityString(R.plurals.elapsed_days,
+                    period.getDays(), period.getDays());
         } else {
             return null;
         }
     }
 
     private String calculeTime(LocalTime timeBegin, LocalTime timeEnd) {
-        Duration d = Duration.between(timeBegin, timeEnd);
-        if (d.toHours() > 0) {
-            return mContext.getString(R.string.elapsed_hours, d.toHours());
-        } else if (d.toMinutes() > 0) {
-            return mContext.getString(R.string.elapsed_minutes, d.toMinutes());
+        Duration duration = Duration.between(timeBegin, timeEnd);
+        if (duration.toHours() > 0) {
+            return mContext.getString(R.string.elapsed_hours, duration.toHours());
+        } else if (duration.toMinutes() > 0) {
+            return mContext.getString(R.string.elapsed_minutes, duration.toMinutes());
         } else {
-            return mContext.getString(R.string.elapsed_seconds, d.getSeconds());
+            return mContext.getString(R.string.elapsed_seconds, duration.getSeconds());
         }
     }
 }

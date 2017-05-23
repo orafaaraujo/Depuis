@@ -58,12 +58,14 @@ public class SimpleItemTouchHelperCallback extends ItemTouchHelper.Callback {
     }
 
     @Override
-    public void onChildDraw(Canvas c, RecyclerView recyclerView, RecyclerView.ViewHolder viewHolder,
-            float dX, float dY, int actionState, boolean isCurrentlyActive) {
+    public void onChildDraw(Canvas canvas, RecyclerView recyclerView,
+            RecyclerView.ViewHolder viewHolder,
+            float horizontalDisplacement, float verticalDisplacement, int actionState,
+            boolean isCurrentlyActive) {
 
         if (actionState == ItemTouchHelper.ACTION_STATE_SWIPE) {
 
-            if (dX < 0) {
+            if (horizontalDisplacement < 0) {
 
                 View itemView = viewHolder.itemView;
                 final Paint paint = new Paint();
@@ -75,13 +77,15 @@ public class SimpleItemTouchHelperCallback extends ItemTouchHelper.Callback {
                 float height = (itemView.getHeight() / 2) - (bitmap.getHeight() / 2);
                 float bitmapWidth = bitmap.getWidth();
 
-                c.drawRect((float) itemView.getRight() + dX, (float) itemView.getTop(),
+                canvas.drawRect((float) itemView.getRight() + horizontalDisplacement,
+                        (float) itemView.getTop(),
                         (float) itemView.getRight(), (float) itemView.getBottom(), paint);
-                c.drawBitmap(bitmap, ((float) itemView.getRight() - bitmapWidth) - 96f,
+                canvas.drawBitmap(bitmap, ((float) itemView.getRight() - bitmapWidth) - 96f,
                         (float) itemView.getTop() + height, null);
             }
 
-            super.onChildDraw(c, recyclerView, viewHolder, dX, dY, actionState, isCurrentlyActive);
+            super.onChildDraw(canvas, recyclerView, viewHolder, horizontalDisplacement,
+                    verticalDisplacement, actionState, isCurrentlyActive);
         }
     }
 

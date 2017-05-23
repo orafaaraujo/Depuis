@@ -24,16 +24,16 @@ public class FontCache {
 
     private static final String FONT_DIR = "fonts";
 
-    private static Map<String, Typeface> cache = new HashMap<>();
+    private static Map<String, Typeface> sCache = new HashMap<>();
 
-    private static Map<String, String> fontMapping = new HashMap<>();
+    private static Map<String, String> sFontMapping = new HashMap<>();
 
     Context mContext;
 
     public FontCache(Context context) {
         mContext = context;
         AssetManager am = mContext.getResources().getAssets();
-        String fileList[];
+        String[] fileList;
         try {
             fileList = am.list(FONT_DIR);
         } catch (IOException e) {
@@ -43,27 +43,27 @@ public class FontCache {
 
         for (String filename : fileList) {
             String alias = filename.substring(0, filename.lastIndexOf('.'));
-            fontMapping.put(alias, filename);
-            fontMapping.put(alias.toLowerCase(Locale.getDefault()), filename);
+            sFontMapping.put(alias, filename);
+            sFontMapping.put(alias.toLowerCase(Locale.getDefault()), filename);
         }
     }
 
     public void addFont(String name, String fontFilename) {
-        fontMapping.put(name, fontFilename);
+        sFontMapping.put(name, fontFilename);
     }
 
     public Typeface get(String fontName) {
-        String fontFilename = fontMapping.get(fontName);
+        String fontFilename = sFontMapping.get(fontName);
         if (fontFilename == null) {
             Timber.e("Couldn't find font %s. Maybe you need to call addFont() first?", fontName);
             return null;
         }
-        if (cache.containsKey(fontFilename)) {
-            return cache.get(fontFilename);
+        if (sCache.containsKey(fontFilename)) {
+            return sCache.get(fontFilename);
         } else {
             Typeface typeface = Typeface.createFromAsset(mContext.getAssets(),
                     FONT_DIR + "/" + fontFilename);
-            cache.put(fontFilename, typeface);
+            sCache.put(fontFilename, typeface);
             return typeface;
         }
     }

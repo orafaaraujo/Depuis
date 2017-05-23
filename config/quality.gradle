@@ -7,12 +7,19 @@ check.dependsOn 'checkstyle', 'findbugs', 'pmd', 'lint'
 def configDir = "${project.rootDir}/config/quality"
 def reportsDir = "${project.buildDir}/reports"
 
+checkstyle {
+    toolVersion = "6.13"
+}
+
 task checkstyle(type: Checkstyle) {
     configFile file("$configDir/checkstyle/checkstyle.xml")
+    configProperties = ['checkstyle.java.header': file("$configDir/checkstyle/java.header").getAbsolutePath()]
     configProperties.checkstyleSuppressionsPath = file("$configDir/checkstyle/suppressions.xml").absolutePath
-    source 'src'
+
+    source 'src/main'
     include '**/*.java'
     exclude '**/gen/**'
+
     classpath = files()
 }
 

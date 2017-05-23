@@ -42,12 +42,12 @@ public class MockDatabase implements FactDatabase {
         }
     }
 
-    private static FactModel makeFact(int i, long time) {
+    private static FactModel makeFact(int index, long time) {
 
         return FactModel.builder()
                 .setId((int) new Date().getTime())
                 .setStartTime(time)
-                .setTitle(String.format(Locale.getDefault(), "%d %s", i, LOREM_TITLE))
+                .setTitle(String.format(Locale.getDefault(), "%d %s", index, LOREM_TITLE))
                 .setComment(LOREM_COMMENT)
                 .setEndTime(-1)
                 .build();

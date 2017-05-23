@@ -56,8 +56,8 @@ public class NewFactActivity extends AppCompatActivity {
         newFactBinding.setViewModel(mNewFactViewModel);
 
         newFactBinding.newFactTextEdittextTitle.setOnFocusChangeListener(
-                (v, hasFocus) -> {
-                    if (v.getId() == R.id.new_fact_text_edittext_title && !hasFocus) {
+                (view, hasFocus) -> {
+                    if (view.getId() == R.id.new_fact_text_edittext_title && !hasFocus) {
 
 
                     }
@@ -91,8 +91,8 @@ public class NewFactActivity extends AppCompatActivity {
         }
     }
 
-    private void showSnackMessage(String s) {
-        Snackbar.make(findViewById(R.id.new_fact_text_title), s, Snackbar.LENGTH_SHORT).show();
+    private void showSnackMessage(String string) {
+        Snackbar.make(findViewById(R.id.new_fact_text_title), string, Snackbar.LENGTH_SHORT).show();
     }
 
     public void onBackButton(View view) {
