@@ -27,19 +27,15 @@ import javax.inject.Provider;
 
 public class FactAdapter extends RecyclerView.Adapter<BindingHolder> {
 
+    private final List<FactModel> mFactModels;
     @Inject
     Context mContext;
-
     @Inject
     DepuisDataBindingComponent mBindingComponent;
-
     @Inject
     Provider<FactViewModel> mFactViewModelProvider;
-
     @Inject
     RxBus mRxBus;
-
-    private final List<FactModel> mFactModels;
 
     @Inject
     FactAdapter() {
@@ -74,7 +70,6 @@ public class FactAdapter extends RecyclerView.Adapter<BindingHolder> {
     public void updateFacts(List<FactModel> factModels) {
         mFactModels.clear();
         mFactModels.addAll(factModels);
-        // TODO If has a new FactModel update a list with the current position!!!
         notifyDataSetChanged();
     }
 

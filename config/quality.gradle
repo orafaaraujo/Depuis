@@ -2,7 +2,7 @@ apply plugin: 'checkstyle'
 apply plugin: 'findbugs'
 apply plugin: 'pmd'
 
-check.dependsOn 'checkstyle', 'findbugs', 'pmd'
+check.dependsOn 'checkstyle', 'findbugs', 'pmd', 'lint'
 
 def configDir = "${project.rootDir}/config/quality"
 def reportsDir = "${project.buildDir}/reports"
@@ -64,6 +64,7 @@ task pmd(type: Pmd) {
 
 android {
     lintOptions {
+        warningsAsErrors true
         abortOnError true
         xmlReport false
         htmlReport true

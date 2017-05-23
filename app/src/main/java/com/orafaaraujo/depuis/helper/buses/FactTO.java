@@ -6,6 +6,10 @@ import com.orafaaraujo.depuis.model.FactModel;
 @AutoValue
 public abstract class FactTO {
 
+    public static FactTO.Builder builder() {
+        return new AutoValue_FactTO.Builder();
+    }
+
     public abstract FactModel fact();
 
     public abstract int position();
@@ -15,10 +19,6 @@ public abstract class FactTO {
     public abstract boolean delete();
 
     public abstract boolean close();
-
-    public static FactTO.Builder builder() {
-        return new AutoValue_FactTO.Builder();
-    }
 
     @AutoValue.Builder
     public abstract static class Builder {

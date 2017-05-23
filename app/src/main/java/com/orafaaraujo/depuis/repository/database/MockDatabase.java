@@ -14,7 +14,6 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 import java.util.Locale;
-import java.util.Optional;
 
 import io.reactivex.Observable;
 import io.reactivex.Single;
@@ -24,10 +23,7 @@ import io.reactivex.Single;
  */
 public class MockDatabase implements FactDatabase {
 
-    List<FactModel> mFactModels = new ArrayList<>();
-
     private static final String LOREM_TITLE = "Lorem ipsum dolor sit amet";
-
     private static final String LOREM_COMMENT =
             "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nulla vehicula egestas "
                     + "libero, sit amet elementum turpis. Pellentesque mattis nibh at urna "
@@ -38,11 +34,23 @@ public class MockDatabase implements FactDatabase {
                     + "augue eget fringilla. Cras eget sodales libero. Class aptent taciti "
                     + "sociosqu ad litora torquent per conubia nostra, per inceptos himenaeos. In"
                     + " vel sodales lacus";
+    private List<FactModel> mFactModels = new ArrayList<>();
 
     public MockDatabase(boolean dbStarted) {
         if (dbStarted) {
             fetchFacts();
         }
+    }
+
+    private static FactModel makeFact(int i, long time) {
+
+        return FactModel.builder()
+                .setId((int) new Date().getTime())
+                .setStartTime(time)
+                .setTitle(String.format(Locale.getDefault(), "%d %s", i, LOREM_TITLE))
+                .setComment(LOREM_COMMENT)
+                .setEndTime(-1)
+                .build();
     }
 
     private void fetchFacts() {
@@ -57,21 +65,10 @@ public class MockDatabase implements FactDatabase {
                 .forEach(i -> mFactModels.add(makeFact(i, time)));
     }
 
-    private static FactModel makeFact(int i, long time) {
-
-        return FactModel.builder()
-                .setId((int) new Date().getTime())
-                .setStartTime(time)
-                .setTitle(String.format(Locale.getDefault(), "%d %s", i, LOREM_TITLE))
-                .setComment(LOREM_COMMENT)
-                .setEndTime(-1)
-                .build();
-    }
-
     @Override
     public long saveFact(FactModel factModel) {
         mFactModels.add(factModel);
-        return mFactModels.size() - 1;
+        return factModel.id();
     }
 
     @Override
@@ -100,16 +97,12 @@ public class MockDatabase implements FactDatabase {
     @Override
     public FactModel findFact(long factId) {
 
-        Optional<FactModel> first = mFactModels
-                .stream()
-                .filter(fact -> fact.id() == factId)
-                .findFirst();
+        Observable<FactModel> map = Observable
+                .fromIterable(mFactModels)
+                .filter(factModel -> factModel.id() == factId)
+                .map(factModel -> factModel);
 
-        if (first.isPresent()) {
-            return first.get();
-        } else {
-            return null;
-        }
+        return map.firstElement().blockingGet();
     }
 
     @NonNull

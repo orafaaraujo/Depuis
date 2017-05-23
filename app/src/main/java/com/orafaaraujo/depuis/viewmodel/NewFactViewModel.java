@@ -26,22 +26,16 @@ import timber.log.Timber;
 
 public class NewFactViewModel extends BaseObservable {
 
+    public final ObservableField<String> titleFact = new ObservableField<>("");
+    public final ObservableField<String> commentFact = new ObservableField<>("");
     @Inject
     RxBus mRxBus;
-
     @Inject
     Context mContext;
-
     @Inject
     DateTimeHelper mDateTimeHelper;
-
     @Inject
     FactDatabase mDatabase;
-
-    public final ObservableField<String> titleFact = new ObservableField<>("");
-
-    public final ObservableField<String> commentFact = new ObservableField<>("");
-
     private long mMilliseconds;
 
     private boolean mTextIsFilled = false;

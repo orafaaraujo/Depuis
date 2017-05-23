@@ -47,7 +47,7 @@
                     android:id="@+id/new_fact_text_title"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_marginTop="16dp"
+                    android:layout_marginTop="@dimen/activity_vertical_margin"
                     android:gravity="center"
                     android:text="@string/new_fact_layout_title"
                     android:textSize="16sp"

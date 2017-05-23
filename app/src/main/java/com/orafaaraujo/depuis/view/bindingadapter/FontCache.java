@@ -6,6 +6,7 @@ import android.graphics.Typeface;
 
 import java.io.IOException;
 import java.util.HashMap;
+import java.util.Locale;
 import java.util.Map;
 
 import timber.log.Timber;
@@ -36,14 +37,14 @@ public class FontCache {
         try {
             fileList = am.list(FONT_DIR);
         } catch (IOException e) {
-            Timber.e("Error loading fonts from assets/fonts.", e);
+            Timber.e(e, "Error loading fonts from assets/fonts.");
             return;
         }
 
         for (String filename : fileList) {
             String alias = filename.substring(0, filename.lastIndexOf('.'));
             fontMapping.put(alias, filename);
-            fontMapping.put(alias.toLowerCase(), filename);
+            fontMapping.put(alias.toLowerCase(Locale.getDefault()), filename);
         }
     }
 
@@ -54,8 +55,7 @@ public class FontCache {
     public Typeface get(String fontName) {
         String fontFilename = fontMapping.get(fontName);
         if (fontFilename == null) {
-            Timber.e("Couldn't find font " + fontName
-                    + ". Maybe you need to call addFont() first?");
+            Timber.e("Couldn't find font %s. Maybe you need to call addFont() first?", fontName);
             return null;
         }
         if (cache.containsKey(fontFilename)) {

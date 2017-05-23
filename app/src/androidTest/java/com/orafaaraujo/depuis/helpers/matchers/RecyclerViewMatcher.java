@@ -18,6 +18,10 @@ public class RecyclerViewMatcher {
         this.recyclerViewId = recyclerViewId;
     }
 
+    public static RecyclerViewMatcher withRecyclerView(final int recyclerViewId) {
+        return new RecyclerViewMatcher(recyclerViewId);
+    }
+
     public Matcher<View> atPosition(final int position) {
         return atPositionOnView(position, -1);
     }
@@ -66,10 +70,6 @@ public class RecyclerViewMatcher {
 
             }
         };
-    }
-
-    public static RecyclerViewMatcher withRecyclerView(final int recyclerViewId) {
-        return new RecyclerViewMatcher(recyclerViewId);
     }
 
 

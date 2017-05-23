@@ -5,11 +5,11 @@ import com.google.auto.value.AutoValue;
 @AutoValue
 public abstract class DatetimeTO {
 
-    public abstract long milliseconds();
-
     public static DatetimeTO.Builder builder() {
         return new AutoValue_DatetimeTO.Builder();
     }
+
+    public abstract long milliseconds();
 
     @AutoValue.Builder
     public abstract static class Builder {

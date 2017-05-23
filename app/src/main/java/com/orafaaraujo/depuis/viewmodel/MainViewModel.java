@@ -27,30 +27,21 @@ import dagger.Lazy;
 
 public class MainViewModel extends BaseObservable {
 
+    public ObservableField<Boolean> mShow = new ObservableField<>(true);
+    public ObservableField<Boolean> mListVisibility = new ObservableField<>(true);
+    public ObservableField<Boolean> mEmptyVisibility = new ObservableField<>(true);
     @Inject
     Context mContext;
-
     @Inject
     FactAdapter mAdapter;
-
     @Inject
     Lazy<RecyclerView.LayoutManager> mLayoutManagerProvider;
-
     @Inject
     DividerItemDecoration mDividerItemDecoration;
-
     @Inject
     SimpleItemTouchHelperCallback mTouchHelperCallback;
-
     @Inject
     FactDatabase mDatabase;
-
-    public ObservableField<Boolean> mShow = new ObservableField<>(true);
-
-    public ObservableField<Boolean> mListVisibility = new ObservableField<>(true);
-
-    public ObservableField<Boolean> mEmptyVisibility = new ObservableField<>(true);
-
     private LinkedList<FactTO> mDeleteFacts = new LinkedList<>();
 
     private LinkedList<FactTO> mUndoDelete = new LinkedList<>();
@@ -129,7 +120,8 @@ public class MainViewModel extends BaseObservable {
     /**
      * Update on database a endtime of a FactModel.
      *
-     * @param factTO FactModel to be copied to a new one (because is immutable) and save on database.
+     * @param factTO FactModel to be copied to a new one (because is immutable) and save on
+     *               database.
      */
     public void closeFact(FactTO factTO) {
 

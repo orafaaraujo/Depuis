@@ -18,11 +18,11 @@ import io.reactivex.subjects.PublishSubject;
 @Reusable
 public class RxBus {
 
+    private PublishSubject<Object> subject = PublishSubject.create();
+
     @Inject
     RxBus() {
     }
-
-    private PublishSubject<Object> subject = PublishSubject.create();
 
     /**
      * Method to send a event via {@link PublishSubject}

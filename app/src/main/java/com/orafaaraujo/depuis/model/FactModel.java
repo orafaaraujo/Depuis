@@ -10,6 +10,10 @@ import com.google.auto.value.AutoValue;
 @AutoValue
 public abstract class FactModel {
 
+    public static Builder builder() {
+        return new AutoValue_FactModel.Builder();
+    }
+
     public abstract long id();
 
     public abstract long startTime();
@@ -19,10 +23,6 @@ public abstract class FactModel {
     public abstract String comment();
 
     public abstract long endTime();
-
-    public static Builder builder() {
-        return new AutoValue_FactModel.Builder();
-    }
 
     @AutoValue.Builder
     public abstract static class Builder {

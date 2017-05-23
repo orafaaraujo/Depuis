@@ -66,12 +66,14 @@ public class ElapsedDateTimeHelper {
     private String calculeDate(LocalDate dateBegin, LocalDate dateEnd) {
         Period p = Period.between(dateBegin, dateEnd);
         if (p.getYears() > 0) {
-            return mContext.getString(R.string.elapsed_years, p.getYears(), p.getMonths(),
-                    p.getDays());
+            return mContext.getResources().getQuantityString(R.plurals.elapsed_years, p.getYears(),
+                    p.getYears(), p.getMonths(), p.getDays());
         } else if (p.getMonths() > 0) {
-            return mContext.getString(R.string.elapsed_months, p.getMonths(), p.getDays());
+            return mContext.getResources().getQuantityString(R.plurals.elapsed_months,
+                    p.getMonths(), p.getMonths(), p.getDays());
         } else if (p.getDays() > 0) {
-            return mContext.getString(R.string.elapsed_days, p.getDays());
+            return mContext.getResources().getQuantityString(R.plurals.elapsed_days, p.getDays(),
+                    p.getDays());
         } else {
             return null;
         }

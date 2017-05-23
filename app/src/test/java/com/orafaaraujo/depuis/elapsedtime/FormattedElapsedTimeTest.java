@@ -35,47 +35,33 @@ import timber.log.Timber;
         application = FormattedElapsedTimeTest.class)
 public class FormattedElapsedTimeTest extends Application {
 
-    private LocalDateTime mBeginDateTime;
-
-    private LocalDateTime mEndDateTime;
-
     private final String WARNING = "FieldCanBeLocal";
-
     @SuppressWarnings(WARNING)
     private final String MAX_SECONDS = "5s";
-
     @SuppressWarnings(WARNING)
     private final String FORMAT_SECONDS = "%ds";
-
     @SuppressWarnings(WARNING)
     private final String MAX_MINUTES = "5m";
-
     @SuppressWarnings(WARNING)
     private final String FORMAT_MINUTES = "%dm";
-
     @SuppressWarnings(WARNING)
     private final String MAX_HOURS = "5h";
-
     @SuppressWarnings(WARNING)
     private final String FORMAT_HOURS = "%dh";
-
     @SuppressWarnings(WARNING)
     private final String MAX_DAYS = "5 days";
-
     @SuppressWarnings(WARNING)
     private final String FORMAT_DAYS = "%d days";
-
     @SuppressWarnings(WARNING)
     private final String MAX_MONTHS = "4 months and 5 days";
-
     @SuppressWarnings(WARNING)
     private final String FORMAT_MONTH = "%d months and %d days";
-
     @SuppressWarnings(WARNING)
     private final String MAX_YEARS = "3 years and 4 months and 5 days";
-
     @SuppressWarnings(WARNING)
     private final String FORMAT_YEARS = "%d years and %d months and %d days";
+    private LocalDateTime mBeginDateTime;
+    private LocalDateTime mEndDateTime;
 
     @Before
     public void setup() {

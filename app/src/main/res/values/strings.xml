@@ -5,7 +5,7 @@
     <string name="main_stop">Stop</string>
     <string name="main_button_share">Share</string>
     <string name="fact_share_message">Share your memory</string>
-    <string name="fact_share_fact" formatted="false">Has been %1s that %2s (Depuis application by Android)</string>
+    <string name="fact_share_fact">Has been %1$s that %2$s (Depuis application by Android)</string>
 
     <string name="main_empty_list_title">no factModel saved</string>
     <string name="main_empty_list_subtitle">start one factModel right now</string>
@@ -24,18 +24,25 @@
 
     <string name="new_fact_title">title</string>
     <string name="new_fact_comment">comment (optional)</string>
-    <string name="new_fact_begin">Begin at</string>
     <string name="new_fact_back">Back</string>
-    <string name="new_fact_title_empty">Title cannot be empty</string>
     <string name="new_fact_success">Fact created with success</string>
     <string name="new_fact_failure_title">Please, fill the title</string>
 
-    <string name="elapsed_years" formatted="false">%d years and %d months and %d days</string>
-    <string name="elapsed_months" formatted="false">%d months and %d days</string>
-    <string name="elapsed_days" formatted="false">%d days</string>
-    <string name="elapsed_hours" formatted="false">%dh</string>
-    <string name="elapsed_minutes" formatted="false">%dm</string>
-    <string name="elapsed_seconds" formatted="false">%ds</string>
+    <plurals name="elapsed_years">
+        <item quantity="one">%1$d year and %2$d months and %3$d days</item>
+        <item quantity="other">%1$d years and %2$d months and %3$d days</item>
+    </plurals>
+    <plurals name="elapsed_months">
+        <item quantity="one">%1$d month and %2$d days</item>
+        <item quantity="other">%1$d months and %2$d days</item>
+    </plurals>
+    <plurals name="elapsed_days">
+        <item quantity="one">%1$d day</item>
+        <item quantity="other">%1$d days</item>
+    </plurals>
+    <string name="elapsed_hours">%1$dh</string>
+    <string name="elapsed_minutes">%1$dm</string>
+    <string name="elapsed_seconds">%1$ds</string>
 
     <string name="about_title">Depuis is an simple application to help you count the time of an important (or not so much) factModel of your life.</string>
     <string name="about_subtitle">This application is a platform of study to me too. I\'m hoping you are like it.</string>
