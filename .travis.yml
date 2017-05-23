@@ -20,7 +20,7 @@ env:
         - SLAVE_AAPT_TIMEOUT=30
         - ADB_INSTALL_TIMEOUT=10 # Time out to 10 mins
         - ANDROID_API_LEVEL=25  # 25 Error: Invalid --abi armeabi-v7a for the selected target
-        - ANDROID_BUILD_TOOLS_VERSION=25.0.2
+        - ANDROID_BUILD_TOOLS_VERSION=25.0.3
         - EMULATOR_API_LEVEL=22  # API 22 is the lastest supported.
         - ANDROID_ABI=armeabi-v7a
 
