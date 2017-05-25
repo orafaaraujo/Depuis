@@ -1,20 +1,3 @@
 apply from: "../config/quality/checkstyle.gradle"
 apply from: "../config/quality/findbugs.gradle"
 apply from: "../config/quality/pmd.gradle"
-
-check.dependsOn 'lint'
-
-def configDir = "${project.rootDir}/config/quality"
-def reportsDir = "${project.buildDir}/reports"
-
-android {
-    lintOptions {
-        warningsAsErrors true
-        abortOnError true
-        xmlReport false
-        htmlReport true
-        lintConfig file("$configDir/lint/lint.xml")
-        htmlOutput file("$reportsDir/lint/lint-result.html")
-        xmlOutput file("$reportsDir/lint/lint-result.xml")
-    }
-}

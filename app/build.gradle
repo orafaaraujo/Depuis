@@ -16,6 +16,9 @@ android {
         vectorDrawables.useSupportLibrary = true
     }
     buildTypes {
+        debug {
+            minifyEnabled false;
+        }
         release {
             minifyEnabled true
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
@@ -28,9 +31,6 @@ android {
         sourceCompatibility JavaVersion.VERSION_1_8
         targetCompatibility JavaVersion.VERSION_1_8
     }
-    defaultConfig {
-        testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
-    }
     packagingOptions {
         exclude 'META-INF/DEPENDENCIES'
         exclude 'META-INF/NOTICE'
@@ -38,7 +38,12 @@ android {
         exclude 'META-INF/license.txt'
         exclude 'META-INF/notice.txt'
     }
-
+    lintOptions {
+        apply from: "${rootDir}/config/quality/lint.gradle", to: it
+        lintConfig file("${project.rootDir}/config/quality/lint/lint.xml")
+        htmlOutput file("${project.buildDir}/reports/lint/lint-result.html")
+        xmlOutput file("${project.buildDir}/reports/lint/lint-result.xml")
+    }
 }
 
 dependencies {
