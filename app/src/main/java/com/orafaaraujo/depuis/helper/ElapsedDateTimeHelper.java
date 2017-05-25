@@ -4,7 +4,6 @@ import android.content.Context;
 import android.text.TextUtils;
 
 import com.orafaaraujo.depuis.R;
-import com.orafaaraujo.depuis.model.FactModel;
 
 import org.threeten.bp.Duration;
 import org.threeten.bp.Instant;
@@ -19,8 +18,7 @@ import javax.inject.Inject;
 import dagger.Reusable;
 
 /**
- * Class used to calculate the elapsed datetime since the @{@link FactModel}
- * was created.
+ * Class used to calculate the elapsed datetime since the Fact was created.
  *
  * Created by rafael on 21/01/17.
  */
@@ -39,8 +37,7 @@ public class ElapsedDateTimeHelper {
      *
      * @param startTime The start time in milliseconds
      * @param endTime   The end time in milliseconds
-     * @return The string formatted by the maximo time passed. For example, if was 15 minutes
-     *     will return "15m", but if is 20 days will return "20 days" and go on.
+     * @return The string formatted by the maximo time passed.
      */
     public String getTime(long startTime, long endTime) {
 
