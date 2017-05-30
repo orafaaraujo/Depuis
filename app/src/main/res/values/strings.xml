@@ -7,16 +7,16 @@
     <string name="fact_share_message">Share your memory</string>
     <string name="fact_share_fact">Has been %1$s that %2$s (Depuis application by Android)</string>
 
-    <string name="main_empty_list_title">no factModel saved</string>
-    <string name="main_empty_list_subtitle">start one factModel right now</string>
-    <string name="main_empty_list_new_button">Start new factModel</string>
+    <string name="main_empty_list_title">no fact saved</string>
+    <string name="main_empty_list_subtitle">start one fact right now</string>
+    <string name="main_empty_list_new_button">Start new fact</string>
 
     <string name="main_deleted">Removing %s?</string>
     <string name="main_deleted_undo">Undo</string>
 
     <string name="fact_close_title">Stop counting</string>
     <string name="fact_close_message">Stop counting the time, not delete it. Can not undo it!</string>
-    <string name="fact_close_snack_bar_message">Fact closed. Depuis will not count the time of this factModel.</string>
+    <string name="fact_close_snack_bar_message">Fact closed. Depuis will not count the time of this fact.</string>
 
     <string name="new_fact_layout_title">Save a memory that you would like to calculate the time from now</string>
     <string name="new_fact_layout_subtitle">Depuis will do it for you</string>
@@ -44,7 +44,7 @@
     <string name="elapsed_minutes">%1$dm</string>
     <string name="elapsed_seconds">%1$ds</string>
 
-    <string name="about_title">Depuis is an simple application to help you count the time of an important (or not so much) factModel of your life.</string>
+    <string name="about_title">Depuis is an simple application to help you count the time of an important (or not so much) fact of your life.</string>
     <string name="about_subtitle">This application is a platform of study to me too. I\'m hoping you are like it.</string>
     <string name="about_contact">If you have any suggestion, question or feedback, please, don\'t hesitate to contact me.</string>
 </resources>
