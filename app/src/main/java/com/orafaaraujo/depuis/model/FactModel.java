@@ -3,10 +3,16 @@ package com.orafaaraujo.depuis.model;
 import com.google.auto.value.AutoValue;
 
 /**
+ * Model of a FactModel.
+ *
  * Created by rafael on 18/01/17.
  */
 @AutoValue
-public abstract class Fact {
+public abstract class FactModel {
+
+    public static Builder builder() {
+        return new AutoValue_FactModel.Builder();
+    }
 
     public abstract long id();
 
@@ -17,10 +23,6 @@ public abstract class Fact {
     public abstract String comment();
 
     public abstract long endTime();
-
-    public static Builder builder() {
-        return new AutoValue_Fact.Builder();
-    }
 
     @AutoValue.Builder
     public abstract static class Builder {
@@ -34,7 +36,7 @@ public abstract class Fact {
 
         public abstract Builder setEndTime(long endTime);
 
-        public abstract Fact build();
+        public abstract FactModel build();
     }
 }
 

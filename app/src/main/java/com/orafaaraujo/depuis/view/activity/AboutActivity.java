@@ -1,7 +1,7 @@
 package com.orafaaraujo.depuis.view.activity;
 
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.support.v7.app.AppCompatActivity;
 
 import com.orafaaraujo.depuis.R;
 

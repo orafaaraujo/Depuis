@@ -8,13 +8,10 @@
     <color name="main_close_fact">#8F98A6</color>
     <color name="main_close_fact_background">#F7F6F6</color>
 
-    <color name="blue_button">#0055a4</color>
     <color name="blue_button_pressed">#FFFFFF</color>
     <color name="blue_button_text">#FFFFFF</color>
 
     <color name="white_button">#FFFFFF</color>
     <color name="white_button_pressed">#F79A93</color>
     <color name="red_border">#EF4135</color>
-
-    <color name="button_text_color">#686565</color>
 </resources>

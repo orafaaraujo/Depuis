@@ -1,4 +1,4 @@
-package com.orafaaraujo.depuis.viewModel;
+package com.orafaaraujo.depuis.viewmodel;
 
 import android.content.Context;
 import android.databinding.BaseObservable;
@@ -10,7 +10,7 @@ import com.orafaaraujo.depuis.helper.ElapsedDateTimeHelper;
 import com.orafaaraujo.depuis.helper.RxBus;
 import com.orafaaraujo.depuis.helper.ShareContentHelper;
 import com.orafaaraujo.depuis.helper.buses.FactTO;
-import com.orafaaraujo.depuis.model.Fact;
+import com.orafaaraujo.depuis.model.FactModel;
 
 import javax.inject.Inject;
 
@@ -39,14 +39,14 @@ public class FactViewModel extends BaseObservable {
 
     private int mPosition;
 
-    private Fact mFact;
+    private FactModel mFactModel;
 
     @Inject
     FactViewModel() {
     }
 
-    public void setFact(Fact fact) {
-        mFact = fact;
+    public void setFactModel(FactModel factModel) {
+        mFactModel = factModel;
     }
 
     public void setPosition(int position) {
@@ -54,30 +54,30 @@ public class FactViewModel extends BaseObservable {
     }
 
     public String getFactTitle() {
-        return mFact.title();
+        return mFactModel.title();
     }
 
     public String getFactComment() {
-        return mFact.comment();
+        return mFactModel.comment();
     }
 
     public String getFactBegin() {
-        return mDateTimeHelper.getDayDate(mFact.startTime());
+        return mDateTimeHelper.getDayDate(mFactModel.startTime());
     }
 
     public String getFactCurrentTime() {
-        return mElapsedDateTimeHelper.getTime(mFact.startTime(), mFact.endTime());
+        return mElapsedDateTimeHelper.getTime(mFactModel.startTime(), mFactModel.endTime());
     }
 
     public View.OnClickListener onClickShare() {
-        return v -> mShareContentHelper.get().share(mFact);
+        return v -> mShareContentHelper.get().share(mFactModel);
     }
 
     public View.OnClickListener onCloseFact() {
         return v ->
                 mRxBus.sendEvent(
                         FactTO.builder()
-                                .setFact(mFact)
+                                .setFact(mFactModel)
                                 .setPosition(mPosition)
                                 .setClose(true)
                                 .setNewFact(false)
@@ -86,19 +86,15 @@ public class FactViewModel extends BaseObservable {
     }
 
     public boolean alreadyClosed() {
-        return mFact.endTime() == -1;
+        return mFactModel.endTime() == -1;
     }
 
     public int getCardClosedBackground() {
-        return alreadyClosed() ?
-                android.R.color.white :
-                R.color.main_close_fact_background;
+        return alreadyClosed() ? android.R.color.white : R.color.main_close_fact_background;
     }
 
     public int getCardClosedIcon() {
-        return alreadyClosed() ?
-                R.drawable.ic_lock_open_black_24dp :
-                R.drawable.ic_lock_22dp;
+        return alreadyClosed() ? R.drawable.ic_lock_open_black_24dp : R.drawable.ic_lock_22dp;
     }
 
     public int getBeginIcon() {

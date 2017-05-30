@@ -1,4 +1,4 @@
-package com.orafaaraujo.depuis.elapsedTime;
+package com.orafaaraujo.depuis.elapsedtime;
 
 import static org.junit.Assert.assertEquals;
 
@@ -23,6 +23,8 @@ import org.threeten.bp.ZoneId;
 import java.util.Calendar;
 import java.util.Locale;
 
+import timber.log.Timber;
+
 /**
  * Test with elapsed time formatted to human.
  *
@@ -33,45 +35,33 @@ import java.util.Locale;
         application = FormattedElapsedTimeTest.class)
 public class FormattedElapsedTimeTest extends Application {
 
-    private LocalDateTime mBeginDateTime;
-
-    private LocalDateTime mEndDateTime;
-
-    @SuppressWarnings("FieldCanBeLocal")
+    private final String WARNING = "FieldCanBeLocal";
+    @SuppressWarnings(WARNING)
     private final String MAX_SECONDS = "5s";
-
-    @SuppressWarnings("FieldCanBeLocal")
+    @SuppressWarnings(WARNING)
     private final String FORMAT_SECONDS = "%ds";
-
-    @SuppressWarnings("FieldCanBeLocal")
+    @SuppressWarnings(WARNING)
     private final String MAX_MINUTES = "5m";
-
-    @SuppressWarnings("FieldCanBeLocal")
+    @SuppressWarnings(WARNING)
     private final String FORMAT_MINUTES = "%dm";
-
-    @SuppressWarnings("FieldCanBeLocal")
+    @SuppressWarnings(WARNING)
     private final String MAX_HOURS = "5h";
-
-    @SuppressWarnings("FieldCanBeLocal")
+    @SuppressWarnings(WARNING)
     private final String FORMAT_HOURS = "%dh";
-
-    @SuppressWarnings("FieldCanBeLocal")
+    @SuppressWarnings(WARNING)
     private final String MAX_DAYS = "5 days";
-
-    @SuppressWarnings("FieldCanBeLocal")
+    @SuppressWarnings(WARNING)
     private final String FORMAT_DAYS = "%d days";
-
-    @SuppressWarnings("FieldCanBeLocal")
+    @SuppressWarnings(WARNING)
     private final String MAX_MONTHS = "4 months and 5 days";
-
-    @SuppressWarnings("FieldCanBeLocal")
+    @SuppressWarnings(WARNING)
     private final String FORMAT_MONTH = "%d months and %d days";
-
-    @SuppressWarnings("FieldCanBeLocal")
+    @SuppressWarnings(WARNING)
     private final String MAX_YEARS = "3 years and 4 months and 5 days";
-
-    @SuppressWarnings("FieldCanBeLocal")
+    @SuppressWarnings(WARNING)
     private final String FORMAT_YEARS = "%d years and %d months and %d days";
+    private LocalDateTime mBeginDateTime;
+    private LocalDateTime mEndDateTime;
 
     @Before
     public void setup() {
@@ -159,7 +149,7 @@ public class FormattedElapsedTimeTest extends Application {
 
         final String calculate = calculate(beginDateTime, LocalDateTime.now());
 
-        System.out.printf(calculate);
+        Timber.d(calculate);
 
     }
 
@@ -174,12 +164,12 @@ public class FormattedElapsedTimeTest extends Application {
     private String calculeDate(LocalDate dateBegin, LocalDate dateEnd) {
         Period p = Period.between(dateBegin, dateEnd);
         if (p.getYears() > 0) {
-            return String.format(Locale.getDefault(),FORMAT_YEARS, p.getYears(), p.getMonths(),
+            return String.format(Locale.getDefault(), FORMAT_YEARS, p.getYears(), p.getMonths(),
                     p.getDays());
         } else if (p.getMonths() > 0) {
-            return String.format(Locale.getDefault(),FORMAT_MONTH, p.getMonths(), p.getDays());
+            return String.format(Locale.getDefault(), FORMAT_MONTH, p.getMonths(), p.getDays());
         } else if (p.getDays() > 0) {
-            return String.format(Locale.getDefault(),FORMAT_DAYS, p.getDays());
+            return String.format(Locale.getDefault(), FORMAT_DAYS, p.getDays());
         } else {
             return null;
         }
@@ -188,11 +178,11 @@ public class FormattedElapsedTimeTest extends Application {
     private String calculeTime(LocalTime timeBegin, LocalTime timeEnd) {
         Duration d = Duration.between(timeBegin, timeEnd);
         if (d.toHours() > 0) {
-            return String.format(Locale.getDefault(),FORMAT_HOURS, d.toHours());
+            return String.format(Locale.getDefault(), FORMAT_HOURS, d.toHours());
         } else if (d.toMinutes() > 0) {
-            return String.format(Locale.getDefault(),FORMAT_MINUTES, d.toMinutes());
+            return String.format(Locale.getDefault(), FORMAT_MINUTES, d.toMinutes());
         } else {
-            return String.format(Locale.getDefault(),FORMAT_SECONDS, d.getSeconds());
+            return String.format(Locale.getDefault(), FORMAT_SECONDS, d.getSeconds());
         }
     }
 }

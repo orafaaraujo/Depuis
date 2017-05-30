@@ -9,8 +9,8 @@ import android.support.v7.app.AppCompatDialogFragment;
 import android.widget.DatePicker;
 
 import com.orafaaraujo.depuis.R;
-import com.orafaaraujo.depuis.helper.buses.DatetimeTO;
 import com.orafaaraujo.depuis.helper.RxBus;
+import com.orafaaraujo.depuis.helper.buses.DatetimeTO;
 
 import java.util.Calendar;
 

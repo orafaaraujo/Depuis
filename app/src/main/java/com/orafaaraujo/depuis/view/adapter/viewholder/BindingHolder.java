@@ -10,14 +10,14 @@ import com.orafaaraujo.depuis.databinding.ItemFactBinding;
 
 public class BindingHolder extends RecyclerView.ViewHolder {
 
-    private ItemFactBinding binding;
+    private ItemFactBinding mBinding;
 
     public BindingHolder(ItemFactBinding binding) {
         super(binding.itemFactLayout);
-        this.binding = binding;
+        this.mBinding = binding;
     }
 
     public ItemFactBinding getBinding() {
-        return binding;
+        return mBinding;
     }
 }

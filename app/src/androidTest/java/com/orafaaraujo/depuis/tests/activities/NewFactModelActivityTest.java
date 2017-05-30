@@ -44,7 +44,7 @@ import org.junit.runner.RunWith;
 @LargeTest
 @SdkSuppress(minSdkVersion = 16)
 @RunWith(AndroidJUnit4.class)
-public class NewFactActivityTest {
+public class NewFactModelActivityTest {
 
     @Rule
     public ActivityTestRule<NewFactActivity> rule = new ActivityTestRule<>(NewFactActivity.class);
@@ -163,13 +163,15 @@ public class NewFactActivityTest {
     @Test
     public void createFactWithDate() {
 
+        String title = "createFactWithDate";
+
         onView(withId(R.id.new_fact_text_edittext_title))
-                .perform(typeText("createFactWithDate"), closeSoftKeyboard())
-                .check(matches(withText("createFactWithDate")));
+                .perform(typeText(title), closeSoftKeyboard())
+                .check(matches(withText(title)));
 
         onView(withId(R.id.new_fact_text_edittext_comment))
-                .perform(typeText("createFactWithDate"), closeSoftKeyboard())
-                .check(matches(withText("createFactWithDate")));
+                .perform(typeText(title), closeSoftKeyboard())
+                .check(matches(withText(title)));
 
         int year = 1987;
         int month = 2;
@@ -187,13 +189,15 @@ public class NewFactActivityTest {
     @Test
     public void createFactWithTime() {
 
+        String title = "createFactWithTime";
+
         onView(withId(R.id.new_fact_text_edittext_title))
-                .perform(typeText("createFactWithTime"), closeSoftKeyboard())
-                .check(matches(withText("createFactWithTime")));
+                .perform(typeText(title), closeSoftKeyboard())
+                .check(matches(withText(title)));
 
         onView(withId(R.id.new_fact_text_edittext_comment))
-                .perform(typeText("createFactWithTime"), closeSoftKeyboard())
-                .check(matches(withText("createFactWithTime")));
+                .perform(typeText(title), closeSoftKeyboard())
+                .check(matches(withText(title)));
 
         int hour = 9;
         int minutes = 15;
@@ -210,13 +214,15 @@ public class NewFactActivityTest {
     @Test
     public void createFactWithDateAndTime() {
 
+        String title = "createFactWithDateAndTime";
+
         onView(withId(R.id.new_fact_text_edittext_title))
-                .perform(typeText("createFactWithDateAndTime"), closeSoftKeyboard())
-                .check(matches(withText("createFactWithDateAndTime")));
+                .perform(typeText(title), closeSoftKeyboard())
+                .check(matches(withText(title)));
 
         onView(withId(R.id.new_fact_text_edittext_comment))
-                .perform(typeText("createFactWithDateAndTime"), closeSoftKeyboard())
-                .check(matches(withText("createFactWithDateAndTime")));
+                .perform(typeText(title), closeSoftKeyboard())
+                .check(matches(withText(title)));
 
         int year = 1987;
         int month = 2;

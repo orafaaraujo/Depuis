@@ -43,14 +43,14 @@ import org.junit.runner.RunWith;
 
 
 /**
- * Test of a flow of Fact (create, list, delete, etc).
+ * Test of a flow of FactModel (create, list, delete, etc).
  *
  * Created by Rafael Araujo on 05/05/17.
  */
 @LargeTest
 @SdkSuppress(minSdkVersion = 16)
 @RunWith(AndroidJUnit4.class)
-public class FactFlowTest {
+public class FactModelFlowTest {
 
     @Rule
     public ActivityTestRule<MainActivity> rule = new ActivityTestRule<>(MainActivity.class);
@@ -78,7 +78,7 @@ public class FactFlowTest {
 
         String title = "createSuccess";
 
-        onView(ViewMatchers.withId(R.id.activity_main_empty_list_button))
+        onView(withId(R.id.activity_main_empty_list_button))
                 .perform(click());
 
         onView(withId(R.id.new_fact_text_edittext_title))
@@ -133,7 +133,7 @@ public class FactFlowTest {
         Context context = InstrumentationRegistry.getTargetContext();
         String title = "createAndDeleting";
 
-        onView(ViewMatchers.withId(R.id.activity_main_empty_list_button))
+        onView(withId(R.id.activity_main_empty_list_button))
                 .perform(click());
 
         onView(withId(R.id.new_fact_text_edittext_title))
@@ -167,7 +167,7 @@ public class FactFlowTest {
         Context context = InstrumentationRegistry.getTargetContext();
         String title = "createAndDeletingAndUndo";
 
-        onView(ViewMatchers.withId(R.id.activity_main_empty_list_button))
+        onView(withId(R.id.activity_main_empty_list_button))
                 .perform(click());
 
         onView(withId(R.id.new_fact_text_edittext_title))
@@ -207,7 +207,7 @@ public class FactFlowTest {
 
         String title = "createAndCloseFactSuccess";
 
-        onView(ViewMatchers.withId(R.id.activity_main_empty_list_button))
+        onView(withId(R.id.activity_main_empty_list_button))
                 .check(matches(isClickable()))
                 .check(matches(isDisplayed()))
                 .check(matches(is(isEnabled())))
@@ -268,7 +268,7 @@ public class FactFlowTest {
 
         String title = "createAndCloseFactFailure";
 
-        onView(ViewMatchers.withId(R.id.activity_main_empty_list_button))
+        onView(withId(R.id.activity_main_empty_list_button))
                 .perform(click());
 
         onView(withId(R.id.new_fact_text_edittext_title))

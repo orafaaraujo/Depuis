@@ -1,4 +1,4 @@
-package com.orafaaraujo.depuis.viewModel;
+package com.orafaaraujo.depuis.viewmodel;
 
 import android.content.Context;
 import android.databinding.BaseObservable;
@@ -13,7 +13,7 @@ import com.orafaaraujo.depuis.helper.DateTimeHelper;
 import com.orafaaraujo.depuis.helper.RxBus;
 import com.orafaaraujo.depuis.helper.buses.FactTO;
 import com.orafaaraujo.depuis.helper.buses.NewFactFeedbackTO;
-import com.orafaaraujo.depuis.model.Fact;
+import com.orafaaraujo.depuis.model.FactModel;
 import com.orafaaraujo.depuis.repository.database.FactDatabase;
 
 import javax.inject.Inject;
@@ -38,11 +38,11 @@ public class NewFactViewModel extends BaseObservable {
     @Inject
     FactDatabase mDatabase;
 
+    private long mMilliseconds;
+
     public final ObservableField<String> titleFact = new ObservableField<>("");
 
     public final ObservableField<String> commentFact = new ObservableField<>("");
-
-    private long mMilliseconds;
 
     private boolean mTextIsFilled = false;
 
@@ -80,9 +80,9 @@ public class NewFactViewModel extends BaseObservable {
         }
     }
 
-    private Fact createFact() {
+    private FactModel createFact() {
 
-        return Fact.builder()
+        return FactModel.builder()
                 .setId(-1) // Will be replaced by Database.
                 .setStartTime(mMilliseconds)
                 .setTitle(titleFact.get())
@@ -93,14 +93,14 @@ public class NewFactViewModel extends BaseObservable {
 
     private void newFaceSuccessFeedback(long factId) {
 
-        Timber.i("Fact complete");
+        Timber.i("FactModel complete");
 
         mRxBus.sendEvent(NewFactFeedbackTO.builder()
                 .setSuccess(true)
                 .setMessage(mContext.getString(R.string.new_fact_success))
                 .build());
 
-        Fact savedFact = Fact.builder()
+        FactModel savedFactModel = FactModel.builder()
                 .setId(factId)
                 .setStartTime(0) // Ignored field
                 .setTitle("") // Ignored field
@@ -109,7 +109,7 @@ public class NewFactViewModel extends BaseObservable {
                 .build();
 
         mRxBus.sendEvent(FactTO.builder()
-                .setFact(savedFact)
+                .setFact(savedFactModel)
                 .setNewFact(true)
                 .setDelete(false)
                 .setClose(false)
@@ -128,18 +128,18 @@ public class NewFactViewModel extends BaseObservable {
     public TextWatcher getWatcher() {
         return new TextWatcher() {
             @Override
-            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+            public void beforeTextChanged(CharSequence sequences, int start, int count, int after) {
 
             }
 
             @Override
-            public void onTextChanged(CharSequence s, int start, int before, int count) {
+            public void onTextChanged(CharSequence sequence, int start, int before, int count) {
 
             }
 
             @Override
-            public void afterTextChanged(Editable s) {
-                mTextIsFilled = !TextUtils.isEmpty(s.toString().trim());
+            public void afterTextChanged(Editable editable) {
+                mTextIsFilled = !TextUtils.isEmpty(editable.toString().trim());
             }
         };
     }

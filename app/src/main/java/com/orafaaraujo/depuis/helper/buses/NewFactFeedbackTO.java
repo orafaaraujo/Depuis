@@ -5,13 +5,13 @@ import com.google.auto.value.AutoValue;
 @AutoValue
 public abstract class NewFactFeedbackTO {
 
-    public abstract boolean success();
-
-    public abstract String message();
-
     public static NewFactFeedbackTO.Builder builder() {
         return new AutoValue_NewFactFeedbackTO.Builder();
     }
+
+    public abstract boolean success();
+
+    public abstract String message();
 
     @AutoValue.Builder
     public abstract static class Builder {
