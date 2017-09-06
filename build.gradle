@@ -2,12 +2,10 @@ buildscript {
     repositories {
         mavenCentral()
         jcenter()
-        maven {
-            url 'https://maven.google.com'
-        }
     }
     dependencies {
-        classpath 'com.android.tools.build:gradle:3.0.0-alpha4'
+        classpath 'com.android.tools.build:gradle:2.3.3'
+        classpath 'me.tatarka:gradle-retrolambda:3.6.0'
     }
 }
 
@@ -15,9 +13,6 @@ allprojects {
     repositories {
         mavenCentral()
         jcenter()
-        maven {
-            url 'https://maven.google.com'
-        }
     }
 }
 
