@@ -46,59 +46,69 @@ android {
     }
 }
 
+ext {
+    support_library = '27.1.1'
+    constraint_layout = '1.1.0'
+    auto_value = '1.6'
+    koin_version = '0.9.3'
+
+    mockito = '2.7.22'
+    support_test = '0.5'
+    espresso = '2.2.2'
+}
+
 dependencies {
     implementation fileTree(include: ['*.jar'], dir: 'libs')
-
-    // Tests
-    testImplementation 'junit:junit:4.12'
-    testImplementation 'org.mockito:mockito-core:2.7.22'
-    testImplementation('org.threeten:threetenbp:1.3.2') {
-        exclude group: 'com.jakewharton.threetenabp', module: 'threetenabp'
-    }
-    testImplementation('org.robolectric:robolectric:3.3.2') {
-        exclude group: 'commons-logging', module: 'commons-logging'
-        exclude group: 'org.apache.httpcomponents', module: 'httpclient'
-    }
-    testImplementation 'org.hamcrest:hamcrest-library:1.3'
-    androidTestImplementation 'org.mockito:mockito-android:2.7.22'
-    androidTestImplementation('com.android.support.test:rules:0.5') {
-        exclude group: 'com.android.support', module: 'support-annotations'
-    }
-    androidTestImplementation('com.android.support.test:runner:0.5') {
-        exclude group: 'com.android.support', module: 'support-annotations'
-    }
-    androidTestImplementation('com.android.support.test.espresso:espresso-core:2.2.2') {
-        exclude group: 'com.android.support', module: 'support-annotations'
-    }
-    androidTestImplementation('com.android.support.test.espresso:espresso-contrib:2.2.2') {
-        exclude group: 'com.android.support', module: 'design'
-        exclude group: 'com.android.support', module: 'appcompat'
-        exclude group: 'com.android.support', module: 'support-v4'
-        exclude group: 'com.android.support', module: 'support-v7'
-        exclude group: 'com.android.support', module: 'recyclerview-v7'
-        exclude group: 'com.android.support', module: 'support-annotations'
-    }
 
     // Development
     implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk7:$kotlin_version"
 
-    implementation 'com.android.support:appcompat-v7:27.1.1'
-    implementation 'com.android.support:recyclerview-v7:27.1.1'
-    implementation 'com.android.support:cardview-v7:27.1.1'
-    implementation 'com.android.support:design:27.1.1'
-    implementation 'com.android.support.constraint:constraint-layout:1.1.0'
+    implementation "com.android.support:appcompat-v7:$support_library"
+    implementation "com.android.support:recyclerview-v7:$support_library"
+    implementation "com.android.support:cardview-v7:$support_library"
+    implementation "com.android.support:design:$support_library"
 
-    implementation             "com.google.auto.value:auto-value-annotations:1.6"
-    annotationProcessor "com.google.auto.value:auto-value:1.6"
+    implementation "com.android.support.constraint:constraint-layout:$constraint_layout"
 
-    implementation 'com.google.dagger:dagger:2.10'
-    annotationProcessor 'com.google.dagger:dagger-compiler:2.10'
-    annotationProcessor 'javax.annotation:jsr250-api:1.0'
+    implementation "com.google.auto.value:auto-value-annotations:$auto_value"
+    annotationProcessor "com.google.auto.value:auto-value:$auto_value"
 
-    implementation 'io.reactivex.rxjava2:rxjava:2.1.0'
-    implementation 'io.reactivex.rxjava2:rxandroid:2.0.1'
+    implementation "org.koin:koin-android:$koin_version"
 
-    implementation 'com.jakewharton.timber:timber:4.5.1'
+    implementation "io.reactivex.rxjava2:rxjava:2.1.0"
+    implementation "io.reactivex.rxjava2:rxandroid:2.0.1"
 
-    implementation 'com.jakewharton.threetenabp:threetenabp:1.0.5'
+    implementation "com.jakewharton.timber:timber:4.5.1"
+
+    implementation "com.jakewharton.threetenabp:threetenabp:1.0.5"
+
+    // Tests
+    testImplementation "junit:junit:4.12"
+    testImplementation "org.mockito:mockito-core:$mockito"
+    testImplementation("org.threeten:threetenbp:1.3.2") {
+        exclude group: "com.jakewharton.threetenabp", module: "threetenabp"
+    }
+    testImplementation("org.robolectric:robolectric:3.3.2") {
+        exclude group: "commons-logging", module: "commons-logging"
+        exclude group: "org.apache.httpcomponents", module: "httpclient"
+    }
+    testImplementation "org.hamcrest:hamcrest-library:1.3"
+    androidTestImplementation "org.mockito:mockito-android:$mockito"
+    androidTestImplementation("com.android.support.test:rules:$support_test") {
+        exclude group: "com.android.support", module: "support-annotations"
+    }
+    androidTestImplementation("com.android.support.test:runner:$support_test") {
+        exclude group: "com.android.support", module: "support-annotations"
+    }
+    androidTestImplementation("com.android.support.test.espresso:espresso-core:$espresso") {
+        exclude group: "com.android.support", module: "support-annotations"
+    }
+    androidTestImplementation("com.android.support.test.espresso:espresso-contrib:$espresso") {
+        exclude group: "com.android.support", module: "design"
+        exclude group: "com.android.support", module: "appcompat"
+        exclude group: "com.android.support", module: "support-v4"
+        exclude group: "com.android.support", module: "support-v7"
+        exclude group: "com.android.support", module: "recyclerview-v7"
+        exclude group: "com.android.support", module: "support-annotations"
+    }
 }
