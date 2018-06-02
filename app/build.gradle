@@ -1,5 +1,6 @@
 apply plugin: 'com.android.application'
 apply plugin: 'kotlin-android'
+apply plugin: 'kotlin-kapt'
 apply plugin: 'project-report'
 apply from: '../config/quality.gradle'
 
@@ -70,8 +71,8 @@ dependencies {
 
     implementation "com.android.support.constraint:constraint-layout:$constraint_layout"
 
-    implementation "com.google.auto.value:auto-value-annotations:$auto_value"
-    annotationProcessor "com.google.auto.value:auto-value:$auto_value"
+    compileOnly "com.google.auto.value:auto-value-annotations:$auto_value"
+    kapt "com.google.auto.value:auto-value:$auto_value"
 
     implementation "org.koin:koin-android:$koin_version"
 
