@@ -1,12 +1,16 @@
 package com.orafaaraujo.depuis.helper.buses;
 
 import com.google.auto.value.AutoValue;
-import com.orafaaraujo.depuis.model.Fact;
+import com.orafaaraujo.depuis.model.FactModel;
 
 @AutoValue
 public abstract class FactTO {
 
-    public abstract Fact fact();
+    public static FactTO.Builder builder() {
+        return new AutoValue_FactTO.Builder();
+    }
+
+    public abstract FactModel fact();
 
     public abstract int position();
 
@@ -16,14 +20,10 @@ public abstract class FactTO {
 
     public abstract boolean close();
 
-    public static FactTO.Builder builder() {
-        return new AutoValue_FactTO.Builder();
-    }
-
     @AutoValue.Builder
     public abstract static class Builder {
 
-        public abstract Builder setFact(Fact fact);
+        public abstract Builder setFact(FactModel factModel);
 
         public abstract Builder setPosition(int position);
 

@@ -10,10 +10,10 @@
         <intent
             android:action="android.intent.action.MAIN"
             android:targetClass="com.orafaaraujo.depuis.view.activity.MainActivity"
-            android:targetPackage="com.orafaaraujo.depuis"/>
+            android:targetPackage="com.orafaaraujo.depuis" />
         <intent
             android:action="android.intent.action.VIEW"
             android:targetClass="com.orafaaraujo.depuis.view.activity.NewFactActivity"
-            android:targetPackage="com.orafaaraujo.depuis"/>
+            android:targetPackage="com.orafaaraujo.depuis" />
     </shortcut>
 </shortcuts>  

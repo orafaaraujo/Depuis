@@ -21,7 +21,6 @@ public class DatabaseModule {
     @Provides
     @Singleton
     FactDatabase provideDatabase(Context context) {
-//        return new MockDatabase(true);
         return new SQLiteDatabase(context);
     }
 

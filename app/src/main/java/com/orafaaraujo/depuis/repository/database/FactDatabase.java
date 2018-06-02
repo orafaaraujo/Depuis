@@ -3,35 +3,35 @@ package com.orafaaraujo.depuis.repository.database;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 
-import com.orafaaraujo.depuis.model.Fact;
+import com.orafaaraujo.depuis.model.FactModel;
 
 import java.util.List;
 
 /**
- * Interface to expose all method used the CRUD of Fact.
+ * Interface to expose all method used the CRUD of FactModel.
  *
  * Created by rafael on 06/02/17.
  */
 public interface FactDatabase {
 
     /**
-     * Fact that need to be saved.
+     * FactModel that need to be saved.
      *
-     * @return The id of fact inserted.
+     * @return The id of factModel inserted.
      */
-    long saveFact(Fact fact);
+    long saveFact(FactModel factModel);
 
     /**
-     * Fact that need to be update.
+     * FactModel that need to be update.
      */
-    void updateFact(Fact fact);
+    void updateFact(FactModel factModel);
 
     /**
      * Get the fact in parameter (using the _ID).
-     * * @return Fact founded in Database. Otherwise, return a null object.
+     * * @return FactModel founded in Database. Otherwise, return a null object.
      */
     @Nullable
-    Fact findFact(long FactId);
+    FactModel findFact(long factId);
 
     /**
      * Get all Facts in Database. Must return a empty List if there's no records.
@@ -39,15 +39,15 @@ public interface FactDatabase {
      * @return All facts in Database. Otherwise, return a empty list.
      */
     @NonNull
-    List<Fact> fetchAll();
+    List<FactModel> fetchAll();
 
     /**
-     * Delete the fact in parameter (using the _ID).
+     * Delete the factModel in parameter (using the _ID).
      */
-    void deleteFact(Fact fact);
+    void deleteFact(FactModel factModel);
 
     /**
-     * Delete all records of Fact on Database.
+     * Delete all records of FactModel on Database.
      */
     void deleteTable();
 

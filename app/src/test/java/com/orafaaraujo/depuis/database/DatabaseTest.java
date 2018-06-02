@@ -9,7 +9,7 @@ import static org.junit.Assert.assertTrue;
 import android.text.TextUtils;
 
 import com.orafaaraujo.depuis.BuildConfig;
-import com.orafaaraujo.depuis.model.Fact;
+import com.orafaaraujo.depuis.model.FactModel;
 import com.orafaaraujo.depuis.repository.database.FactDatabase;
 import com.orafaaraujo.depuis.repository.database.SQLiteDatabase;
 
@@ -51,55 +51,55 @@ public class DatabaseTest {
         long factId = mDatabase.saveFact(provideFact());
         assertTrue(factId > -1);
 
-        final List<Fact> facts = mDatabase.fetchAll();
+        final List<FactModel> factModels = mDatabase.fetchAll();
 
-        assertNotNull(facts);
-        assertFalse(facts.isEmpty());
-        assertEquals(1, facts.size());
+        assertNotNull(factModels);
+        assertFalse(factModels.isEmpty());
+        assertEquals(1, factModels.size());
     }
 
     @Test
     public void update() {
 
-        Fact fact = provideFact();
-        long factId = mDatabase.saveFact(fact);
+        FactModel factModel = provideFact();
+        long factId = mDatabase.saveFact(factModel);
 
-        Fact savedFact = mDatabase.findFact(factId);
-        assertNotNull(savedFact);
+        FactModel savedFactModel = mDatabase.findFact(factId);
+        assertNotNull(savedFactModel);
 
-        Fact changeFact = Fact.builder()
-                .setId(savedFact.id())
-                .setStartTime(savedFact.startTime() + 1000)
+        FactModel changeFactModel = FactModel.builder()
+                .setId(savedFactModel.id())
+                .setStartTime(savedFactModel.startTime() + 1000)
                 .setTitle("Updated!")
                 .setComment("Updated!")
-                .setEndTime(savedFact.endTime() + 1000)
+                .setEndTime(savedFactModel.endTime() + 1000)
                 .build();
-        mDatabase.updateFact(changeFact);
+        mDatabase.updateFact(changeFactModel);
 
-        Fact updateFact = mDatabase.findFact(changeFact.id());
-        assertNotNull(updateFact);
+        FactModel updateFactModel = mDatabase.findFact(changeFactModel.id());
+        assertNotNull(updateFactModel);
 
-        assertFalse(updateFact.startTime() == savedFact.startTime());
-        assertFalse(TextUtils.equals(updateFact.title(), savedFact.title()));
-        assertFalse(TextUtils.equals(updateFact.comment(), savedFact.comment()));
-        assertFalse(updateFact.endTime() == savedFact.endTime());
+        assertFalse(updateFactModel.startTime() == savedFactModel.startTime());
+        assertFalse(TextUtils.equals(updateFactModel.title(), savedFactModel.title()));
+        assertFalse(TextUtils.equals(updateFactModel.comment(), savedFactModel.comment()));
+        assertFalse(updateFactModel.endTime() == savedFactModel.endTime());
 
-        assertTrue(updateFact.startTime() == changeFact.startTime());
-        assertTrue(TextUtils.equals(updateFact.title(), changeFact.title()));
-        assertTrue(TextUtils.equals(updateFact.comment(), changeFact.comment()));
-        assertTrue(updateFact.endTime() == changeFact.endTime());
+        assertTrue(updateFactModel.startTime() == changeFactModel.startTime());
+        assertTrue(TextUtils.equals(updateFactModel.title(), changeFactModel.title()));
+        assertTrue(TextUtils.equals(updateFactModel.comment(), changeFactModel.comment()));
+        assertTrue(updateFactModel.endTime() == changeFactModel.endTime());
     }
 
     @Test
     public void findOne() throws Exception {
 
-        Fact fact = provideFact();
+        FactModel factModel = provideFact();
 
-        long factId = mDatabase.saveFact(fact);
+        long factId = mDatabase.saveFact(factModel);
 
-        Fact savedFact = mDatabase.findFact(factId);
-        assertNotNull(savedFact);
-        assertEquals(fact, savedFact);
+        FactModel savedFactModel = mDatabase.findFact(factId);
+        assertNotNull(savedFactModel);
+        assertEquals(factModel, savedFactModel);
     }
 
     @Test
@@ -109,25 +109,25 @@ public class DatabaseTest {
         mDatabase.saveFact(provideFact());
         mDatabase.saveFact(provideFact());
 
-        final List<Fact> facts = mDatabase.fetchAll();
+        final List<FactModel> factModels = mDatabase.fetchAll();
 
-        assertNotNull(facts);
-        assertFalse(facts.isEmpty());
-        assertEquals(3, facts.size());
+        assertNotNull(factModels);
+        assertFalse(factModels.isEmpty());
+        assertEquals(3, factModels.size());
     }
 
     @Test
     public void delete() throws Exception {
 
-        Fact fact = provideFact();
-        long factId = mDatabase.saveFact(fact);
+        FactModel factModel = provideFact();
+        long factId = mDatabase.saveFact(factModel);
 
-        Fact savedFact = mDatabase.findFact(factId);
-        assertNotNull(savedFact);
+        FactModel savedFactModel = mDatabase.findFact(factId);
+        assertNotNull(savedFactModel);
 
-        mDatabase.deleteFact(savedFact);
-        Fact deletedFact = mDatabase.findFact(factId);
-        assertNull(deletedFact);
+        mDatabase.deleteFact(savedFactModel);
+        FactModel deletedFactModel = mDatabase.findFact(factId);
+        assertNull(deletedFactModel);
     }
 
     @Test
@@ -137,26 +137,26 @@ public class DatabaseTest {
         mDatabase.saveFact(provideFact());
         mDatabase.saveFact(provideFact());
 
-        final List<Fact> facts = mDatabase.fetchAll();
+        final List<FactModel> factModels = mDatabase.fetchAll();
 
-        assertNotNull(facts);
-        assertFalse(facts.isEmpty());
-        assertEquals(3, facts.size());
+        assertNotNull(factModels);
+        assertFalse(factModels.isEmpty());
+        assertEquals(3, factModels.size());
 
         mDatabase.deleteTable();
 
-        final List<Fact> deletedFacts = mDatabase.fetchAll();
+        final List<FactModel> deletedFactModels = mDatabase.fetchAll();
 
-        assertNotNull(deletedFacts);
-        assertTrue(deletedFacts.isEmpty());
-        assertEquals(0, deletedFacts.size());
+        assertNotNull(deletedFactModels);
+        assertTrue(deletedFactModels.isEmpty());
+        assertEquals(0, deletedFactModels.size());
     }
 
-    private Fact provideFact() {
+    private FactModel provideFact() {
         long startTime = mCalendar.getTimeInMillis();
         long endTime = startTime + 1000;
 
-        return Fact.builder()
+        return FactModel.builder()
                 .setId(1)
                 .setStartTime(startTime)
                 .setTitle("new fact")

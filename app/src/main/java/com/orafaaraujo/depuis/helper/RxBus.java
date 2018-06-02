@@ -22,13 +22,13 @@ public class RxBus {
     RxBus() {
     }
 
-    private PublishSubject<Object> subject = PublishSubject.create();
+    private PublishSubject<Object> mSubject = PublishSubject.create();
 
     /**
-     * Method to send a event via {@link PublishSubject}
+     * Method to send a event via {@link PublishSubject}.
      */
     public void sendEvent(Object vo) {
-        subject.onNext(vo);
+        mSubject.onNext(vo);
     }
 
     /**
@@ -36,7 +36,7 @@ public class RxBus {
      * to receive the {@link DatetimeTO} events.
      */
     public Observable<DatetimeTO> getDatetimeEvents() {
-        return subject
+        return mSubject
                 .filter(o -> o instanceof DatetimeTO)
                 .map(o -> (DatetimeTO) o);
     }
@@ -46,7 +46,7 @@ public class RxBus {
      * to receive the {@link NewFactFeedbackTO} events.
      */
     public Observable<NewFactFeedbackTO> getNewFactFeedbackEvents() {
-        return subject
+        return mSubject
                 .filter(o -> o instanceof NewFactFeedbackTO)
                 .map(o -> (NewFactFeedbackTO) o);
     }
@@ -56,7 +56,7 @@ public class RxBus {
      * to receive the {@link FactTO} delete events.
      */
     public Observable<FactTO> getDeletedFactEvents() {
-        return subject
+        return mSubject
                 .filter(o -> o instanceof FactTO)
                 .map(o -> (FactTO) o)
                 .filter(FactTO::delete);
@@ -67,7 +67,7 @@ public class RxBus {
      * to receive the {@link FactTO} close events.
      */
     public Observable<FactTO> getClosedFactEvents() {
-        return subject
+        return mSubject
                 .filter(o -> o instanceof FactTO)
                 .map(o -> (FactTO) o)
                 .filter(FactTO::close);
@@ -78,7 +78,7 @@ public class RxBus {
      * to receive the new {@link FactTO}.
      */
     public Observable<FactTO> getNewFactEvents() {
-        return subject
+        return mSubject
                 .filter(o -> o instanceof FactTO)
                 .map(o -> (FactTO) o)
                 .filter(FactTO::newFact);

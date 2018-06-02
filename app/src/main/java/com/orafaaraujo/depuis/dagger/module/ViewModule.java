@@ -21,7 +21,6 @@ import dagger.Provides;
 public class ViewModule {
 
     @Provides
-    @Singleton
     RecyclerView.LayoutManager provideLayoutManager(Context context) {
         return new LinearLayoutManager(context);
     }
@@ -34,8 +33,9 @@ public class ViewModule {
 
     /**
      * Must implement the concrete class, because
-     * @{@link android.support.v7.widget.helper.ItemTouchHelper.android.support.v7.widget.helper.ItemTouchHelper.Callback}
-     * is a static abstract classe.
+     *
+     * @{@link android.support.v7.widget.helper.ItemTouchHelper.android.support.v7.widget.helper
+     * .ItemTouchHelper.Callback} is a static abstract classe.
      */
     @Provides
     @Singleton

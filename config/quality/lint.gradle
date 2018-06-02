@@ -1,0 +1,4 @@
+warningsAsErrors true
+abortOnError true
+xmlReport false
+htmlReport true
