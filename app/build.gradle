@@ -1,115 +1,50 @@
 apply plugin: 'com.android.application'
 apply plugin: 'kotlin-android'
-apply plugin: 'kotlin-kapt'
-apply plugin: 'project-report'
-apply from: '../config/quality.gradle'
+apply plugin: 'kotlin-android-extensions'
 
 android {
     compileSdkVersion 27
-    buildToolsVersion '27.0.3'
     defaultConfig {
         applicationId "com.orafaaraujo.depuis"
-        minSdkVersion 16
+        minSdkVersion 15
         targetSdkVersion 27
         versionCode 1
         versionName "1.0"
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
-        vectorDrawables.useSupportLibrary = true
     }
     buildTypes {
-        debug {
-            minifyEnabled false
-        }
         release {
-            minifyEnabled true
+            minifyEnabled false
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
         }
-    }
-    dataBinding {
-        enabled = true
-    }
-    compileOptions {
-        sourceCompatibility JavaVersion.VERSION_1_8
-        targetCompatibility JavaVersion.VERSION_1_8
-    }
-    packagingOptions {
-        exclude 'META-INF/DEPENDENCIES'
-        exclude 'META-INF/NOTICE'
-        exclude 'META-INF/LICENSE'
-        exclude 'META-INF/license.txt'
-        exclude 'META-INF/notice.txt'
-    }
-    lintOptions {
-        apply from: "${rootDir}/config/quality/lint.gradle", to: it
-        lintConfig file("${project.rootDir}/config/quality/lint/lint.xml")
-        htmlOutput file("${project.buildDir}/reports/lint/lint-result.html")
-        xmlOutput file("${project.buildDir}/reports/lint/lint-result.xml")
     }
 }
 
 ext {
     support_library = '27.1.1'
     constraint_layout = '1.1.0'
-    auto_value = '1.6'
-    koin_version = '0.9.3'
-
-    mockito = '2.7.22'
-    support_test = '0.5'
-    espresso = '2.2.2'
 }
 
 dependencies {
-    implementation fileTree(include: ['*.jar'], dir: 'libs')
+    implementation fileTree(dir: 'libs', include: ['*.jar'])
 
-    // Development
+    // Kotlin
     implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk7:$kotlin_version"
 
+    // Support library
     implementation "com.android.support:appcompat-v7:$support_library"
     implementation "com.android.support:recyclerview-v7:$support_library"
     implementation "com.android.support:cardview-v7:$support_library"
-    implementation "com.android.support:design:$support_library"
+    implementation "com.android.support.constraint:constraint-layout:1.1.0"
 
-    implementation "com.android.support.constraint:constraint-layout:$constraint_layout"
+    // Logging
+    implementation "com.jakewharton.timber:timber:4.7.0"
 
-    compileOnly "com.google.auto.value:auto-value-annotations:$auto_value"
-    kapt "com.google.auto.value:auto-value:$auto_value"
-
-    implementation "org.koin:koin-android:$koin_version"
-
-    implementation "io.reactivex.rxjava2:rxjava:2.1.0"
-    implementation "io.reactivex.rxjava2:rxandroid:2.0.1"
-
-    implementation "com.jakewharton.timber:timber:4.5.1"
-
-    implementation "com.jakewharton.threetenabp:threetenabp:1.0.5"
+    // Time calculation
+    implementation "com.jakewharton.threetenabp:threetenabp:1.1.0"
 
     // Tests
     testImplementation "junit:junit:4.12"
-    testImplementation "org.mockito:mockito-core:$mockito"
-    testImplementation("org.threeten:threetenbp:1.3.2") {
-        exclude group: "com.jakewharton.threetenabp", module: "threetenabp"
-    }
-    testImplementation("org.robolectric:robolectric:3.3.2") {
-        exclude group: "commons-logging", module: "commons-logging"
-        exclude group: "org.apache.httpcomponents", module: "httpclient"
-    }
-    testImplementation "org.hamcrest:hamcrest-library:1.3"
-    androidTestImplementation "org.mockito:mockito-android:$mockito"
-    androidTestImplementation("com.android.support.test:rules:$support_test") {
-        exclude group: "com.android.support", module: "support-annotations"
-    }
-    androidTestImplementation("com.android.support.test:runner:$support_test") {
-        exclude group: "com.android.support", module: "support-annotations"
-    }
-    androidTestImplementation("com.android.support.test.espresso:espresso-core:$espresso") {
-        exclude group: "com.android.support", module: "support-annotations"
-    }
-    androidTestImplementation("com.android.support.test.espresso:espresso-contrib:$espresso") {
-        exclude group: "com.android.support", module: "design"
-        exclude group: "com.android.support", module: "appcompat"
-        exclude group: "com.android.support", module: "support-v4"
-        exclude group: "com.android.support", module: "support-v7"
-        exclude group: "com.android.support", module: "recyclerview-v7"
-        exclude group: "com.android.support", module: "support-annotations"
-    }
+    androidTestImplementation "com.android.support.test:runner:1.0.2"
+    androidTestImplementation "com.android.support.test.espresso:espresso-core:3.0.2"
 }
