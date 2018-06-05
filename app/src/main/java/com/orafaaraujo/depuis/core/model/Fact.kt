@@ -1,9 +1,14 @@
 package com.orafaaraujo.depuis.core.model
 
+import android.arch.persistence.room.Entity
+import android.arch.persistence.room.PrimaryKey
+
+@Entity
 data class Fact(
-        val id: Int,
+        @PrimaryKey(autoGenerate = true)
+        val id: Long = 0,
         val title: String,
-        val description: String,
+        val description: String?,
         val startTime: Long,
-        val endTime: Long,
-        val active: Boolean)
+        var endTime: Long?,
+        var active: Boolean = true)
