@@ -14,13 +14,13 @@ Frameworks used in this project:
   - [Room](https://developer.android.com/topic/libraries/architecture/room)
 
 #### Quality check
-- [klint](https://github.com/shyiko/ktlint)
+- [ktlint](https://github.com/shyiko/ktlint)
 
 ---
 
 ## License
 ```
-Copyright 2018 Igor Escodro
+Copyright 2018 Rafa Araujo
 
 Licensed under the Apache License, Version 2.0 (the "License");
 you may not use this file except in compliance with the License.
