@@ -1,0 +1,11 @@
+detekt {
+    version = "1.0.0.RC7-2"
+    profile("main") {
+        input = "$projectDir"
+        config = "$project.rootDir/config/quality/detekt/detekt-ruleset.yml"
+        filters = ".*test.*,.*/resources/.*,.*/tmp/.*"
+        output = "${project.buildDir}/reports/detekt.xml"
+        parallel = true
+        disableDefaultRuleSets = false
+    }
+}
