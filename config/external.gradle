@@ -1,0 +1,2 @@
+apply plugin: "org.jlleitschuh.gradle.ktlint"
+apply from: "../config/quality/detekt/detekt.gradle"
